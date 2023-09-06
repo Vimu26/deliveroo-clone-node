@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from "express";
 import cors from 'cors';
 import mongoose from 'mongoose';
-import routes from '../routes/user.routes.js';
+// import routes from '../routes/user.routes.js';
 
 const app = express();
 
@@ -27,6 +27,6 @@ app.get('/', (req, res) => {
   });
 
 app.use(cors());
-app.use(routes);
+// app.use(routes);
 app.use(express.json());
 
