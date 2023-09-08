@@ -1,12 +1,12 @@
 const userService = require("../services/user.database.service");
 
-const getAllUsers = async (req, res) => {
+const getAllUsersController = async (req, res) => {
   try {
     const userDetails = await userService.getAllUsersFromDBService();
     console.log("User creation status:", userDetails);
 
     if (userDetails) {
-      res.json({ status: true , message: " Users Not Found" , data: userDetails });
+      res.json({ status: true , message: " Users Found" , data: userDetails });
     } else {
       res.json({ status: false, message: " User Not Found" });
     }
@@ -18,14 +18,13 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const createUser = async (req,res) => {
-    console.log(req.body);
+const createUserController = async (req,res) => {
     try{
         const status = await userService.createUserDBService(req.body);
         console.log("User creation status:", status);
 
     if (status) {
-      res.json({ status: true, message: " User Created Successfully" });
+      res.json({ status: true, message: " User Created Successfully" , data :req.body });
     } else {
       res.json({ status: false, message: " User Not Created" });
     }
@@ -37,5 +36,5 @@ const createUser = async (req,res) => {
 };
 
 module.exports = {
-  getAllUsers,createUser,
+  getAllUsersController,createUserController,
 };
