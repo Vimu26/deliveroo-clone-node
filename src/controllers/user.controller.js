@@ -36,7 +36,25 @@ const createUserController = async (req, res) => {
   }
 };
 
-const updateUserController = (req, res) => {
+const updateUserController = async (req, res) => {
+  console.log(req.params.id);
+  try{
+    const user = await userService.updateUserDBService(
+      req.params.id,
+      req.body
+    );
+
+    if (user) {
+      res.json({ status: true, message: "User Updated Successfully" });
+    } else {
+      res.json({ status: false, message: "User Not Updated" });
+    }
+
+  }
+  catch(err){
+    console.error("An error occurred:", error);
+    res.status(500).json({ status: false, message: "An error occurred" });
+  }
 };
 
 module.exports = {
