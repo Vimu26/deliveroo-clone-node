@@ -36,7 +36,11 @@ const createUserController = async (req, res) => {
   }
 };
 
+const updateUserController = (req, res) => {
+};
+
 module.exports = {
   getAllUsersController,
   createUserController,
+  updateUserController,
 };
