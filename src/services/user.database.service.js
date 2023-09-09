@@ -34,7 +34,11 @@ const createUserDBService = async (userDetails) => {
 
 const updateUserDBService = async (id, userDetails) => {
   try {
-    const updatedUser = await userDetailsModel.findByIdAndUpdate(id, userDetails , { new: true });
+    const updatedUser = await userDetailsModel.findByIdAndUpdate(
+      id,
+      userDetails,
+      { new: true }
+    );
     return true;
   } catch (error) {
     console.error("An error occurred during user update:", error);
