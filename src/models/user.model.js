@@ -15,8 +15,8 @@ const userDetailsSchema = new mongoose.Schema({
   },
   contact_number: {
     type: String,
-    min : [10],
-    max : [10],
+    min: [10],
+    max: [10],
     required: true,
   },
   password: {
