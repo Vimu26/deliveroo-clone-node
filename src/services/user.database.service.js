@@ -1,6 +1,5 @@
 const userDetailsModel = require("../models/user.model");
 
-
 const getAllUsersFromDBService = () => {
   return userDetailsModel
     .find()
@@ -33,4 +32,18 @@ const createUserDBService = async (userDetails) => {
   }
 };
 
-module.exports = { getAllUsersFromDBService, createUserDBService };
+const updateUserDBService = async (id, userDetails) => {
+  try {
+    const updatedUser = await userDetailsModel.findByIdAndUpdate(id, userDetails , { new: true });
+    return true;
+  } catch (error) {
+    console.error("An error occurred during user update:", error);
+    return false;
+  }
+};
+
+module.exports = {
+  getAllUsersFromDBService,
+  createUserDBService,
+  updateUserDBService,
+};
