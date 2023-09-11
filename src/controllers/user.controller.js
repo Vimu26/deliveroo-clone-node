@@ -37,12 +37,15 @@ const createUserController = async (req, res) => {
 };
 
 const updateUserController = async (req, res) => {
-  console.log(req.params.id);
   try {
     const user = await userService.updateUserDBService(req.params.id, req.body);
 
     if (user) {
-      res.json({ status: true, message: "User Updated Successfully" });
+      res.json({
+        status: true,
+        message: "User Updated Successfully",
+        data: user,
+      });
     } else {
       res.json({ status: false, message: "User Not Updated" });
     }
@@ -55,6 +58,7 @@ const updateUserController = async (req, res) => {
 const deleteUserController = async (req, res) => {
   try {
     const deleteUser = await userService.deleteUserDBService(req.params.id);
+
     if (deleteUser) {
       res.json({ status: true, message: "User Deleted Successfully" });
     } else {
