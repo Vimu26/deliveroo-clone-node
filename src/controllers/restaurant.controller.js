@@ -2,33 +2,33 @@ const userService = require("../services/restaurant.database.service");
 
 const getAllRestaurantsController = async (req, res) => {
   try {
-    const userDetails = await userService.getAllUsersFromDBService();
+    const userDetails = await userService.getAllRestaurantsFromDBService();
     if (userDetails) {
-      res.json({ status: true, message: "Users Found", data: userDetails });
+      res.json({ status: true, message: "Restaurants Found", data: userDetails });
     } else {
-      res.json({ status: false, message: " User Not Found" });
+      res.json({ status: false, message: " Restaurants Not Found" });
     }
   } catch (err) {
     console
       .error(err)
       .status(500)
-      .json({ status: false, message: "Can't Find Users" });
+      .json({ status: false, message: "Can't Find Restaurants" });
   }
 };
 
 const createRestaurantController = async (req, res) => {
   try {
-    const status = await userService.createUserDBService(req.body);
-    console.log("User creation status:", status);
+    const status = await userService.createRestaurantDBService(req.body);
+    console.log("Restaurant creation status:", status);
 
     if (status) {
       res.json({
         status: true,
-        message: " User Created Successfully",
+        message: "Restaurant Created Successfully",
         data: req.body,
       });
     } else {
-      res.json({ status: false, message: " User Not Created" });
+      res.json({ status: false, message: "Restaurant Not Created" });
     }
   } catch (error) {
     console.error("An error occurred:", error);
@@ -38,16 +38,16 @@ const createRestaurantController = async (req, res) => {
 
 const updateRestaurantController = async (req, res) => {
   try {
-    const user = await userService.updateUserDBService(req.params.id, req.body);
+    const user = await userService.updateRestaurantDBService(req.params.id, req.body);
 
     if (user) {
       res.json({
         status: true,
-        message: "User Updated Successfully",
+        message: "Restaurant Updated Successfully",
         data: user,
       });
     } else {
-      res.json({ status: false, message: "User Not Updated" });
+      res.json({ status: false, message: "Restaurant Not Updated" });
     }
   } catch (err) {
     console.error("An error occurred:", error);
@@ -57,12 +57,12 @@ const updateRestaurantController = async (req, res) => {
 
 const deleteRestaurantController = async (req, res) => {
   try {
-    const deleteUser = await userService.deleteUserDBService(req.params.id);
+    const deleteUser = await userService.deleteRestaurantDBService(req.params.id);
 
     if (deleteUser) {
-      res.json({ status: true, message: "User Deleted Successfully" });
+      res.json({ status: true, message: "Restaurant Deleted Successfully" });
     } else {
-      res.json({ status: false, message: "User Not Deleted" });
+      res.json({ status: false, message: "Restaurant Not Deleted" });
     }
   } catch (err) {
     console.error("An error occurred:", error);
