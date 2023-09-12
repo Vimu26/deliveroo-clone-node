@@ -1,10 +1,10 @@
-const userService = require("../services/restaurant.database.service");
+const restaurantService = require("../services/restaurant.database.service");
 
 const getAllRestaurantsController = async (req, res) => {
   try {
-    const userDetails = await userService.getAllRestaurantsFromDBService();
-    if (userDetails) {
-      res.json({ status: true, message: "Restaurants Found", data: userDetails });
+    const restaurantDetails = await restaurantService.getAllRestaurantsFromDBService();
+    if (restaurantDetails) {
+      res.json({ status: true, message: "Restaurants Found", data: restaurantDetails });
     } else {
       res.json({ status: false, message: " Restaurants Not Found" });
     }
@@ -18,7 +18,7 @@ const getAllRestaurantsController = async (req, res) => {
 
 const createRestaurantController = async (req, res) => {
   try {
-    const status = await userService.createRestaurantDBService(req.body);
+    const status = await restaurantService.createRestaurantDBService(req.body);
     console.log("Restaurant creation status:", status);
 
     if (status) {
@@ -38,13 +38,13 @@ const createRestaurantController = async (req, res) => {
 
 const updateRestaurantController = async (req, res) => {
   try {
-    const user = await userService.updateRestaurantDBService(req.params.id, req.body);
+    const restaurant = await restaurantService.updateRestaurantDBService(req.params.id, req.body);
 
-    if (user) {
+    if (restaurant) {
       res.json({
         status: true,
         message: "Restaurant Updated Successfully",
-        data: user,
+        data: restaurant,
       });
     } else {
       res.json({ status: false, message: "Restaurant Not Updated" });
@@ -57,9 +57,9 @@ const updateRestaurantController = async (req, res) => {
 
 const deleteRestaurantController = async (req, res) => {
   try {
-    const deleteUser = await userService.deleteRestaurantDBService(req.params.id);
+    const deleteRestaurant = await restaurantService.deleteRestaurantDBService(req.params.id);
 
-    if (deleteUser) {
+    if (deleteRestaurant) {
       res.json({ status: true, message: "Restaurant Deleted Successfully" });
     } else {
       res.json({ status: false, message: "Restaurant Not Deleted" });
