@@ -17,11 +17,10 @@ const getAllRestaurantsFromDBService = () => {
 const createRestaurantDBService = async (restaurantDetails) => {
   try {
     const restaurantModelData = new restaurantDetailsModel({
-      first_name: restaurantDetails.first_name,
-      last_name: restaurantDetails.last_name,
+      name: restaurantDetails.name,
       contact_number: restaurantDetails.contact_number,
       email: restaurantDetails.email,
-      password: restaurantDetails.password,
+      address: restaurantDetails.address,
     });
 
     await restaurantModelData.save();
