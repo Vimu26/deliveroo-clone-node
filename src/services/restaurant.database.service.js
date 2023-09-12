@@ -1,30 +1,30 @@
-const userDetailsModel = require("../models/user.model");
+const restaurantDetailsModel = require("../models/restaurant.model");
 
-const getAllUsersFromDBService = () => {
-  return userDetailsModel
+const getAllRestaurantsFromDBService = () => {
+  return restaurantDetailsModel
     .find()
-    .then((users) => {
-      if (users.length === 0) {
-        console.log("No users found");
+    .then((restaurants) => {
+      if (restaurants.length === 0) {
+        console.log("No Restaurants found");
       }
-      return users;
+      return restaurants;
     })
     .catch((err) => {
       throw err;
     });
 };
 
-const createUserDBService = async (userDetails) => {
+const createRestaurantDBService = async (restaurantDetails) => {
   try {
-    const userModelData = new userDetailsModel({
-      first_name: userDetails.first_name,
-      last_name: userDetails.last_name,
-      contact_number: userDetails.contact_number,
-      email: userDetails.email,
-      password: userDetails.password,
+    const restaurantModelData = new restaurantDetailsModel({
+      first_name: restaurantDetails.first_name,
+      last_name: restaurantDetails.last_name,
+      contact_number: restaurantDetails.contact_number,
+      email: restaurantDetails.email,
+      password: restaurantDetails.password,
     });
 
-    await userModelData.save();
+    await restaurantModelData.save();
     return true;
   } catch (error) {
     console.error(error);
@@ -32,23 +32,23 @@ const createUserDBService = async (userDetails) => {
   }
 };
 
-const updateUserDBService = async (id, userDetails) => {
+const updateRestaurantDBService = async (id, restaurantDetails) => {
   try {
-    const updatedUser = await userDetailsModel.findByIdAndUpdate(
+    const updatedRestaurant = await restaurantDetailsModel.findByIdAndUpdate(
       id,
-      userDetails,
+      restaurantDetails,
       { new: true }
     );
-    return updatedUser;
+    return updatedRestaurant;
   } catch (error) {
     console.error("An error occurred during user update:", error);
     return;
   }
 };
 
-const deleteUserDBService = async (id) => {
+const deleteRestaurantDBService = async (id) => {
   try {
-    await userDetailsModel.findByIdAndDelete(id);
+    await restaurantDetailsModel.findByIdAndDelete(id);
     return true;
   } catch (error) {
     console.error("An error occurred during user Delete:", error);
@@ -57,8 +57,8 @@ const deleteUserDBService = async (id) => {
 };
 
 module.exports = {
-  getAllUsersFromDBService,
-  createUserDBService,
-  updateUserDBService,
-  deleteUserDBService,
+  getAllRestaurantsFromDBService,
+  createRestaurantDBService,
+  updateRestaurantDBService,
+  deleteRestaurantDBService,
 };
