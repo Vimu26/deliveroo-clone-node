@@ -1,10 +1,10 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
-const dishRoutes = require("./routes/dish.routes")
+const dishRoutes = require("./routes/dish.routes");
 
 const app = express();
 
@@ -14,13 +14,15 @@ app.use(userRoutes);
 app.use(restaurantRoutes);
 app.use(dishRoutes);
 
-mongoose.connect("mongodb://127.0.0.1:27017/deliveroo-clone-api",{
+mongoose
+  .connect("mongodb://127.0.0.1:27017/deliveroo-clone-api", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log("Database Connected Successfully!!"))
-.catch((err) => {
-  console.error(err);
-});
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Database Connected Successfully!!"))
+  .catch((err) => {
+    console.error(err);
+  });
 
 app.listen(process.env.PORT, (error) => {
   if (error) {
@@ -30,8 +32,6 @@ app.listen(process.env.PORT, (error) => {
   }
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-  });
-
-
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});

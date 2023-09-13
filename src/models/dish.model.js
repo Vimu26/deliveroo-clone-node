@@ -5,7 +5,7 @@ const dishDetailsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  dishCode :{
+  dish_code: {
     type: String,
     required: true,
   },
