@@ -1,7 +1,8 @@
 const dishService = require('../services/dish.database.service');
 
 
-module.exports.getAllDishesController = () => async (req,res) => {
+const getAllDishesController = () => async (req,res) => {
+    console.log(res)
 try{
  const dishDetails = await dishService.getAllDishesDBservice();
  if (dishDetails) {
@@ -16,4 +17,8 @@ catch(err){
     .status(500)
     .json({ status: false, message: "Can't Find Dishes" });
 }
+}
+
+module.exports = {
+    getAllDishesController,
 }
