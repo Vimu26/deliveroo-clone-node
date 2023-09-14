@@ -4,15 +4,14 @@ const getAllUsersController = async (req, res) => {
   try {
     const userDetails = await userService.getAllUsersFromDBService();
     if (userDetails) {
-      res.json({ status: true, message: "Users Found", data: userDetails });
+      res.status(200).json({ status: true, message: "Users Found", data: userDetails });
     } else {
-      res.json({ status: false, message: " User Not Found" });
+      res.status(200).json({ status: false, message: " User Not Found" });
     }
   } catch (err) {
-    console
-      .error(err)
-      .status(500)
-      .json({ status: false, message: "Can't Find Users" });
+    console.error(err);
+
+    res.status(500).json({ status: false, message: "Can't Find Users" });
   }
 };
 
@@ -31,8 +30,13 @@ const createUserController = async (req, res) => {
       res.json({ status: false, message: " User Not Created" });
     }
   } catch (error) {
+    if(error == conflict) {
+      res.status(500).json({ status: false, message: "An error occurred" });
+    }else {
+      res.status(500).json({ status: false, message: "An error occurred" });
+    }
     console.error("An error occurred:", error);
-    res.status(500).json({ status: false, message: "An error occurred" });
+    
   }
 };
 

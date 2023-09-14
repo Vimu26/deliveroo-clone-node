@@ -10,7 +10,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(userRoutes);
+
+app.use('/users',userRoutes);
 app.use(restaurantRoutes);
 app.use(dishRoutes);
 
@@ -35,3 +36,7 @@ app.listen(process.env.PORT, (error) => {
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+// app.any("#*", (req, res) => {
+//   res.send("Router Not Found!");
+// });
