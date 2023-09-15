@@ -14,6 +14,24 @@ const getAllDishesDBservice = () => {
     });
 };
 
+const createDishDBService = async (dishDetails) => {
+  try {
+    const dishModelData = new dishDetailsModel({
+      name: dishDetails.name,
+      dish_code: dishDetails.dish_code,
+      price: dishDetails.price,
+      image: dishDetails.image,
+    });
+
+    await dishModelData.save();
+    return true;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+
 module.exports = {
-  getAllDishesDBservice,
+  getAllDishesDBservice,createDishDBService,
 };

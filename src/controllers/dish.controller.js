@@ -16,6 +16,26 @@ const getAllDishesController = async (req, res) => {
   }
 };
 
+const createDishController = async (req, res) => {
+  try {
+    const status = await dishService.createDishDBService(req.body);
+    console.log("Dish creation status:", status);
+
+    if (status) {
+      res.json({
+        status: true,
+        message: " Dish Created Successfully",
+        data: req.body,
+      });
+    } else {
+      res.json({ status: false, message: "Dish Not Created" });
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+};
+
+
 module.exports = {
-  getAllDishesController,
+  getAllDishesController, createDishController,
 };
