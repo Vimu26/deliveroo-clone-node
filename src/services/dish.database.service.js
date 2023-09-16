@@ -1,6 +1,6 @@
 const dishDetailsModel = require("../models/dish.model");
 
-const getAllDishesDBservice = () => {
+const getAllDishesService = () => {
   return dishDetailsModel
     .find()
     .then((dish) => {
@@ -14,7 +14,7 @@ const getAllDishesDBservice = () => {
     });
 };
 
-const createDishDBService = async (dishDetails) => {
+const createDishService = async (dishDetails) => {
   try {
     const dishModelData = new dishDetailsModel({
       name: dishDetails.name,
@@ -31,7 +31,33 @@ const createDishDBService = async (dishDetails) => {
   }
 };
 
+const updateDishService = async (id, dishDetails) => {
+  try {
+    const updatedDish = await dishDetailsModel.findByIdAndUpdate(
+      id,
+      dishDetails,
+      { new: true }
+    );
+    return updatedDish;
+  } catch (error) {
+    console.error("An error occurred during Dish update:", error);
+    return;
+  }
+};
+
+const deleteDishService = async (id) => {
+  try {
+    await dishDetailsModel.findByIdAndDelete(id);
+    return true;
+  } catch (error) {
+    console.error("An error occurred during Dish Delete:", error);
+    return false;
+  }
+};
 
 module.exports = {
-  getAllDishesDBservice,createDishDBService,
+  getAllDishesService,
+  createDishService,
+  updateDishService,
+  deleteDishService,
 };

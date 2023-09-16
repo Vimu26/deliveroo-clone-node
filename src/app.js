@@ -12,8 +12,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/users',userRoutes);
-app.use(restaurantRoutes);
-app.use(dishRoutes);
+app.use('/restaurants',restaurantRoutes);
+app.use('/dishes',dishRoutes);
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/deliveroo-clone-api", {
