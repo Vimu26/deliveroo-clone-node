@@ -4,7 +4,7 @@ const getAllUsersController = async (req, res) => {
   try {
     const userDetails = await userService.getAllUsersFromDBService();
     if (userDetails) {
-      res.status(200).json({ status: true, message: "Users Found", data: userDetails });
+    res.status(200).json({ status: true, message: "Users Found", data: userDetails });
     } else {
       res.status(200).json({ status: false, message: " User Not Found" });
     }
@@ -30,11 +30,11 @@ const createUserController = async (req, res) => {
       res.json({ status: false, message: " User Not Created" });
     }
   } catch (error) {
-    if(error == conflict) {
-      res.status(500).json({ status: false, message: "An error occurred" });
-    }else {
-      res.status(500).json({ status: false, message: "An error occurred" });
-    }
+    // if(error == conflict) {
+    //   res.status(500).json({ status: false, message: "An error occurred" });
+    // }else {
+    //   res.status(500).json({ status: false, message: "An error occurred" });
+    // }
     console.error("An error occurred:", error);
     
   }
@@ -54,7 +54,7 @@ const updateUserController = async (req, res) => {
       res.json({ status: false, message: "User Not Updated" });
     }
   } catch (err) {
-    console.error("An error occurred:", error);
+    console.error("An error occurred:", err);
     res.status(500).json({ status: false, message: "An error occurred" });
   }
 };
@@ -69,7 +69,7 @@ const deleteUserController = async (req, res) => {
       res.json({ status: false, message: "User Not Deleted" });
     }
   } catch (err) {
-    console.error("An error occurred:", error);
+    console.error("An error occurred:", err);
     res.status(500).json({ status: false, message: "An error occurred" });
   }
 };
