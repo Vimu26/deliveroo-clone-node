@@ -3,13 +3,9 @@ const router = express.Router();
 
 const dishController = require("../controllers/dish.controller");
 
-router.route("/dish/get-all-dishes").get(dishController.getAllDishesController);
-router.route("/dish/create-dish").post(dishController.createDishController);
-// router
-//   .route("/dish/update-dish/:id")
-//   .patch(dishController.updateDishController);
-// router
-//   .route("/dish/delete-dish/:id")
-//   .delete(dishController.deleteDishController);
+router.get("/get-all-dishes", dishController.getAllDishesController);
+router.post("/create-dish", dishController.createDishController);
+router.patch("/update-dish/:id", dishController.updateDishController);
+router.delete("/delete-dish/:id", dishController.deleteDishController);
 
 module.exports = router;

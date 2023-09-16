@@ -8,6 +8,7 @@ const dishDetailsSchema = new mongoose.Schema({
   dish_code: {
     type: String,
     required: true,
+    unique: true,
   },
   price: {
     type: String,
