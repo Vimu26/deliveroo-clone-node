@@ -10,7 +10,7 @@ const getAllDishesController = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ status: false, message: "Can't Find Dishes" });
-    console.error("An error occurred:", error);
+    console.error("An error occurred:", err);
   }
 };
 
@@ -47,7 +47,7 @@ const updateDishController = async (req, res) => {
       res.json({ status: false, message: "Dish Not Updated" });
     }
   } catch (err) {
-    console.error("An error occurred:", error);
+    console.error("An error occurred:", err);
     res.status(500).json({ status: false, message: "An error occurred" });
   }
 };
