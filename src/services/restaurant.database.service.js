@@ -36,7 +36,7 @@ const updateRestaurantDBService = async (id, restaurantDetails) => {
     const updatedRestaurant = await restaurantDetailsModel.findByIdAndUpdate(
       id,
       restaurantDetails,
-      { new: true }
+      { new: true },
     );
     return updatedRestaurant;
   } catch (error) {

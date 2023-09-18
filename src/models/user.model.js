@@ -12,12 +12,12 @@ const userDetailsSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   contact_number: {
     type: String,
-    min : [10],
-    max : [10],
+    min: [10],
+    max: [10],
     required: true,
   },
   password: {

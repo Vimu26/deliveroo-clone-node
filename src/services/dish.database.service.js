@@ -36,7 +36,7 @@ const updateDishService = async (id, dishDetails) => {
     const updatedDish = await dishDetailsModel.findByIdAndUpdate(
       id,
       dishDetails,
-      { new: true }
+      { new: true },
     );
     return updatedDish;
   } catch (error) {

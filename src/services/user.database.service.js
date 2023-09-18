@@ -37,7 +37,7 @@ const updateUserDBService = async (id, userDetails) => {
     const updatedUser = await userDetailsModel.findByIdAndUpdate(
       id,
       userDetails,
-      { new: true }
+      { new: true },
     );
     return updatedUser;
   } catch (error) {
