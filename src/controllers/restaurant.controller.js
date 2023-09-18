@@ -2,17 +2,20 @@ const restaurantService = require("../services/restaurant.database.service");
 
 const getAllRestaurantsController = async (req, res) => {
   try {
-    const restaurantDetails = await restaurantService.getAllRestaurantsFromDBService();
+    const restaurantDetails =
+      await restaurantService.getAllRestaurantsFromDBService();
     if (restaurantDetails) {
-      res.json({ status: true, message: "Restaurants Found", data: restaurantDetails });
+      res.json({
+        status: true,
+        message: "Restaurants Found",
+        data: restaurantDetails,
+      });
     } else {
       res.json({ status: false, message: " Restaurants Not Found" });
     }
   } catch (err) {
-    console
-      .error(err)
-      .status(500)
-      .json({ status: false, message: "Can't Find Restaurants" });
+    console.error("Error occurs while getting All Restaurants", err);
+    res.status(500).json({ status: false, message: "Can't Find Restaurants" });
   }
 };
 
@@ -38,7 +41,10 @@ const createRestaurantController = async (req, res) => {
 
 const updateRestaurantController = async (req, res) => {
   try {
-    const restaurant = await restaurantService.updateRestaurantDBService(req.params.id, req.body);
+    const restaurant = await restaurantService.updateRestaurantDBService(
+      req.params.id,
+      req.body,
+    );
 
     if (restaurant) {
       res.json({
@@ -50,14 +56,16 @@ const updateRestaurantController = async (req, res) => {
       res.json({ status: false, message: "Restaurant Not Updated" });
     }
   } catch (err) {
-    console.error("An error occurred:", error);
+    console.error("An error occurred:", err);
     res.status(500).json({ status: false, message: "An error occurred" });
   }
 };
 
 const deleteRestaurantController = async (req, res) => {
   try {
-    const deleteRestaurant = await restaurantService.deleteRestaurantDBService(req.params.id);
+    const deleteRestaurant = await restaurantService.deleteRestaurantDBService(
+      req.params.id,
+    );
 
     if (deleteRestaurant) {
       res.json({ status: true, message: "Restaurant Deleted Successfully" });
@@ -65,7 +73,7 @@ const deleteRestaurantController = async (req, res) => {
       res.json({ status: false, message: "Restaurant Not Deleted" });
     }
   } catch (err) {
-    console.error("An error occurred:", error);
+    console.error("An error occurred:", err);
     res.status(500).json({ status: false, message: "An error occurred" });
   }
 };

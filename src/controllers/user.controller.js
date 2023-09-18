@@ -4,7 +4,9 @@ const getAllUsersController = async (req, res) => {
   try {
     const userDetails = await userService.getAllUsersFromDBService();
     if (userDetails) {
-    res.status(200).json({ status: true, message: "Users Found", data: userDetails });
+      res
+        .status(200)
+        .json({ status: true, message: "Users Found", data: userDetails });
     } else {
       res.status(200).json({ status: false, message: " User Not Found" });
     }
@@ -36,7 +38,6 @@ const createUserController = async (req, res) => {
     //   res.status(500).json({ status: false, message: "An error occurred" });
     // }
     console.error("An error occurred:", error);
-    
   }
 };
 
