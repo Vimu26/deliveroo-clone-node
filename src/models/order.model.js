@@ -15,8 +15,9 @@ const orderDetailsSchema = new mongoose.Schema({
     required: true,
   },
   placed_on: {
-    type: String,
+    type: Date,
     required: true,
+    default: Date.now,
   },
 });
 

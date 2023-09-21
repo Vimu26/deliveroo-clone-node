@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
 const dishRoutes = require("./routes/dish.routes");
+const orderRoutes = require("./routes/order.routes");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use("/users", userRoutes);
 app.use("/restaurants", restaurantRoutes);
 app.use("/dishes", dishRoutes);
+app.use("/orders", orderRoutes);
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/deliveroo-clone-api", {
