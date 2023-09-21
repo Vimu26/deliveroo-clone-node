@@ -36,7 +36,7 @@ const updateOrderDBService = async (orderId, orderDetails) => {
     const order = await orderDetailsModel.findByIdAndUpdate(
       orderId,
       orderDetails,
-      { new: true }
+      { new: true },
     );
     return order;
   } catch (error) {
@@ -46,28 +46,26 @@ const updateOrderDBService = async (orderId, orderDetails) => {
 };
 
 const deleteOrderDBService = async (orderId) => {
-  try{
-   await orderDetailsModel.findByIdAndDelete(orderId);
-   return true;
-  }
-  catch (error) {
+  try {
+    await orderDetailsModel.findByIdAndDelete(orderId);
+    return true;
+  } catch (error) {
     console.error("An error occurred during user Delete:", error);
     return false;
   }
 };
 
 const getSingleUserDBService = async (orderId) => {
- try {
-  const order = await orderDetailsModel.findById(orderId);
-  if (order) {
-    return order;
-  } else {
-    console.log("No Order found");
+  try {
+    const order = await orderDetailsModel.findById(orderId);
+    if (order) {
+      return order;
+    } else {
+      console.log("No Order found");
+    }
+  } catch (error) {
+    console.error("An error occurred");
   }
- }
- catch (error) {
-  console.error("An error occurred")
- }
 };
 
 module.exports = {

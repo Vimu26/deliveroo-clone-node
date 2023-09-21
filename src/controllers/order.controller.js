@@ -46,7 +46,7 @@ const updateOrderController = async (req, res) => {
   try {
     const UpdatedOrder = await orderService.updateOrderDBService(
       req.params.id,
-      req.body
+      req.body,
     );
     if (UpdatedOrder) {
       res.json({
@@ -78,16 +78,18 @@ const deleteOrderController = async (req, res) => {
 };
 
 const getSingleOrder = async (req, res) => {
-  try{
+  try {
     const order = await orderService.getSingleUserDBService(req.params.id);
-   if(order){
-    res.json({ status:true, message: "Order Found successfully" , data: order });
-   }
-   else{
-    res.status(500).json({ status:false, message: "Order Doesn't Exist" });
-   }
-  }
-  catch (error) {
+    if (order) {
+      res.json({
+        status: true,
+        message: "Order Found successfully",
+        data: order,
+      });
+    } else {
+      res.status(500).json({ status: false, message: "Order Doesn't Exist" });
+    }
+  } catch (error) {
     console.error("An error occurred:", error);
     res.status(500).json({ status: false, message: "An error occurred" });
   }
