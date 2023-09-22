@@ -8,16 +8,16 @@ const dishRoutes = require("./routes/dish.routes");
 const orderRoutes = require("./routes/order.routes");
 const dishCategories = require("./routes/dish-category.routes");
 
-const app = express();
+const server = express();
 
-app.use(express.json());
-app.use(cors());
+server.use(express.json());
+server.use(cors());
 
-app.use("/users", userRoutes);
-app.use("/restaurants", restaurantRoutes);
-app.use("/dishes", dishRoutes);
-app.use("/orders", orderRoutes);
-app.use("/dishCategories", dishCategories);
+server.use("/users", userRoutes);
+server.use("/restaurants", restaurantRoutes);
+server.use("/dishes", dishRoutes);
+server.use("/orders", orderRoutes);
+server.use("/dishCategories", dishCategories);
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/deliveroo-clone-api", {
@@ -29,7 +29,7 @@ mongoose
     console.error(err);
   });
 
-app.listen(process.env.PORT, (error) => {
+server.listen(process.env.PORT, (error) => {
   if (error) {
     console.error(error);
   } else {
@@ -37,10 +37,10 @@ app.listen(process.env.PORT, (error) => {
   }
 });
 
-app.get("/", (req, res) => {
+server.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-// app.any("#*", (req, res) => {
+// server.any("#*", (req, res) => {
 //   res.send("Router Not Found!");
 // });
