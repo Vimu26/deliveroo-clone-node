@@ -65,6 +65,7 @@ const getSingleUserDBService = async (orderId) => {
     }
   } catch (error) {
     console.error("An error occurred");
+    return;
   }
 };
 
