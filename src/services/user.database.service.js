@@ -14,6 +14,23 @@ const getAllUsersFromDBService = () => {
     });
 };
 
+const getSingleUserDBService = async (id) => {
+  try{
+    const user = await userDetailsModel.findById(id);
+    if(user) {
+      return user;
+    }
+    else {
+      console.log("No user Found");
+      return;
+    }
+  }
+  catch(err) {
+    console.log("User Does Not Exist");
+    return;
+  }
+};
+
 const createUserDBService = async (userDetails) => {
   try {
     const userModelData = new userDetailsModel({
@@ -61,4 +78,5 @@ module.exports = {
   createUserDBService,
   updateUserDBService,
   deleteUserDBService,
+  getSingleUserDBService,
 };

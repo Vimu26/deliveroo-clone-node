@@ -8,12 +8,29 @@ const getAllUsersController = async (req, res) => {
         .status(200)
         .json({ status: true, message: "Users Found", data: userDetails });
     } else {
-      res.status(200).json({ status: false, message: " User Not Found" });
+      res.status(200).json({ status: false, message: " Users Not Found" });
     }
   } catch (err) {
     console.error(err);
-
     res.status(500).json({ status: false, message: "Can't Find Users" });
+  }
+};
+
+const getSingleUsersController = async (req, res) => {
+  try{
+    const user = await userService.getSingleUserDBService(req.params.id);
+    if (user) {
+      res
+        .status(200)
+        .json({ status: true, message: "User Found", data: user });
+    } else {
+      res.status(200).json({ status: false, message: " User Not Found" });
+    }
+
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({ status: false, message: "Can't Find User" });
   }
 };
 
@@ -80,4 +97,5 @@ module.exports = {
   createUserController,
   updateUserController,
   deleteUserController,
+  getSingleUsersController,
 };
