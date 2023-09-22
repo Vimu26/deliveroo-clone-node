@@ -16,20 +16,46 @@ const getAllDishCategoriesDBService = async () => {
 };
 
 const createDishCategoryDBService = async (dishCategory) => {
-    try{
-       const category = new dishCategoryDetailsModel({
-        name : dishCategory.name,
-        image : dishCategory.image,
-       });
-       await category.save();
-       return category;
-    }
-    catch (err) {
-        console.error(err);
-        return;
-    }
-}
+  try {
+    const category = new dishCategoryDetailsModel({
+      name: dishCategory.name,
+      image: dishCategory.image,
+    });
+    await category.save();
+    return category;
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+};
+
+const updateDishCategoryDBService = async (id, category) => {
+  try {
+    const dishCategory = await dishCategoryDetailsModel.findByIdAndUpdate(
+      id,
+      category,
+      { new: true }
+    );
+    return dishCategory;
+  } catch (err) {
+    console.error("An error occurred during Dish Category update:", err);
+    return;
+  }
+};
+
+const deleteDishCategoryDBService = async (id) => {
+  try {
+    await dishCategoryDetailsModel.findByIdAndDelete(id);
+    return true;
+  } catch (err) {
+    console.error("An error occurred during Dish Category Delete:", err);
+    return false;
+  }
+};
 
 module.exports = {
-  getAllDishCategoriesDBService,createDishCategoryDBService,
+  getAllDishCategoriesDBService,
+  createDishCategoryDBService,
+  updateDishCategoryDBService,
+  deleteDishCategoryDBService,
 };
