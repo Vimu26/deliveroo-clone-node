@@ -34,7 +34,7 @@ const updateDishCategoryDBService = async (id, category) => {
     const dishCategory = await dishCategoryDetailsModel.findByIdAndUpdate(
       id,
       category,
-      { new: true }
+      { new: true },
     );
     return dishCategory;
   } catch (err) {
@@ -53,9 +53,24 @@ const deleteDishCategoryDBService = async (id) => {
   }
 };
 
+const getSingleDishCategory = async (id) => {
+  try {
+    const category = await dishCategoryDetailsModel.findById(id);
+    if (category) {
+      return category;
+    } else {
+      console.log("No Dish Category Found ");
+      return;
+    }
+  } catch (error) {
+    console.error("An error occurred");
+  }
+};
+
 module.exports = {
   getAllDishCategoriesDBService,
   createDishCategoryDBService,
   updateDishCategoryDBService,
   deleteDishCategoryDBService,
+  getSingleDishCategory,
 };
