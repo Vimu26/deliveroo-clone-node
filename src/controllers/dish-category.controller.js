@@ -40,14 +40,57 @@ const createDishCategoryController = async (req, res) => {
     res.status(500).json({ status: false, message: "An error occurred" });
   }
 };
-// updateDishCategoryController
-// deleteDishCategoryController
+
+const updateDishCategoryController = async (req, res) => {
+  try {
+    const updatedDishCategory =
+      await dishCategoryService.updateDishCategoryDBService(
+        req.params.id,
+        req.body
+      );
+    if (updatedDishCategory) {
+      res.json({
+        status: true,
+        message: "Dish Category updated successfully",
+        data: updatedDishCategory,
+      });
+    } else {
+      res.json({ status: false, message: "Dish Category not updated" });
+    }
+  } catch (err) {
+    console.error("An error occurred:", err);
+    res.status(500).json({ status: false, message: "An error occurred" });
+  }
+};
+
+const deleteDishCategoryController = async (req, res) => {
+  try {
+    const deletedDishCategory =
+      await dishCategoryService.deleteDishCategoryDBService(
+        req.params.id,
+        req.body
+      );
+    if (deletedDishCategory) {
+      res.json({
+        status: true,
+        message: "Dish Category Deleted successfully",
+        data: deletedDishCategory,
+      });
+    } else {
+      res.json({ status: false, message: "Dish Category not Deleted" });
+    }
+  } catch (err) {
+    console.error("An error occurred:", err);
+    res.status(500).json({ status: false, message: "An error occurred" });
+  }
+};
+
 // getSingleDishCategoryController
 
 module.exports = {
   getAllDishCategoriesController,
   createDishCategoryController,
-  // updateDishCategoryController,
-  // deleteDishCategoryController,
+  updateDishCategoryController,
+  deleteDishCategoryController,
   // getSingleDishCategoryController,
 };
