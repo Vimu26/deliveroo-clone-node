@@ -14,10 +14,13 @@ const getAllDishCategoriesController = async (req, res) => {
       res.json({ status: false, message: "Dish Categories Not Found" });
     }
   } catch (err) {
-    console.error("An error occurred in Get All:", err);
+    console.error("An error occurred :", err);
     res
       .status(500)
-      .json({ status: false, message: "An error occurred in Get All" });
+      .json({
+        status: false,
+        message: "An error occurred in Get All Categories",
+      });
   }
 };
 
@@ -28,7 +31,7 @@ const createDishCategoryController = async (req, res) => {
     );
     if (category) {
       res.json({
-        status: "true",
+        status: true,
         message: "Dish category Created Successfully",
         data: category,
       });
@@ -37,7 +40,12 @@ const createDishCategoryController = async (req, res) => {
     }
   } catch (err) {
     console.error("An Error Occurred", err);
-    res.status(500).json({ status: false, message: "An error occurred" });
+    res
+      .status(500)
+      .json({
+        status: false,
+        message: "An error occurred in Creating Dish Categories",
+      });
   }
 };
 
@@ -55,11 +63,16 @@ const updateDishCategoryController = async (req, res) => {
         data: updatedDishCategory,
       });
     } else {
-      res.json({ status: false, message: "Dish Category not updated" });
+      res.json({ status: false, message: "Dish Category Not updated" });
     }
   } catch (err) {
     console.error("An error occurred:", err);
-    res.status(500).json({ status: false, message: "An error occurred" });
+    res
+      .status(500)
+      .json({
+        status: false,
+        message: "An error occurred in Updating Dish Category",
+      });
   }
 };
 
@@ -74,14 +87,18 @@ const deleteDishCategoryController = async (req, res) => {
       res.json({
         status: true,
         message: "Dish Category Deleted successfully",
-        data: deletedDishCategory,
       });
     } else {
       res.json({ status: false, message: "Dish Category not Deleted" });
     }
   } catch (err) {
     console.error("An error occurred:", err);
-    res.status(500).json({ status: false, message: "An error occurred" });
+    res
+      .status(500)
+      .json({
+        status: false,
+        message: "An error occurred in Deleting Dish Category",
+      });
   }
 };
 
@@ -101,6 +118,12 @@ const getSingleDishCategoryController = async (req, res) => {
     }
   } catch (err) {
     console.error("An error occurred :", err);
+    res
+      .status(500)
+      .json({
+        status: false,
+        message: "An error occurred in Get Dish Category",
+      });
     return;
   }
 };

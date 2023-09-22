@@ -59,7 +59,7 @@ const getSingleDishCategory = async (id) => {
     if (category) {
       return category;
     } else {
-      console.log("No category Found ");
+      console.log("No Dish Category Found ");
       return;
     }
   } catch (error) {
