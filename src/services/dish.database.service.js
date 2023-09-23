@@ -7,11 +7,30 @@ const getAllDishesService = () => {
       if (dish.length === 0) {
         console.log("No Dishes Found");
       }
-      return dish;
+      else {
+        return dish;
+      }
     })
     .catch((err) => {
       throw err;
     });
+};
+
+const getSingleDishService = async (id) => {
+  try {
+    const dish = await dishDetailsModel.findById(id);
+    if (dish) {
+      return dish;
+    }
+    else {
+      console.log("No Dish Exist" );
+      return;
+    }
+  }
+  catch (err) {
+    console.error("An error occurred during getting a Dish:", err);
+    return;
+  }
 };
 
 const createDishService = async (dishDetails) => {
@@ -60,4 +79,5 @@ module.exports = {
   createDishService,
   updateDishService,
   deleteDishService,
+  getSingleDishService,
 };

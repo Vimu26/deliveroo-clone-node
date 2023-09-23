@@ -14,6 +14,23 @@ const getAllRestaurantsFromDBService = () => {
     });
 };
 
+const getSingleRestaurantDBService = async (id) => {
+  try {
+    const restaurant = await restaurantDetailsModel.findById(id);
+    if (restaurant) {
+      return restaurant;
+    }
+    else {
+      console.log("No restaurant Exists " );
+      return;
+    }
+  }
+  catch (err) {
+    console.log("An error occurred during getting Restaurant");
+    return;
+  }
+};
+
 const createRestaurantDBService = async (restaurantDetails) => {
   try {
     const restaurantModelData = new restaurantDetailsModel({
@@ -60,4 +77,5 @@ module.exports = {
   createRestaurantDBService,
   updateRestaurantDBService,
   deleteRestaurantDBService,
+  getSingleRestaurantDBService
 };

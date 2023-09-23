@@ -19,6 +19,26 @@ const getAllRestaurantsController = async (req, res) => {
   }
 };
 
+const getSingleRestaurantController = async (req, res) => {
+  try {
+    const restaurant = await restaurantService.getSingleRestaurantDBService(
+      req.params.id
+    );
+    if (restaurant) {
+      res.json({
+        status: true,
+        message: "Restaurant Found Successfully",
+        data: restaurant,
+      });
+    } else {
+      res.json({ status: false, message: "Restaurant Does not Exist" });
+    }
+  } catch (err) {
+    console.error("Error occurs while getting Restaurant", err);
+    res.status(500).json({ status: false, message: "Can't Find Restaurant" });
+  }
+};
+
 const createRestaurantController = async (req, res) => {
   try {
     const status = await restaurantService.createRestaurantDBService(req.body);
@@ -43,7 +63,7 @@ const updateRestaurantController = async (req, res) => {
   try {
     const restaurant = await restaurantService.updateRestaurantDBService(
       req.params.id,
-      req.body,
+      req.body
     );
 
     if (restaurant) {
@@ -64,7 +84,7 @@ const updateRestaurantController = async (req, res) => {
 const deleteRestaurantController = async (req, res) => {
   try {
     const deleteRestaurant = await restaurantService.deleteRestaurantDBService(
-      req.params.id,
+      req.params.id
     );
 
     if (deleteRestaurant) {
@@ -83,4 +103,5 @@ module.exports = {
   createRestaurantController,
   updateRestaurantController,
   deleteRestaurantController,
+  getSingleRestaurantController,
 };
