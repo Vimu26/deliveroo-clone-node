@@ -10,8 +10,8 @@ const getAllDishCategoriesDBService = async () => {
       return;
     }
   } catch (err) {
-    console.error(err);
-    return;
+    console.log("An error occurred during getting Dish Categories");
+    throw err;
   }
 };
 
@@ -23,9 +23,12 @@ const createDishCategoryDBService = async (dishCategory) => {
     });
     await category.save();
     return category;
-  } catch (err) {
-    console.error(err);
-    return;
+  } catch (error) {
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "Dish Category already exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
@@ -37,19 +40,26 @@ const updateDishCategoryDBService = async (id, category) => {
       { new: true },
     );
     return dishCategory;
-  } catch (err) {
-    console.error("An error occurred during Dish Category update:", err);
-    return;
+  } catch (error) {
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "Dish Category already exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
 const deleteDishCategoryDBService = async (id) => {
   try {
-    await dishCategoryDetailsModel.findByIdAndDelete(id);
-    return true;
+    const dish = await dishCategoryDetailsModel.findByIdAndDelete(id);
+    if (dish) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (err) {
-    console.error("An error occurred during Dish Category Delete:", err);
-    return false;
+    console.error("An error occurred during Dish Category Delete : ", err);
+    throw err;
   }
 };
 
@@ -63,7 +73,8 @@ const getSingleDishCategory = async (id) => {
       return;
     }
   } catch (error) {
-    console.error("An error occurred");
+    console.log("An error occurred during getting Dish Category");
+    throw error;
   }
 };
 
