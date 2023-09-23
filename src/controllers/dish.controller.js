@@ -14,6 +14,20 @@ const getAllDishesController = async (req, res) => {
   }
 };
 
+const getSingleDishController = async (req, res) => {
+  try {
+    const dishDetails = await dishService.getSingleDishService(req.params.id);
+    if (dishDetails) {
+      res.json({ status: true, message: "Dish Found", data: dishDetails });
+    } else {
+      res.json({ status: false, message: "Dish Not Found" });
+    }
+  } catch (err) {
+    res.status(500).json({ status: false, message: "Can't Find Dish" });
+    console.error("An error occurred:", err);
+  }
+};
+
 const createDishController = async (req, res) => {
   try {
     const status = await dishService.createDishService(req.body);
@@ -72,4 +86,5 @@ module.exports = {
   createDishController,
   updateDishController,
   deleteDishController,
+  getSingleDishController,
 };

@@ -7,5 +7,6 @@ router.get("/", dishController.getAllDishesController);
 router.post("/", dishController.createDishController);
 router.patch("/:id", dishController.updateDishController);
 router.delete("/:id", dishController.deleteDishController);
+router.get("/:id", dishController.getSingleDishController);
 
 module.exports = router;
