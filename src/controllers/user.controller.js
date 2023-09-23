@@ -8,7 +8,7 @@ const getAllUsersController = async (req, res) => {
         .status(200)
         .json({ status: true, message: "Users Found", data: userDetails });
     } else {
-      res.status(200).json({ status: false, message: " Users Not Found" });
+      res.status(404).json({ status: false, message: " Users Not Found" });
     }
   } catch (err) {
     console.error(err);
@@ -22,7 +22,7 @@ const getSingleUsersController = async (req, res) => {
     if (user) {
       res.status(200).json({ status: true, message: "User Found", data: user });
     } else {
-      res.status(200).json({ status: false, message: " User Not Found" });
+      res.status(404).json({ status: false, message: " User Not Found" });
     }
   } catch (err) {
     console.error(err);
@@ -44,12 +44,10 @@ const createUserController = async (req, res) => {
     }
   } catch (error) {
     if (error.code === "conflict") {
-      res
-        .status(409)
-        .json({
-          status: false,
-          message: "An error occurred Because of Duplicate Creation",
-        });
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
     } else {
       res.status(500).json({ status: false, message: "Internal Server Error" });
     }
@@ -59,34 +57,40 @@ const createUserController = async (req, res) => {
 const updateUserController = async (req, res) => {
   try {
     const user = await userService.updateUserDBService(req.params.id, req.body);
-
     if (user) {
-      res.json({
+      res.status(200).json({
         status: true,
         message: "User Updated Successfully",
         data: user,
       });
     } else {
-      res.json({ status: false, message: "User Not Updated" });
+      res.status(404).json({ status: false, message: "User Not Updated" });
     }
-  } catch (err) {
-    console.error("An error occurred:", err);
-    res.status(500).json({ status: false, message: "An error occurred" });
+  } catch (error) {
+    if (error.code === "conflict") {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else {
+      res.status(500).json({ status: false, message: "Internal Server Error" });
+    }
   }
 };
 
 const deleteUserController = async (req, res) => {
   try {
     const deleteUser = await userService.deleteUserDBService(req.params.id);
-
     if (deleteUser) {
-      res.json({ status: true, message: "User Deleted Successfully" });
+      res
+        .status(200)
+        .json({ status: true, message: "User Deleted Successfully" });
     } else {
-      res.json({ status: false, message: "User Not Deleted" });
+      res.status(404).json({ status: false, message: "User Not Found" });
     }
   } catch (err) {
-    console.error("An error occurred:", err);
-    res.status(500).json({ status: false, message: "An error occurred" });
+    console.error("An error occurred");
+    res.status(500).json({ status: false, message: "Internal Server Error" });
   }
 };
 

@@ -58,18 +58,25 @@ const updateUserDBService = async (id, userDetails) => {
     );
     return updatedUser;
   } catch (error) {
-    console.error("An error occurred during user update:", error);
-    return;
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "User already exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
 const deleteUserDBService = async (id) => {
   try {
-    await userDetailsModel.findByIdAndDelete(id);
-    return true;
+    const user = await userDetailsModel.findByIdAndDelete(id);
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
-    console.error("An error occurred during user Delete:", error);
-    return false;
+    console.log("An error occurred during user Delete");
+    throw error;
   }
 };
 
