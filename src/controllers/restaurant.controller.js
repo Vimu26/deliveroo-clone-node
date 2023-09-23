@@ -5,16 +5,16 @@ const getAllRestaurantsController = async (req, res) => {
     const restaurantDetails =
       await restaurantService.getAllRestaurantsFromDBService();
     if (restaurantDetails) {
-      res.json({
+      res.status(200).json({
         status: true,
         message: "Restaurants Found Successfully",
         data: restaurantDetails,
       });
     } else {
-      res.json({ status: false, message: "Restaurants Not Found" });
+      res.status(404).json({ status: false, message: "Restaurants Not Found" });
     }
   } catch (err) {
-    console.error("Error occurs while getting All Restaurants", err);
+    console.error("An error occurred", err);
     res.status(500).json({ status: false, message: "Can't Find Restaurants" });
   }
 };
@@ -25,16 +25,18 @@ const getSingleRestaurantController = async (req, res) => {
       req.params.id,
     );
     if (restaurant) {
-      res.json({
+      res.status(200).json({
         status: true,
         message: "Restaurant Found Successfully",
         data: restaurant,
       });
     } else {
-      res.json({ status: false, message: "Restaurant Does not Exist" });
+      res
+        .status(404)
+        .json({ status: false, message: "Restaurant Does not Exist" });
     }
   } catch (err) {
-    console.error("Error occurs while getting Restaurant", err);
+    console.error("An error occurred", err);
     res.status(500).json({ status: false, message: "Can't Find Restaurant" });
   }
 };
@@ -45,17 +47,26 @@ const createRestaurantController = async (req, res) => {
       req.body,
     );
     if (restaurant) {
-      res.json({
+      res.status(201).json({
         status: true,
         message: "Restaurant Created Successfully",
         data: restaurant,
       });
     } else {
-      res.json({ status: false, message: "Restaurant Not Created" });
+      res
+        .status(404)
+        .json({ status: false, message: "Restaurant Not Created" });
     }
   } catch (error) {
-    console.error("An error occurred");
-    res.status(500).json({ status: false, message: "An error occurred" });
+    if (error.code === "conflict") {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else {
+      console.error("An error occurred", error);
+      res.status(500).json({ status: false, message: "Internal Server Error" });
+    }
   }
 };
 
@@ -65,19 +76,27 @@ const updateRestaurantController = async (req, res) => {
       req.params.id,
       req.body,
     );
-
     if (restaurant) {
-      res.json({
+      res.status(200).json({
         status: true,
         message: "Restaurant Updated Successfully",
         data: restaurant,
       });
     } else {
-      res.json({ status: false, message: "Restaurant Not Updated" });
+      res
+        .status(404)
+        .json({ status: false, message: "Restaurant Not Updated" });
     }
   } catch (err) {
-    console.error("An error occurred");
-    res.status(500).json({ status: false, message: "An error occurred" });
+    if (err.code === "conflict") {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else {
+      console.error("An error occurred", err);
+      res.status(500).json({ status: false, message: "Internal Server Error" });
+    }
   }
 };
 
@@ -86,15 +105,17 @@ const deleteRestaurantController = async (req, res) => {
     const deleteRestaurant = await restaurantService.deleteRestaurantDBService(
       req.params.id,
     );
-
     if (deleteRestaurant) {
-      res.json({ status: true, message: "Restaurant Deleted Successfully" });
+      res
+        .status(200)
+        .json({ status: true, message: "Restaurant Deleted Successfully" });
     } else {
-      res.json({ status: false, message: "Restaurant Not Deleted" });
+      res
+        .status(404)
+        .json({ status: false, message: "Restaurant Not Deleted" });
     }
   } catch (err) {
-    console.error("An error occurred");
-    res.status(500).json({ status: false, message: "An error occurred" });
+    res.status(500).json({ status: false, message: "Internal Server Error" });
   }
 };
 

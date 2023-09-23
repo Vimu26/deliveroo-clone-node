@@ -26,7 +26,7 @@ const getSingleRestaurantDBService = async (id) => {
     }
   } catch (err) {
     console.log("An error occurred during getting Restaurant");
-    return;
+    throw err;
   }
 };
 
@@ -42,8 +42,11 @@ const createRestaurantDBService = async (restaurantDetails) => {
     await restaurantModelData.save();
     return restaurantModelData;
   } catch (error) {
-    console.log("An error occurred during Creating Restaurant");
-    return;
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "Restaurant already exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
@@ -56,18 +59,25 @@ const updateRestaurantDBService = async (id, restaurantDetails) => {
     );
     return updatedRestaurant;
   } catch (error) {
-    console.error("An error occurred during user update");
-    return;
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "User already exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
 const deleteRestaurantDBService = async (id) => {
   try {
-    await restaurantDetailsModel.findByIdAndDelete(id);
-    return true;
+    const restaurant = await restaurantDetailsModel.findByIdAndDelete(id);
+    if (restaurant) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
-    console.error("An error occurred during user Delete:", error);
-    return false;
+    console.error("An error occurred during Restaurant Delete : ", error);
+    throw error;
   }
 };
 
