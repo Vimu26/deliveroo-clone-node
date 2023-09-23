@@ -17,18 +17,14 @@ const getAllUsersController = async (req, res) => {
 };
 
 const getSingleUsersController = async (req, res) => {
-  try{
+  try {
     const user = await userService.getSingleUserDBService(req.params.id);
     if (user) {
-      res
-        .status(200)
-        .json({ status: true, message: "User Found", data: user });
+      res.status(200).json({ status: true, message: "User Found", data: user });
     } else {
       res.status(200).json({ status: false, message: " User Not Found" });
     }
-
-  }
-  catch(err){
+  } catch (err) {
     console.error(err);
     res.status(500).json({ status: false, message: "Can't Find User" });
   }
@@ -36,25 +32,27 @@ const getSingleUsersController = async (req, res) => {
 
 const createUserController = async (req, res) => {
   try {
-    const status = await userService.createUserDBService(req.body);
-    console.log("User creation status:", status);
-
-    if (status) {
-      res.json({
+    const user = await userService.createUserDBService(req.body);
+    if (user) {
+      res.status(201).json({
         status: true,
         message: " User Created Successfully",
-        data: req.body,
+        data: user,
       });
     } else {
       res.json({ status: false, message: " User Not Created" });
     }
   } catch (error) {
-    // if(error == conflict) {
-    //   res.status(500).json({ status: false, message: "An error occurred" });
-    // }else {
-    //   res.status(500).json({ status: false, message: "An error occurred" });
-    // }
-    console.error("An error occurred:", error);
+    if (error.code === "conflict") {
+      res
+        .status(409)
+        .json({
+          status: false,
+          message: "An error occurred Because of Duplicate Creation",
+        });
+    } else {
+      res.status(500).json({ status: false, message: "Internal Server Error" });
+    }
   }
 };
 

@@ -6,8 +6,9 @@ const getAllRestaurantsFromDBService = () => {
     .then((restaurants) => {
       if (restaurants.length === 0) {
         console.log("No Restaurants found");
+      } else {
+        return restaurants;
       }
-      return restaurants;
     })
     .catch((err) => {
       throw err;
@@ -19,13 +20,11 @@ const getSingleRestaurantDBService = async (id) => {
     const restaurant = await restaurantDetailsModel.findById(id);
     if (restaurant) {
       return restaurant;
-    }
-    else {
-      console.log("No restaurant Exists " );
+    } else {
+      console.log("No restaurant Exists ");
       return;
     }
-  }
-  catch (err) {
+  } catch (err) {
     console.log("An error occurred during getting Restaurant");
     return;
   }
@@ -41,10 +40,10 @@ const createRestaurantDBService = async (restaurantDetails) => {
     });
 
     await restaurantModelData.save();
-    return true;
+    return restaurantModelData;
   } catch (error) {
-    console.error(error);
-    return false;
+    console.log("An error occurred during Creating Restaurant");
+    return;
   }
 };
 
@@ -57,7 +56,7 @@ const updateRestaurantDBService = async (id, restaurantDetails) => {
     );
     return updatedRestaurant;
   } catch (error) {
-    console.error("An error occurred during user update:", error);
+    console.error("An error occurred during user update");
     return;
   }
 };
@@ -77,5 +76,5 @@ module.exports = {
   createRestaurantDBService,
   updateRestaurantDBService,
   deleteRestaurantDBService,
-  getSingleRestaurantDBService
+  getSingleRestaurantDBService,
 };

@@ -30,14 +30,12 @@ const getSingleDishController = async (req, res) => {
 
 const createDishController = async (req, res) => {
   try {
-    const status = await dishService.createDishService(req.body);
-    console.log("Dish creation status:", status);
-
-    if (status) {
+    const dish = await dishService.createDishService(req.body);
+    if (dish) {
       res.json({
         status: true,
         message: "Dish Created Successfully",
-        data: req.body,
+        data: dish,
       });
     } else {
       res.json({ status: false, message: "Dish Not Created" });

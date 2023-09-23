@@ -6,8 +6,7 @@ const getAllDishesService = () => {
     .then((dish) => {
       if (dish.length === 0) {
         console.log("No Dishes Found");
-      }
-      else {
+      } else {
         return dish;
       }
     })
@@ -21,13 +20,11 @@ const getSingleDishService = async (id) => {
     const dish = await dishDetailsModel.findById(id);
     if (dish) {
       return dish;
-    }
-    else {
-      console.log("No Dish Exist" );
+    } else {
+      console.log("No Dish Exist");
       return;
     }
-  }
-  catch (err) {
+  } catch (err) {
     console.error("An error occurred during getting a Dish:", err);
     return;
   }
@@ -43,7 +40,7 @@ const createDishService = async (dishDetails) => {
     });
 
     await dishModelData.save();
-    return true;
+    return dishModelData;
   } catch (error) {
     console.error(error);
     throw error;
@@ -59,7 +56,7 @@ const updateDishService = async (id, dishDetails) => {
     );
     return updatedDish;
   } catch (error) {
-    console.error("An error occurred during Dish update:", error);
+    console.error("An error occurred during Dish update");
     return;
   }
 };
@@ -69,7 +66,7 @@ const deleteDishService = async (id) => {
     await dishDetailsModel.findByIdAndDelete(id);
     return true;
   } catch (error) {
-    console.error("An error occurred during Dish Delete:", error);
+    console.error("An error occurred during Dish Delete");
     return false;
   }
 };
