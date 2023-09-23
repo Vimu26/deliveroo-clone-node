@@ -15,17 +15,15 @@ const getAllUsersFromDBService = () => {
 };
 
 const getSingleUserDBService = async (id) => {
-  try{
+  try {
     const user = await userDetailsModel.findById(id);
-    if(user) {
+    if (user) {
       return user;
-    }
-    else {
+    } else {
       console.log("No user Found");
       return;
     }
-  }
-  catch(err) {
+  } catch (err) {
     console.log("User Does Not Exist");
     return;
   }
@@ -40,12 +38,14 @@ const createUserDBService = async (userDetails) => {
       email: userDetails.email,
       password: userDetails.password,
     });
-
     await userModelData.save();
-    return true;
+    return userModelData;
   } catch (error) {
-    console.error(error);
-    throw error;
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "User already exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
