@@ -93,6 +93,7 @@ const deleteUserController = async (req, res) => {
       res.status(404).json({ status: false, message: "User Not Found" });
     }
   } catch (err) {
+    console.error("An error occurred:", err);
     res.status(500).json({ status: false, message: "Internal Server Error" });
   }
 };
