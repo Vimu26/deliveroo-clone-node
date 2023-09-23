@@ -6,10 +6,9 @@ const getAllUsersFromDBService = () => {
     .then((users) => {
       if (users.length === 0) {
         console.log("No users found");
+      } else {
+        return users;
       }
-      else{
-         return users;
-      } 
     })
     .catch((err) => {
       throw err;
@@ -77,7 +76,7 @@ const deleteUserDBService = async (id) => {
       return false;
     }
   } catch (error) {
-    console.log("An error occurred during user Delete : " ,error);
+    console.log("An error occurred during user Delete : ", error);
     throw error;
   }
 };

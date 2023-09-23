@@ -14,7 +14,7 @@ const getAllRestaurantsController = async (req, res) => {
       res.status(404).json({ status: false, message: "Restaurants Not Found" });
     }
   } catch (err) {
-    console.error("An error occurred",err);
+    console.error("An error occurred", err);
     res.status(500).json({ status: false, message: "Can't Find Restaurants" });
   }
 };
@@ -22,7 +22,7 @@ const getAllRestaurantsController = async (req, res) => {
 const getSingleRestaurantController = async (req, res) => {
   try {
     const restaurant = await restaurantService.getSingleRestaurantDBService(
-      req.params.id
+      req.params.id,
     );
     if (restaurant) {
       res.status(200).json({
@@ -31,10 +31,12 @@ const getSingleRestaurantController = async (req, res) => {
         data: restaurant,
       });
     } else {
-      res.status(404).json({ status: false, message: "Restaurant Does not Exist" });
+      res
+        .status(404)
+        .json({ status: false, message: "Restaurant Does not Exist" });
     }
   } catch (err) {
-    console.error("An error occurred",err);
+    console.error("An error occurred", err);
     res.status(500).json({ status: false, message: "Can't Find Restaurant" });
   }
 };
@@ -42,7 +44,7 @@ const getSingleRestaurantController = async (req, res) => {
 const createRestaurantController = async (req, res) => {
   try {
     const restaurant = await restaurantService.createRestaurantDBService(
-      req.body
+      req.body,
     );
     if (restaurant) {
       res.status(201).json({
@@ -51,7 +53,9 @@ const createRestaurantController = async (req, res) => {
         data: restaurant,
       });
     } else {
-      res.status(404).json({ status: false, message: "Restaurant Not Created" });
+      res
+        .status(404)
+        .json({ status: false, message: "Restaurant Not Created" });
     }
   } catch (error) {
     if (error.code === "conflict") {
@@ -60,7 +64,7 @@ const createRestaurantController = async (req, res) => {
         message: "An error occurred Because of Duplicate Creation",
       });
     } else {
-      console.error("An error occurred",error);
+      console.error("An error occurred", error);
       res.status(500).json({ status: false, message: "Internal Server Error" });
     }
   }
@@ -70,7 +74,7 @@ const updateRestaurantController = async (req, res) => {
   try {
     const restaurant = await restaurantService.updateRestaurantDBService(
       req.params.id,
-      req.body
+      req.body,
     );
     if (restaurant) {
       res.status(200).json({
@@ -79,7 +83,9 @@ const updateRestaurantController = async (req, res) => {
         data: restaurant,
       });
     } else {
-      res.status(404).json({ status: false, message: "Restaurant Not Updated" });
+      res
+        .status(404)
+        .json({ status: false, message: "Restaurant Not Updated" });
     }
   } catch (err) {
     if (err.code === "conflict") {
@@ -88,7 +94,7 @@ const updateRestaurantController = async (req, res) => {
         message: "An error occurred Because of Duplicate Creation",
       });
     } else {
-      console.error("An error occurred",err);
+      console.error("An error occurred", err);
       res.status(500).json({ status: false, message: "Internal Server Error" });
     }
   }
@@ -97,12 +103,16 @@ const updateRestaurantController = async (req, res) => {
 const deleteRestaurantController = async (req, res) => {
   try {
     const deleteRestaurant = await restaurantService.deleteRestaurantDBService(
-      req.params.id
+      req.params.id,
     );
     if (deleteRestaurant) {
-      res.status(200).json({ status: true, message: "Restaurant Deleted Successfully" });
+      res
+        .status(200)
+        .json({ status: true, message: "Restaurant Deleted Successfully" });
     } else {
-      res.status(404).json({ status: false, message: "Restaurant Not Deleted" });
+      res
+        .status(404)
+        .json({ status: false, message: "Restaurant Not Deleted" });
     }
   } catch (err) {
     res.status(500).json({ status: false, message: "Internal Server Error" });

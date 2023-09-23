@@ -13,7 +13,7 @@ const getAllUsersController = async (req, res) => {
       res.status(404).json({ status: false, message: " Users Not Found" });
     }
   } catch (err) {
-    console.error("An error occurred",err);
+    console.error("An error occurred", err);
     res.status(500).json({ status: false, message: "Can't Find Users" });
   }
 };
@@ -27,7 +27,7 @@ const getSingleUsersController = async (req, res) => {
       res.status(404).json({ status: false, message: " User Does not Exist" });
     }
   } catch (err) {
-    console.error("An error occurred",err);
+    console.error("An error occurred", err);
     res.status(500).json({ status: false, message: "Can't Find User" });
   }
 };
@@ -51,7 +51,7 @@ const createUserController = async (req, res) => {
         message: "An error occurred Because of Duplicate Creation",
       });
     } else {
-      console.error("An error occurred",error);
+      console.error("An error occurred", error);
       res.status(500).json({ status: false, message: "Internal Server Error" });
     }
   }
@@ -76,7 +76,7 @@ const updateUserController = async (req, res) => {
         message: "An error occurred Because of Duplicate Creation",
       });
     } else {
-      console.error("An error occurred",error);
+      console.error("An error occurred", error);
       res.status(500).json({ status: false, message: "Internal Server Error" });
     }
   }

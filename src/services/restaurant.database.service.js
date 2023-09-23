@@ -70,12 +70,11 @@ const updateRestaurantDBService = async (id, restaurantDetails) => {
 const deleteRestaurantDBService = async (id) => {
   try {
     const restaurant = await restaurantDetailsModel.findByIdAndDelete(id);
-    if(restaurant) {
+    if (restaurant) {
       return true;
-    }
-    else {
+    } else {
       return false;
-    }    
+    }
   } catch (error) {
     console.error("An error occurred during Restaurant Delete : ", error);
     throw error;
