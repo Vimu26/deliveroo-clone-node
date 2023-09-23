@@ -7,7 +7,7 @@ const getAllOrderDetailsFromDBService = async () => {
       if (orders.length > 0) {
         return orders;
       } else {
-        console.log("No orders found");
+        console.log("No Orders found");
       }
     })
     .catch((err) => {
@@ -26,8 +26,11 @@ const createOrderDBService = async (orderDetails) => {
     await orderModelData.save();
     return orderModelData;
   } catch (error) {
-    console.error(error);
-    throw error;
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "Order already Exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
@@ -40,18 +43,25 @@ const updateOrderDBService = async (orderId, orderDetails) => {
     );
     return order;
   } catch (error) {
-    console.error(error);
-    return;
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "Order already Exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
 const deleteOrderDBService = async (orderId) => {
   try {
-    await orderDetailsModel.findByIdAndDelete(orderId);
-    return true;
+    const order = await orderDetailsModel.findByIdAndDelete(orderId);
+    if (order) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
-    console.error("An error occurred during user Delete:", error);
-    return false;
+    console.error("An error occurred during user Delete ");
+    throw error;
   }
 };
 
@@ -62,10 +72,11 @@ const getSingleUserDBService = async (orderId) => {
       return order;
     } else {
       console.log("No Order found");
+      return;
     }
   } catch (error) {
-    console.error("An error occurred");
-    return;
+    console.error("An error occurred during Getting A Order");
+    throw error;
   }
 };
 

@@ -43,7 +43,7 @@ const createRestaurantDBService = async (restaurantDetails) => {
     return restaurantModelData;
   } catch (error) {
     if (error.code === 11000) {
-      throw { code: "conflict", message: "Restaurant already exists" };
+      throw { code: "conflict", message: "Restaurant already Exists" };
     } else {
       throw error;
     }
@@ -60,7 +60,7 @@ const updateRestaurantDBService = async (id, restaurantDetails) => {
     return updatedRestaurant;
   } catch (error) {
     if (error.code === 11000) {
-      throw { code: "conflict", message: "User already exists" };
+      throw { code: "conflict", message: "Restaurant already Exists" };
     } else {
       throw error;
     }
@@ -76,7 +76,7 @@ const deleteRestaurantDBService = async (id) => {
       return false;
     }
   } catch (error) {
-    console.error("An error occurred during Restaurant Delete : ", error);
+    console.error("An error occurred during Restaurant Delete ");
     throw error;
   }
 };

@@ -25,8 +25,8 @@ const getSingleDishService = async (id) => {
       return;
     }
   } catch (err) {
-    console.error("An error occurred during getting a Dish:", err);
-    return;
+    console.error("An error occurred during getting a Dish");
+    throw err;
   }
 };
 
@@ -42,8 +42,11 @@ const createDishService = async (dishDetails) => {
     await dishModelData.save();
     return dishModelData;
   } catch (error) {
-    console.error(error);
-    throw error;
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "Dish already Exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
@@ -56,18 +59,25 @@ const updateDishService = async (id, dishDetails) => {
     );
     return updatedDish;
   } catch (error) {
-    console.error("An error occurred during Dish update");
-    return;
+    if (error.code === 11000) {
+      throw { code: "conflict", message: "Dish already Exists" };
+    } else {
+      throw error;
+    }
   }
 };
 
 const deleteDishService = async (id) => {
   try {
-    await dishDetailsModel.findByIdAndDelete(id);
-    return true;
+    const dish = await dishDetailsModel.findByIdAndDelete(id);
+    if (dish) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
     console.error("An error occurred during Dish Delete");
-    return false;
+    throw error;
   }
 };
 
