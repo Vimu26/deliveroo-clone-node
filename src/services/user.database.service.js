@@ -1,4 +1,5 @@
 const userDetailsModel = require("../models/user.model");
+const bcrypt = require('bcrypt');
 
 const getAllUsersFromDBService = () => {
   return userDetailsModel
@@ -32,12 +33,16 @@ const getSingleUserDBService = async (id) => {
 
 const createUserDBService = async (userDetails) => {
   try {
+    const saltRounds = 10;
+    const salt  = await bcrypt.genSalt(saltRounds);
+    const hashPassword = await bcrypt.hash(userDetails.password , salt);
+
     const userModelData = new userDetailsModel({
       first_name: userDetails.first_name,
       last_name: userDetails.last_name,
       contact_number: userDetails.contact_number,
       email: userDetails.email,
-      password: userDetails.password,
+      password: hashPassword,
     });
     await userModelData.save();
     return userModelData;
@@ -52,6 +57,12 @@ const createUserDBService = async (userDetails) => {
 
 const updateUserDBService = async (id, userDetails) => {
   try {
+    if ('password' in userDetails) {
+      const saltRounds = 10;
+      const salt = await bcrypt.genSalt(saltRounds);
+      userDetails.password = await bcrypt.hash(userDetails.password, salt);
+    }
+    
     const updatedUser = await userDetailsModel.findByIdAndUpdate(
       id,
       userDetails,
