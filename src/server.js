@@ -18,6 +18,7 @@ server.use("/restaurants", restaurantRoutes);
 server.use("/dishes", dishRoutes);
 server.use("/orders", orderRoutes);
 server.use("/dishCategories", dishCategories);
+// server.use("/oauth", authRoutes);
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/deliveroo-clone-api", {
@@ -38,9 +39,15 @@ server.listen(process.env.PORT, (error) => {
 });
 
 server.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.status(200).json({
+    success: true,
+    message: "API Successfully in Port ${process.env.PORT}",
+  });
 });
 
-// server.any("#*", (req, res) => {
-//   res.send("Router Not Found!");
-// });
+server.all("*", (req, res) => {
+  res.status(404).json({
+    success: true,
+    message: "Router Not Found!",
+  });
+});
