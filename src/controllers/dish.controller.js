@@ -20,13 +20,11 @@ const getSingleDishController = async (req, res) => {
   try {
     const dishDetails = await dishService.getSingleDishService(req.params.id);
     if (dishDetails) {
-      res
-        .status(200)
-        .json({
-          status: true,
-          message: "Dish Found Successfully",
-          data: dishDetails,
-        });
+      res.status(200).json({
+        status: true,
+        message: "Dish Found Successfully",
+        data: dishDetails,
+      });
     } else {
       res.status(404).json({ status: false, message: "Dish Doesn't Exist" });
     }

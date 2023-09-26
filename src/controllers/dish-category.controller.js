@@ -11,7 +11,9 @@ const getAllDishCategoriesController = async (req, res) => {
         data: dishCategory,
       });
     } else {
-      res.status(404).json({ status: false, message: "Dish Categories Not Found" });
+      res
+        .status(404)
+        .json({ status: false, message: "Dish Categories Not Found" });
     }
   } catch (err) {
     console.error("An error occurred :", err);
@@ -34,7 +36,9 @@ const createDishCategoryController = async (req, res) => {
         data: category,
       });
     } else {
-      res.status(404).json({ status: false, message: "Dish Category Not Created" });
+      res
+        .status(404)
+        .json({ status: false, message: "Dish Category Not Created" });
     }
   } catch (err) {
     if (err.code === "conflict") {
@@ -63,7 +67,9 @@ const updateDishCategoryController = async (req, res) => {
         data: updatedDishCategory,
       });
     } else {
-      res.status(404).json({ status: false, message: "Dish Category Not updated" });
+      res
+        .status(404)
+        .json({ status: false, message: "Dish Category Not updated" });
     }
   } catch (error) {
     if (error.code === "conflict") {
@@ -91,7 +97,9 @@ const deleteDishCategoryController = async (req, res) => {
         message: "Dish Category Deleted successfully",
       });
     } else {
-      res.status(404).json({ status: false, message: "Dish Category not Deleted" });
+      res
+        .status(404)
+        .json({ status: false, message: "Dish Category not Deleted" });
     }
   } catch (err) {
     console.error("An error occurred:", err);
@@ -114,14 +122,16 @@ const getSingleDishCategoryController = async (req, res) => {
         data: category,
       });
     } else {
-      res.status(404).json({ status: false, message: "Dish Category Not Found" });
+      res
+        .status(404)
+        .json({ status: false, message: "Dish Category Not Found" });
     }
   } catch (err) {
     console.error("An error occurred :", err);
     res.status(500).json({
       status: false,
       message: "An error occurred in Getting Dish Category",
-    })
+    });
   }
 };
 
