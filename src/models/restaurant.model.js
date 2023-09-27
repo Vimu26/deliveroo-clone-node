@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const db_name = require("../constants/db.names");
 
 const restaurantDetailsSchema = new mongoose.Schema({
   name: {
@@ -22,4 +23,4 @@ const restaurantDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model("restaurant", restaurantDetailsSchema);
+module.exports = new mongoose.model(db_name.DB_NAMES.RESTAURANTS , restaurantDetailsSchema);

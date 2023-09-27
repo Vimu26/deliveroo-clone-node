@@ -17,7 +17,7 @@ server.use("/users", userRoutes);
 server.use("/restaurants", restaurantRoutes);
 server.use("/dishes", dishRoutes);
 server.use("/orders", orderRoutes);
-server.use("/dishCategories", dishCategories);
+server.use("/dish-categories", dishCategories);
 // server.use("/oauth", authRoutes);
 
 mongoose
