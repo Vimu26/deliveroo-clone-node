@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const db_name = require("../constants/db.names");
 
 const orderDetailsSchema = new mongoose.Schema({
   quantity: {
@@ -21,4 +22,4 @@ const orderDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model("orders", orderDetailsSchema);
+module.exports = new mongoose.model(db_name.DB_NAMES.ORDERS , orderDetailsSchema);
