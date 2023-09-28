@@ -23,4 +23,7 @@ const restaurantDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model(db_name.DB_NAMES.RESTAURANTS , restaurantDetailsSchema);
+module.exports = new mongoose.model(
+  db_name.DB_NAMES.RESTAURANTS,
+  restaurantDetailsSchema,
+);

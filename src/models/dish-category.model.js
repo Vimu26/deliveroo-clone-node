@@ -12,4 +12,7 @@ const dishCategoryDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model(db_name.DB_NAMES.DISH_CATEGORIES , dishCategoryDetailsSchema);
+module.exports = new mongoose.model(
+  db_name.DB_NAMES.DISH_CATEGORIES,
+  dishCategoryDetailsSchema,
+);
