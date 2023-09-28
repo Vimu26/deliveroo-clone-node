@@ -30,76 +30,80 @@ const getSingleUser = async (req, res) => {
   }
 };
 
-const createUserController = async (req, res) => {
+const createUser = async (req, res) => {
   try {
-    const user = await userService.createUserDBService(req.body);
-    if (user) {
-      res.status(201).json({
-        status: true,
-        message: " User Created Successfully",
-        data: user,
-      });
-    } else {
-      res.status(404).json({ status: false, message: " User Not Created" });
-    }
+    const user = await userService.createUser(req.body);
+    res.status(201).json({
+      status: true,
+      message: " User Created Successfully",
+      data: user,
+    });
   } catch (error) {
-    if (error.code === "conflict") {
+    if (error.code === 11000) {
       res.status(409).json({
         status: false,
         message: "An error occurred Because of Duplicate Creation",
       });
     } else {
-      console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
     }
   }
 };
 
-const updateUserController = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
-    const user = await userService.updateUserDBService(req.params.id, req.body);
-    if (user) {
-      res.status(200).json({
-        status: true,
-        message: "User Updated Successfully",
-        data: user,
-      });
-    } else {
-      res.status(404).json({ status: false, message: "User Not Updated" });
-    }
+    const user = await userService.updateUser(req.params.id, req.body);
+    res.status(200).json({
+      status: true,
+      message: "User Updated Successfully",
+      data: user,
+    });
   } catch (error) {
-    if (error.code === "conflict") {
+    if (error.code === 11000) {
       res.status(409).json({
         status: false,
         message: "An error occurred Because of Duplicate Creation",
       });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "User Does Not Exist",
+      });
     } else {
       console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      res.status(500).json({ status: false, message: error.message });
     }
   }
 };
 
-const deleteUserController = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
-    const deleteUser = await userService.deleteUserDBService(req.params.id);
-    if (deleteUser) {
-      res
-        .status(200)
-        .json({ status: true, message: "User Deleted Successfully" });
-    } else {
-      res.status(404).json({ status: false, message: "User Not Found" });
-    }
+    const deleteUser = await userService.deleteUser(req.params.id);
+    res
+      .status(200)
+      .json({
+        status: true,
+        message: "User Deleted Successfully",
+        data: deleteUser,
+      });
   } catch (err) {
-    console.error("An error occurred:", err);
-    res.status(500).json({ status: false, message: "Internal Server Error" });
+    if (err.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "User Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", err);
+      res.status(500).json({ status: false, message: err.message });
+    }
   }
 };
 
 module.exports = {
   getAllUsers,
-  createUserController,
-  updateUserController,
-  deleteUserController,
+  createUser,
+  updateUser,
+  deleteUser,
   getSingleUser,
 };
