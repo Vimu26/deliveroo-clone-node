@@ -1,34 +1,32 @@
 const userService = require("../services/user.database.service");
 
-const getAllUsersController = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
-    const userDetails = await userService.getAllUsersFromDBService();
-    if (userDetails) {
-      res.status(200).json({
-        status: true,
-        message: "Users Found Successfully",
-        data: userDetails,
-      });
-    } else {
-      res.status(404).json({ status: false, message: " Users Not Found" });
-    }
+    const userDetails = await userService.getAllUsers();
+    res.status(200).json({
+      status: true,
+      message: "Users Found Successfully",
+      data: userDetails,
+    });
   } catch (err) {
-    console.error("An error occurred", err);
-    res.status(500).json({ status: false, message: "Can't Find Users" });
+    console.error("An error occurred", err.message);
+    res.status(404).json({ status: false, message: err.message });
   }
 };
 
-const getSingleUsersController = async (req, res) => {
+const getSingleUser = async (req, res) => {
   try {
-    const user = await userService.getSingleUserDBService(req.params.id);
-    if (user) {
-      res.status(200).json({ status: true, message: "User Found", data: user });
-    } else {
-      res.status(404).json({ status: false, message: " User Does not Exist" });
-    }
+    const user = await userService.getSingleUser(req.params.id);
+    res
+      .status(200)
+      .json({ status: true, message: "User Found Successfully", data: user });
   } catch (err) {
-    console.error("An error occurred", err);
-    res.status(500).json({ status: false, message: "Can't Find User" });
+    if (err.messageFormat == undefined) {
+      res.status(404).json({ status: false, message: "User Does Not Exist" });
+    } else {
+      console.error("An error occurred", err.message);
+      res.status(500).json({ status: false, message: err.message });
+    }
   }
 };
 
@@ -99,9 +97,9 @@ const deleteUserController = async (req, res) => {
 };
 
 module.exports = {
-  getAllUsersController,
+  getAllUsers,
   createUserController,
   updateUserController,
   deleteUserController,
-  getSingleUsersController,
+  getSingleUser,
 };

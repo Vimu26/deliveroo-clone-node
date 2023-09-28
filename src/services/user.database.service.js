@@ -1,34 +1,14 @@
 const userDetailsModel = require("../models/user.model");
 const hashPassword = require("./password-hash.database.service");
 
-const getAllUsersFromDBService = async () => {
-  return await userDetailsModel
-    .find()
-    .then((users) => {
-      if (users.length === 0) {
-        console.log("No users found");
-      } else {
-        return users;
-      }
-    })
-    .catch((err) => {
-      throw err;
-    });
+const getAllUsers = async () => {
+  const users = await userDetailsModel.find();
+  return users;
 };
 
-const getSingleUserDBService = async (id) => {
-  try {
-    const user = await userDetailsModel.findById(id);
-    if (user) {
-      return user;
-    } else {
-      console.log("No user Exists");
-      return;
-    }
-  } catch (err) {
-    console.log("An error occurred during getting User");
-    throw err;
-  }
+const getSingleUser = async (id) => {
+  const user = await userDetailsModel.findById(id);
+  return user;
 };
 
 const createUserDBService = async (userDetails) => {
@@ -91,9 +71,9 @@ const deleteUserDBService = async (id) => {
 };
 
 module.exports = {
-  getAllUsersFromDBService,
+  getAllUsers,
   createUserDBService,
   updateUserDBService,
   deleteUserDBService,
-  getSingleUserDBService,
+  getSingleUser,
 };
