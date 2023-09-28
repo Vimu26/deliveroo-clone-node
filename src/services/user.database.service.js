@@ -1,5 +1,5 @@
 const userDetailsModel = require("../models/user.model");
-const bcrypt = require("bcrypt");
+const hashPassword = require("./password-hash.database.service");
 
 const getAllUsersFromDBService = async () => {
   return await userDetailsModel
@@ -33,16 +33,14 @@ const getSingleUserDBService = async (id) => {
 
 const createUserDBService = async (userDetails) => {
   try {
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashPassword = await bcrypt.hash(userDetails.password, salt);
+    const password = await hashPassword.hashPassword(userDetails.password);
 
     const userModelData = new userDetailsModel({
       first_name: userDetails.first_name,
       last_name: userDetails.last_name,
       contact_number: userDetails.contact_number,
       email: userDetails.email,
-      password: hashPassword,
+      password: password,
     });
     await userModelData.save();
     return userModelData;
@@ -58,15 +56,15 @@ const createUserDBService = async (userDetails) => {
 const updateUserDBService = async (id, userDetails) => {
   try {
     if ("password" in userDetails) {
-      const saltRounds = 10;
-      const salt = await bcrypt.genSalt(saltRounds);
-      userDetails.password = await bcrypt.hash(userDetails.password, salt);
+      userDetails.password = await hashPassword.hashPassword(
+        userDetails.password
+      );
     }
 
     const updatedUser = await userDetailsModel.findByIdAndUpdate(
       id,
       userDetails,
-      { new: true },
+      { new: true }
     );
     return updatedUser;
   } catch (error) {
