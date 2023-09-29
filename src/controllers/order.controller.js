@@ -1,120 +1,117 @@
 const orderService = require("../services/order.database.service");
 
-const getAllOrdersController = async (req, res) => {
+const getAllOrders = async (req, res) => {
   try {
-    const orderDetails = await orderService.getAllOrderDetailsFromDBService();
-    if (orderDetails) {
-      res.status(200).json({
-        status: true,
-        message: "Order Details Found",
-        data: orderDetails,
-      });
-    } else {
-      res
-        .status(404)
-        .json({ status: false, message: "Order Details Not Found" });
-    }
+    const orderDetails = await orderService.getAllOrderDetails();
+
+    res.status(200).json({
+      status: true,
+      message: "Order Details Found",
+      data: orderDetails,
+    });
   } catch (err) {
-    console.error("An error occurred", err);
-    res
-      .status(500)
-      .json({ status: false, message: "Can't Find Order Details" });
+    console.error("An error occurred", err.message);
+    res.status(500).json({ status: false, message: err.message });
   }
 };
 
-const createOrderController = async (req, res) => {
+const createOrder = async (req, res) => {
   try {
-    const order = await orderService.createOrderDBService(req.body);
-    if (order) {
-      res.json({
-        status: true,
-        message: "Order Created Successfully",
-        data: order,
-      });
-    } else {
-      res.status(404).json({ status: false, message: "Order Not Created" });
-    }
+    const order = await orderService.createOrder(req.body);
+
+    res.json({
+      status: true,
+      message: "Order Created Successfully",
+      data: order,
+    });
   } catch (error) {
-    if (error.code === "conflict") {
+    if (error.code === 11000) {
       res.status(409).json({
         status: false,
         message: "An error occurred Because of Duplicate Creation",
       });
     } else {
-      console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
     }
   }
 };
 
-const updateOrderController = async (req, res) => {
+const updateOrder = async (req, res) => {
   try {
-    const UpdatedOrder = await orderService.updateOrderDBService(
+    const UpdatedOrder = await orderService.updateOrder(
       req.params.id,
-      req.body,
+      req.body
     );
-    if (UpdatedOrder) {
-      res.status(200).json({
-        status: true,
-        message: "Order updated successfully",
-        data: UpdatedOrder,
-      });
-    } else {
-      res.status(404).json({ status: false, message: "Order not updated" });
-    }
+
+    res.status(200).json({
+      status: true,
+      message: "Order updated successfully",
+      data: UpdatedOrder,
+    });
   } catch (error) {
-    if (error.code === "conflict") {
+    if (error.code === 11000) {
       res.status(409).json({
         status: false,
         message: "An error occurred Because of Duplicate Creation",
       });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Restaurant Does Not Exist",
+      });
     } else {
       console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      res.status(500).json({ status: false, message: error.message });
     }
   }
 };
 
-const deleteOrderController = async (req, res) => {
+const deleteOrder = async (req, res) => {
   try {
-    const deletedOrder = await orderService.deleteOrderDBService(req.params.id);
-    if (deletedOrder) {
-      res
-        .status(200)
-        .json({ status: true, message: "Order Deleted successfully" });
+    const deletedOrder = await orderService.deleteOrder(req.params.id);
+    res.status(200).json({
+      status: true,
+      message: "Order Deleted successfully",
+      data: deletedOrder,
+    });
+  } catch (err) {
+    if (err.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Restaurant Does Not Exist",
+      });
     } else {
+      console.error("An error occurred", err);
+      res.status(500).json({ status: false, message: err.message });
+    }
+  }
+};
+
+const getSingleOrder = async (req, res) => {
+  try {
+    const order = await orderService.getSingleUser(req.params.id);
+    res.status(200).json({
+      status: true,
+      message: "Order Found successfully",
+      data: order,
+    });
+  } catch (err) {
+    if (err.messageFormat == undefined) {
       res
         .status(404)
-        .json({ status: false, message: "Order Not Deleted successfully" });
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-    res.status(500).json({ status: false, message: "Internal Server Error" });
-  }
-};
-
-const getSingleOrderController = async (req, res) => {
-  try {
-    const order = await orderService.getSingleUserDBService(req.params.id);
-    if (order) {
-      res.status(200).json({
-        status: true,
-        message: "Order Found successfully",
-        data: order,
-      });
+        .json({ status: false, message: "Restaurant Does Not Exist" });
     } else {
-      res.status(404).json({ status: false, message: "Order Doesn't Exist" });
+      console.error("An error occurred", err.message);
+      res.status(500).json({ status: false, message: err.message });
     }
-  } catch (error) {
-    console.error("An error occurred:", error);
-    res.status(500).json({ status: false, message: "Can't Find Order" });
   }
 };
 
 module.exports = {
-  createOrderController,
-  getAllOrdersController,
-  updateOrderController,
-  deleteOrderController,
-  getSingleOrderController,
+  createOrder,
+  getAllOrders,
+  updateOrder,
+  deleteOrder,
+  getSingleOrder,
 };
