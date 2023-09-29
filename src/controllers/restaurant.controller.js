@@ -1,129 +1,118 @@
 const restaurantService = require("../services/restaurant.database.service");
 
-const getAllRestaurantsController = async (req, res) => {
+const getAllRestaurants = async (req, res) => {
   try {
-    const restaurantDetails =
-      await restaurantService.getAllRestaurantsFromDBService();
-    if (restaurantDetails) {
-      res.status(200).json({
-        status: true,
-        message: "Restaurants Found Successfully",
-        data: restaurantDetails,
-      });
-    } else {
-      res.status(404).json({ status: false, message: "Restaurants Not Found" });
-    }
+    const restaurantDetails = await restaurantService.getAllRestaurants();
+    res.status(200).json({
+      status: true,
+      message: "Restaurants Found Successfully",
+      data: restaurantDetails,
+    });
   } catch (err) {
-    console.error("An error occurred", err);
-    res.status(500).json({ status: false, message: "Can't Find Restaurants" });
+    console.error("An error occurred", err.message);
+    res.status(500).json({ status: false, message: err.message });
   }
 };
 
-const getSingleRestaurantController = async (req, res) => {
+const getSingleRestaurant = async (req, res) => {
   try {
-    const restaurant = await restaurantService.getSingleRestaurantDBService(
+    const restaurant = await restaurantService.getSingleRestaurant(
       req.params.id,
     );
-    if (restaurant) {
-      res.status(200).json({
-        status: true,
-        message: "Restaurant Found Successfully",
-        data: restaurant,
-      });
-    } else {
+    res.status(200).json({
+      status: true,
+      message: "Restaurant Found Successfully",
+      data: restaurant,
+    });
+  } catch (err) {
+    if (err.messageFormat == undefined) {
       res
         .status(404)
-        .json({ status: false, message: "Restaurant Doesn't Exist" });
+        .json({ status: false, message: "Restaurant Does Not Exist" });
+    } else {
+      console.error("An error occurred", err.message);
+      res.status(500).json({ status: false, message: err.message });
     }
-  } catch (err) {
-    console.error("An error occurred", err);
-    res.status(500).json({ status: false, message: "Can't Find Restaurant" });
   }
 };
 
-const createRestaurantController = async (req, res) => {
+const createRestaurant = async (req, res) => {
   try {
-    const restaurant = await restaurantService.createRestaurantDBService(
-      req.body,
-    );
-    if (restaurant) {
-      res.status(201).json({
-        status: true,
-        message: "Restaurant Created Successfully",
-        data: restaurant,
-      });
-    } else {
-      res
-        .status(404)
-        .json({ status: false, message: "Restaurant Not Created" });
-    }
+    const restaurant = await restaurantService.createRestaurant(req.body);
+    res.status(201).json({
+      status: true,
+      message: "Restaurant Created Successfully",
+      data: restaurant,
+    });
   } catch (error) {
-    if (error.code === "conflict") {
+    if (error.code === 11000) {
       res.status(409).json({
         status: false,
         message: "An error occurred Because of Duplicate Creation",
+      });
+    } else {
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
+    }
+  }
+};
+
+const updateRestaurant = async (req, res) => {
+  try {
+    const restaurant = await restaurantService.updateRestaurant(
+      req.params.id,
+      req.body,
+    );
+    res.status(200).json({
+      status: true,
+      message: "Restaurant Updated Successfully",
+      data: restaurant,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Restaurant Does Not Exist",
       });
     } else {
       console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      res.status(500).json({ status: false, message: error.message });
     }
   }
 };
 
-const updateRestaurantController = async (req, res) => {
+const deleteRestaurant = async (req, res) => {
   try {
-    const restaurant = await restaurantService.updateRestaurantDBService(
+    const deleteRestaurant = await restaurantService.deleteRestaurant(
       req.params.id,
-      req.body,
     );
-    if (restaurant) {
-      res.status(200).json({
-        status: true,
-        message: "Restaurant Updated Successfully",
-        data: restaurant,
-      });
-    } else {
-      res
-        .status(404)
-        .json({ status: false, message: "Restaurant Not Updated" });
-    }
+    res.status(200).json({
+      status: true,
+      message: "Restaurant Deleted Successfully",
+      data: deleteRestaurant,
+    });
   } catch (err) {
-    if (err.code === "conflict") {
-      res.status(409).json({
+    if (err.messageFormat == undefined) {
+      res.status(404).json({
         status: false,
-        message: "An error occurred Because of Duplicate Creation",
+        message: "Restaurant Does Not Exist",
       });
     } else {
       console.error("An error occurred", err);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      res.status(500).json({ status: false, message: err.message });
     }
-  }
-};
-
-const deleteRestaurantController = async (req, res) => {
-  try {
-    const deleteRestaurant = await restaurantService.deleteRestaurantDBService(
-      req.params.id,
-    );
-    if (deleteRestaurant) {
-      res
-        .status(200)
-        .json({ status: true, message: "Restaurant Deleted Successfully" });
-    } else {
-      res
-        .status(404)
-        .json({ status: false, message: "Restaurant Not Deleted" });
-    }
-  } catch (err) {
-    console.error("An error occurred:", err);
-    res.status(500).json({ status: false, message: "Internal Server Error" });
   }
 };
 
 module.exports = {
-  getAllRestaurantsController,
-  createRestaurantController,
-  updateRestaurantController,
-  deleteRestaurantController,
-  getSingleRestaurantController,
+  getAllRestaurants,
+  createRestaurant,
+  updateRestaurant,
+  deleteRestaurant,
+  getSingleRestaurant,
 };

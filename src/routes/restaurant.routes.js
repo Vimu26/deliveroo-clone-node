@@ -3,10 +3,10 @@ const router = express.Router();
 
 const restaurantController = require("../controllers/restaurant.controller");
 
-router.get("/", restaurantController.getAllRestaurantsController);
-router.post("/", restaurantController.createRestaurantController);
-router.patch("/:id", restaurantController.updateRestaurantController);
-router.delete("/:id", restaurantController.deleteRestaurantController);
-router.get("/:id", restaurantController.getSingleRestaurantController);
+router.get("/", restaurantController.getAllRestaurants);
+router.post("/", restaurantController.createRestaurant);
+router.patch("/:id", restaurantController.updateRestaurant);
+router.delete("/:id", restaurantController.deleteRestaurant);
+router.get("/:id", restaurantController.getSingleRestaurant);
 
 module.exports = router;
