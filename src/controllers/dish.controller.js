@@ -1,42 +1,41 @@
 const dishService = require("../services/dish.database.service");
 
-const getAllDishesController = async (req, res) => {
+const getAllDishes = async (req, res) => {
   try {
-    const dishDetails = await dishService.getAllDishesService();
-    if (dishDetails) {
-      res
-        .status(200)
-        .json({ status: true, message: "Dishes Found", data: dishDetails });
-    } else {
-      res.status(404).json({ status: false, message: "Dishes Not Found" });
-    }
+    const dishDetails = await dishService.getAllDishes();
+    res.status(200).json({
+      status: true,
+      message: "Dishes Found successfully",
+      data: dishDetails,
+    });
   } catch (err) {
-    res.status(500).json({ status: false, message: "Can't Find Dishes" });
-    console.error("An error occurred:", err);
+    console.error("An error occurred", err.message);
+    res.status(500).json({ status: false, message: err.message });
   }
 };
 
-const getSingleDishController = async (req, res) => {
+const getSingleDish = async (req, res) => {
   try {
-    const dishDetails = await dishService.getSingleDishService(req.params.id);
-    if (dishDetails) {
-      res.status(200).json({
-        status: true,
-        message: "Dish Found Successfully",
-        data: dishDetails,
-      });
-    } else {
-      res.status(404).json({ status: false, message: "Dish Doesn't Exist" });
-    }
+    const dishDetails = await dishService.getSingleDish(req.params.id);
+
+    res.status(200).json({
+      status: true,
+      message: "Dish Found Successfully",
+      data: dishDetails,
+    });
   } catch (err) {
-    res.status(500).json({ status: false, message: "Can't Find Dish" });
-    console.error("An error occurred:", err);
+    if (err.messageFormat == undefined) {
+      res.status(404).json({ status: false, message: "Dish Does Not Exist" });
+    } else {
+      console.error("An error occurred", err.message);
+      res.status(500).json({ status: false, message: err.message });
+    }
   }
 };
 
-const createDishController = async (req, res) => {
+const createDish = async (req, res) => {
   try {
-    const dish = await dishService.createDishService(req.body);
+    const dish = await dishService.createDish(req.body);
     if (dish) {
       res.status(201).json({
         status: true,
@@ -47,65 +46,72 @@ const createDishController = async (req, res) => {
       res.status(404).json({ status: false, message: "Dish Not Created" });
     }
   } catch (error) {
-    if (error.code === "conflict") {
+    if (error.code === 11000) {
       res.status(409).json({
         status: false,
         message: "An error occurred Because of Duplicate Creation",
       });
     } else {
-      console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
     }
   }
 };
 
-const updateDishController = async (req, res) => {
+const updateDish = async (req, res) => {
   try {
-    const dish = await dishService.updateDishService(req.params.id, req.body);
+    const dish = await dishService.updateDish(req.params.id, req.body);
 
-    if (dish) {
-      res.status(200).json({
+    res.status(200).json({
+      status: true,
+      message: "Dish Updated Successfully",
+      data: dish,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Dish Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
+    }
+  }
+};
+
+const deleteDish = async (req, res) => {
+  try {
+    const deleteDish = await dishService.deleteDish(req.params.id);
+    res
+      .status(200)
+      .json({
         status: true,
-        message: "Dish Updated Successfully",
-        data: dish,
+        message: "Dish Deleted Successfully",
+        data: deleteDish,
       });
-    } else {
-      res.status(404).json({ status: false, message: "Dish Not Updated" });
-    }
   } catch (err) {
-    if (err.code === "conflict") {
-      res.status(409).json({
+    if (err.messageFormat == undefined) {
+      res.status(404).json({
         status: false,
-        message: "An error occurred Because of Duplicate Creation",
+        message: "Dish Does Not Exist",
       });
     } else {
-      console.error("An error occurred", err);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
+      console.error("An error occurred", err.message);
+      res.status(500).json({ status: false, message: err.message });
     }
-  }
-};
-
-const deleteDishController = async (req, res) => {
-  try {
-    const deleteDish = await dishService.deleteDishService(req.params.id);
-
-    if (deleteDish) {
-      res
-        .status(200)
-        .json({ status: true, message: "Dish Deleted Successfully" });
-    } else {
-      res.status(404).json({ status: false, message: "Dish Not Deleted" });
-    }
-  } catch (err) {
-    console.error("An error occurred:", err);
-    res.status(500).json({ status: false, message: "Internal Server Error" });
   }
 };
 
 module.exports = {
-  getAllDishesController,
-  createDishController,
-  updateDishController,
-  deleteDishController,
-  getSingleDishController,
+  getAllDishes,
+  createDish,
+  updateDish,
+  deleteDish,
+  getSingleDish,
 };

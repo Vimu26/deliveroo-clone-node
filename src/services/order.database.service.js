@@ -1,6 +1,6 @@
 const orderDetailsModel = require("../models/order.model");
 
-const getAllOrderDetails = async () => {
+const getAllOrders = async () => {
   const orders = await orderDetailsModel.find();
   return orders;
 };
@@ -11,7 +11,6 @@ const createOrder = async (orderDetails) => {
     order_code: orderDetails.order_code,
     total_price: orderDetails.total_price,
   });
-
   await orderModelData.save();
   return orderModelData;
 };
@@ -37,7 +36,7 @@ const getSingleUser = async (orderId) => {
 
 module.exports = {
   createOrder,
-  getAllOrderDetails,
+  getAllOrders,
   updateOrder,
   deleteOrder,
   getSingleUser,
