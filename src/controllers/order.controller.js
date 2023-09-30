@@ -3,7 +3,6 @@ const orderService = require("../services/order.database.service");
 const getAllOrders = async (req, res) => {
   try {
     const orderDetails = await orderService.getAllOrderDetails();
-
     res.status(200).json({
       status: true,
       message: "Order Details Found",
@@ -18,7 +17,6 @@ const getAllOrders = async (req, res) => {
 const createOrder = async (req, res) => {
   try {
     const order = await orderService.createOrder(req.body);
-
     res.json({
       status: true,
       message: "Order Created Successfully",
@@ -58,10 +56,10 @@ const updateOrder = async (req, res) => {
     } else if (error.messageFormat == undefined) {
       res.status(404).json({
         status: false,
-        message: "Restaurant Does Not Exist",
+        message: "Order Does Not Exist",
       });
     } else {
-      console.error("An error occurred", error);
+      console.error("An error occurred", error.message);
       res.status(500).json({ status: false, message: error.message });
     }
   }
@@ -82,7 +80,7 @@ const deleteOrder = async (req, res) => {
         message: "Restaurant Does Not Exist",
       });
     } else {
-      console.error("An error occurred", err);
+      console.error("An error occurred", err.message);
       res.status(500).json({ status: false, message: err.message });
     }
   }
@@ -100,7 +98,7 @@ const getSingleOrder = async (req, res) => {
     if (err.messageFormat == undefined) {
       res
         .status(404)
-        .json({ status: false, message: "Restaurant Does Not Exist" });
+        .json({ status: false, message: "Order Does Not Exist" });
     } else {
       console.error("An error occurred", err.message);
       res.status(500).json({ status: false, message: err.message });
