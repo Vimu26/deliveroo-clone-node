@@ -17,7 +17,6 @@ const getAllDishes = async (req, res) => {
 const getSingleDish = async (req, res) => {
   try {
     const dishDetails = await dishService.getSingleDish(req.params.id);
-
     res.status(200).json({
       status: true,
       message: "Dish Found Successfully",
@@ -88,13 +87,11 @@ const updateDish = async (req, res) => {
 const deleteDish = async (req, res) => {
   try {
     const deleteDish = await dishService.deleteDish(req.params.id);
-    res
-      .status(200)
-      .json({
-        status: true,
-        message: "Dish Deleted Successfully",
-        data: deleteDish,
-      });
+    res.status(200).json({
+      status: true,
+      message: "Dish Deleted Successfully",
+      data: deleteDish,
+    });
   } catch (err) {
     if (err.messageFormat == undefined) {
       res.status(404).json({
