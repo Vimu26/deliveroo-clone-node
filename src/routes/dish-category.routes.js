@@ -3,10 +3,10 @@ const router = express.Router();
 
 const dishCategoryController = require("../controllers/dish-category.controller");
 
-router.get("/", dishCategoryController.getAllDishCategoriesController);
-router.post("/", dishCategoryController.createDishCategoryController);
-router.patch("/:id", dishCategoryController.updateDishCategoryController);
-router.delete("/:id", dishCategoryController.deleteDishCategoryController);
-router.get("/:id", dishCategoryController.getSingleDishCategoryController);
+router.get("/", dishCategoryController.getAllDishCategories);
+router.post("/", dishCategoryController.createDishCategory);
+router.patch("/:id", dishCategoryController.updateDishCategory);
+router.delete("/:id", dishCategoryController.deleteDishCategory);
+router.get("/:id", dishCategoryController.getSingleDishCategory);
 
 module.exports = router;

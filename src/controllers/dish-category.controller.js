@@ -1,144 +1,119 @@
 const dishCategoryService = require("../services/dish-category.database.service");
 
-const getAllDishCategoriesController = async (req, res) => {
+const getAllDishCategories = async (req, res) => {
   try {
-    const dishCategory =
-      await dishCategoryService.getAllDishCategoriesDBService();
-    if (dishCategory) {
-      res.status(200).json({
-        status: true,
-        message: "Dish Categories Found Successfully",
-        data: dishCategory,
-      });
-    } else {
-      res
-        .status(404)
-        .json({ status: false, message: "Dish Categories Not Found" });
-    }
-  } catch (err) {
-    console.error("An error occurred :", err);
-    res.status(500).json({
-      status: false,
-      message: "An error occurred in Get All Categories",
+    const dishCategory = await dishCategoryService.getAllDishCategories();
+    res.status(200).json({
+      status: true,
+      message: "Dish Categories Found Successfully",
+      data: dishCategory,
     });
+  } catch (err) {
+    console.error("An error occurred", err.message);
+    res.status(500).json({ status: false, message: err.message });
   }
 };
 
-const createDishCategoryController = async (req, res) => {
+const createDishCategory = async (req, res) => {
   try {
-    const category = await dishCategoryService.createDishCategoryDBService(
+    const category = await dishCategoryService.createDishCategory(req.body);
+    res.status(201).json({
+      status: true,
+      message: "Dish category Created Successfully",
+      data: category,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else {
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
+    }
+  }
+};
+
+const updateDishCategory = async (req, res) => {
+  try {
+    const updatedDishCategory = await dishCategoryService.updateDishCategory(
+      req.params.id,
       req.body,
     );
-    if (category) {
-      res.status(201).json({
-        status: true,
-        message: "Dish category Created Successfully",
-        data: category,
-      });
-    } else {
-      res
-        .status(404)
-        .json({ status: false, message: "Dish Category Not Created" });
-    }
-  } catch (err) {
-    if (err.code === "conflict") {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else {
-      console.error("An error occurred", err);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
-    }
-  }
-};
-
-const updateDishCategoryController = async (req, res) => {
-  try {
-    const updatedDishCategory =
-      await dishCategoryService.updateDishCategoryDBService(
-        req.params.id,
-        req.body,
-      );
-    if (updatedDishCategory) {
-      res.status(200).json({
-        status: true,
-        message: "Dish Category updated successfully",
-        data: updatedDishCategory,
-      });
-    } else {
-      res
-        .status(404)
-        .json({ status: false, message: "Dish Category Not updated" });
-    }
-  } catch (error) {
-    if (error.code === "conflict") {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else {
-      console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: "Internal Server Error" });
-    }
-  }
-};
-
-const deleteDishCategoryController = async (req, res) => {
-  try {
-    const deletedDishCategory =
-      await dishCategoryService.deleteDishCategoryDBService(
-        req.params.id,
-        req.body,
-      );
-    if (deletedDishCategory) {
-      res.status(200).json({
-        status: true,
-        message: "Dish Category Deleted successfully",
-      });
-    } else {
-      res
-        .status(404)
-        .json({ status: false, message: "Dish Category not Deleted" });
-    }
-  } catch (err) {
-    console.error("An error occurred:", err);
-    res.status(500).json({
-      status: false,
-      message: "An error occurred in Deleting Dish Category",
+    res.status(200).json({
+      status: true,
+      message: "Dish Category updated successfully",
+      data: updatedDishCategory,
     });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Dish Category Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
+    }
   }
 };
 
-const getSingleDishCategoryController = async (req, res) => {
+const deleteDishCategory = async (req, res) => {
+  try {
+    const dish = await dishCategoryService.deleteDishCategory(
+      req.params.id,
+      req.body,
+    );
+    res.status(200).json({
+      status: true,
+      message: "Dish Category Deleted successfully",
+      data: dish,
+    });
+  } catch (err) {
+    if (err.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Dish Category Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", err.message);
+      res.status(500).json({ status: false, message: err.message });
+    }
+  }
+};
+
+const getSingleDishCategory = async (req, res) => {
   try {
     const category = await dishCategoryService.getSingleDishCategory(
       req.params.id,
     );
-    if (category) {
-      res.status(200).json({
-        status: true,
-        message: "Dish Category Found Successfully",
-        data: category,
-      });
-    } else {
+    res.status(200).json({
+      status: true,
+      message: "Dish Category Found Successfully",
+      data: category,
+    });
+  } catch (err) {
+    if (err.messageFormat == undefined) {
       res
         .status(404)
-        .json({ status: false, message: "Dish Category Not Found" });
+        .json({ status: false, message: "Dish Category Does Not Exist" });
+    } else {
+      console.error("An error occurred", err.message);
+      res.status(500).json({ status: false, message: err.message });
     }
-  } catch (err) {
-    console.error("An error occurred :", err);
-    res.status(500).json({
-      status: false,
-      message: "An error occurred in Getting Dish Category",
-    });
   }
 };
 
 module.exports = {
-  getAllDishCategoriesController,
-  createDishCategoryController,
-  updateDishCategoryController,
-  deleteDishCategoryController,
-  getSingleDishCategoryController,
+  getAllDishCategories,
+  createDishCategory,
+  updateDishCategory,
+  deleteDishCategory,
+  getSingleDishCategory,
 };

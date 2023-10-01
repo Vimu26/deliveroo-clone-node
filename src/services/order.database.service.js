@@ -19,7 +19,7 @@ const updateOrder = async (orderId, orderDetails) => {
   const order = await orderDetailsModel.findByIdAndUpdate(
     orderId,
     orderDetails,
-    { new: true }
+    { new: true },
   );
   return order;
 };
