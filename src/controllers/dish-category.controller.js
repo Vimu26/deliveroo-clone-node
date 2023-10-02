@@ -16,7 +16,10 @@ const getAllDishCategories = async (req, res) => {
 
 const createDishCategory = async (req, res) => {
   try {
-    const category = await dishCategoryService.createDishCategory(req.body);
+    const category = await dishCategoryService.createDishCategory({
+      name: req.body.name,
+      image: req.body.image,
+    });
     res.status(201).json({
       status: true,
       message: "Dish category Created Successfully",
@@ -39,7 +42,10 @@ const updateDishCategory = async (req, res) => {
   try {
     const updatedDishCategory = await dishCategoryService.updateDishCategory(
       req.params.id,
-      req.body,
+      {
+        name: req.body.name,
+        image: req.body.image,
+      },
     );
     res.status(200).json({
       status: true,
