@@ -34,7 +34,12 @@ const getSingleDish = async (req, res) => {
 
 const createDish = async (req, res) => {
   try {
-    const dish = await dishService.createDish(req.body);
+    const dish = await dishService.createDish({
+      name: req.body.name,
+      dish_code: req.body.dish_code,
+      price: req.body.price,
+      image: req.body.image,
+    });
     if (dish) {
       res.status(201).json({
         status: true,
@@ -59,7 +64,12 @@ const createDish = async (req, res) => {
 
 const updateDish = async (req, res) => {
   try {
-    const dish = await dishService.updateDish(req.params.id, req.body);
+    const dish = await dishService.updateDish(req.params.id, {
+      name: req.body.name,
+      dish_code: req.body.dish_code,
+      price: req.body.price,
+      image: req.body.image,
+    });
 
     res.status(200).json({
       status: true,
