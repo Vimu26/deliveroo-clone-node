@@ -16,7 +16,11 @@ const getAllOrders = async (req, res) => {
 
 const createOrder = async (req, res) => {
   try {
-    const order = await orderService.createOrder(req.body);
+    const order = await orderService.createOrder({
+      quantity: req.body.quantity,
+      order_code: req.body.order_code,
+      total_price: req.body.total_price,
+    });
     res.json({
       status: true,
       message: "Order Created Successfully",
@@ -37,10 +41,11 @@ const createOrder = async (req, res) => {
 
 const updateOrder = async (req, res) => {
   try {
-    const UpdatedOrder = await orderService.updateOrder(
-      req.params.id,
-      req.body,
-    );
+    const UpdatedOrder = await orderService.updateOrder(req.params.id, {
+      quantity: req.body.quantity,
+      order_code: req.body.order_code,
+      total_price: req.body.total_price,
+    });
 
     res.status(200).json({
       status: true,

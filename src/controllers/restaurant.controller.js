@@ -38,7 +38,12 @@ const getSingleRestaurant = async (req, res) => {
 
 const createRestaurant = async (req, res) => {
   try {
-    const restaurant = await restaurantService.createRestaurant(req.body);
+    const restaurant = await restaurantService.createRestaurant({
+      name: req.body.name,
+      contact_number: req.body.contact_number,
+      email: req.body.email,
+      address: req.body.address,
+    });
     res.status(201).json({
       status: true,
       message: "Restaurant Created Successfully",
@@ -59,10 +64,12 @@ const createRestaurant = async (req, res) => {
 
 const updateRestaurant = async (req, res) => {
   try {
-    const restaurant = await restaurantService.updateRestaurant(
-      req.params.id,
-      req.body,
-    );
+    const restaurant = await restaurantService.updateRestaurant(req.params.id, {
+      name: req.body.name,
+      contact_number: req.body.contact_number,
+      email: req.body.email,
+      address: req.body.address,
+    });
     res.status(200).json({
       status: true,
       message: "Restaurant Updated Successfully",

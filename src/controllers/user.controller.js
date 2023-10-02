@@ -32,10 +32,16 @@ const getSingleUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const user = await userService.createUser(req.body);
+    const user = await userService.createUser({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      contact_number: req.body.contact_number,
+      password: req.body.password,
+    });
     res.status(201).json({
       status: true,
-      message: " User Created Successfully",
+      message: "User Created Successfully",
       data: user,
     });
   } catch (error) {
@@ -53,7 +59,13 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const user = await userService.updateUser(req.params.id, req.body);
+    const user = await userService.updateUser(req.params.id, {
+      firstName: req.body.first_name,
+      lastName: req.body.last_name,
+      email: req.body.email,
+      contact: req.body.contact_number,
+      password: req.body.password,
+    });
     res.status(200).json({
       status: true,
       message: "User Updated Successfully",
