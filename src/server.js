@@ -17,13 +17,13 @@ server.use(express.json());
 server.use(cors());
 
 //use routes
-server.use(commonRoutes)
 server.use("/users", userRoutes);
 server.use("/restaurants", restaurantRoutes);
 server.use("/dishes", dishRoutes);
 server.use("/orders", orderRoutes);
 server.use("/dish-categories", dishCategories);
 // server.use("/oauth", authRoutes);
+server.use("/", commonRoutes)
 
 
 //connect to the database
