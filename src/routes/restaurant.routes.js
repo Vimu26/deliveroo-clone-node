@@ -12,6 +12,9 @@ router.post("/", restaurantController.createRestaurant);
 //update restaurants partially
 router.patch("/:id", restaurantController.updateRestaurant);
 
+//update entire restaurant data
+router.put("/:id", restaurantController.updateRestaurant);
+
 //delete restaurants
 router.delete("/:id", restaurantController.deleteRestaurant);
 

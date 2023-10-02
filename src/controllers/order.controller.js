@@ -2,7 +2,7 @@ const orderService = require("../services/order.database.service");
 
 const getAllOrders = async (req, res) => {
   try {
-    const orderDetails = await orderService.getAllOrderDetails();
+    const orderDetails = await orderService.getAllOrders();
     res.status(200).json({
       status: true,
       message: "Order Details Found",

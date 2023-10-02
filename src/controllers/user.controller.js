@@ -98,10 +98,15 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// const updateUserData = async (id , detais) => {
+
+// }
+
 module.exports = {
   getAllUsers,
   createUser,
   updateUser,
   deleteUser,
   getSingleUser,
+  // updateUserData,
 };

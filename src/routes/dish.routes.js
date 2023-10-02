@@ -12,6 +12,10 @@ router.post("/", dishController.createDish);
 //update a dish partially
 router.patch("/:id", dishController.updateDish);
 
+//update entire dish data
+router.put("/:id", dishController.updateDish);
+
+
 //delete a dish
 router.delete("/:id", dishController.deleteDish);
 
