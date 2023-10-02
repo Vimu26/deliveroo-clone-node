@@ -8,7 +8,7 @@ const restaurantRoutes = require("./routes/restaurant.routes");
 const dishRoutes = require("./routes/dish.routes");
 const orderRoutes = require("./routes/order.routes");
 const dishCategories = require("./routes/dish-category.routes");
-const commonRoutes = require( "./routes/common.routes")
+const commonRoutes = require("./routes/common.routes");
 
 const server = express();
 
@@ -23,8 +23,7 @@ server.use("/dishes", dishRoutes);
 server.use("/orders", orderRoutes);
 server.use("/dish-categories", dishCategories);
 // server.use("/oauth", authRoutes);
-server.use("/", commonRoutes)
-
+server.use("/", commonRoutes);
 
 //connect to the database
 mongoose
