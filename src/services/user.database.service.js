@@ -39,6 +39,20 @@ const updateUser = async (id, userDetails) => {
   return updatedUser;
 };
 
+const updateUserData = async (id, userDetails) => {
+  if ("password" in userDetails) {
+    userDetails.password = await hashPassword.hashPassword(
+      userDetails.password,
+    );
+  }
+  const updatedUser = await userDetailsModel.findByIdAndUpdate(
+    id,
+    userDetails,
+    { new: true },
+  );
+  return updatedUser;
+};
+
 const deleteUser = async (id) => {
   const user = await userDetailsModel.findByIdAndDelete(id);
   return user;
@@ -50,4 +64,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getSingleUser,
+  updateUserData,
 };

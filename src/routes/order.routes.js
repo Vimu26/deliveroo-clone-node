@@ -13,7 +13,7 @@ router.post("/", orderController.createOrder);
 router.patch("/:id", orderController.updateOrder);
 
 //update entire order data
-router.put("/:id", orderController.updateOrder);
+router.put("/:id", orderController.updateOrderData);
 
 //delete order
 router.delete("/:id", orderController.deleteOrder);

@@ -89,6 +89,38 @@ const updateUser = async (req, res) => {
   }
 };
 
+const updateUserData = async (req, res) => {
+  try {
+    const user = await userService.updateUserData(req.params.id, {
+      firstName: req.body.first_name,
+      lastName: req.body.last_name,
+      email: req.body.email,
+      contact: req.body.contact_number,
+      password: req.body.password,
+    });
+    res.status(200).json({
+      status: true,
+      message: "User Updated Successfully",
+      data: user,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "User Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", error);
+      res.status(500).json({ status: false, message: error.message });
+    }
+  }
+};
+
 const deleteUser = async (req, res) => {
   try {
     const deleteUser = await userService.deleteUser(req.params.id);
@@ -120,5 +152,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getSingleUser,
-  // updateUserData,
+  updateUserData,
 };

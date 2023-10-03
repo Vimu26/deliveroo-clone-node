@@ -24,6 +24,15 @@ const updateOrder = async (orderId, orderDetails) => {
   return order;
 };
 
+const updateOrderData = async (orderId, orderDetails) => {
+  const order = await orderDetailsModel.findByIdAndUpdate(
+    orderId,
+    orderDetails,
+    { new: true },
+  );
+  return order;
+};
+
 const deleteOrder = async (orderId) => {
   const order = await orderDetailsModel.findByIdAndDelete(orderId);
   return order;
@@ -40,4 +49,5 @@ module.exports = {
   updateOrder,
   deleteOrder,
   getSingleUser,
+  updateOrderData,
 };
