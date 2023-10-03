@@ -23,6 +23,15 @@ const updateDishCategory = async (id, category) => {
   return dishCategory;
 };
 
+const updateDishCategoryData = async (id, category) => {
+  const dishCategory = await dishCategoryDetailsModel.findByIdAndUpdate(
+    id,
+    category,
+    { new: true },
+  );
+  return dishCategory;
+};
+
 const deleteDishCategory = async (id) => {
   const dish = await dishCategoryDetailsModel.findByIdAndDelete(id);
   return dish;
@@ -39,4 +48,5 @@ module.exports = {
   updateDishCategory,
   deleteDishCategory,
   getSingleDishCategory,
+  updateDishCategoryData,
 };

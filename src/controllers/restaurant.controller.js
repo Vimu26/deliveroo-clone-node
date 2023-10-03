@@ -93,6 +93,40 @@ const updateRestaurant = async (req, res) => {
   }
 };
 
+const updateRestaurantData = async (req, res) => {
+  try {
+    const restaurant = await restaurantService.updateRestaurantData(
+      req.params.id,
+      {
+        name: req.body.name,
+        contact_number: req.body.contact_number,
+        email: req.body.email,
+        address: req.body.address,
+      },
+    );
+    res.status(200).json({
+      status: true,
+      message: "Restaurant Updated Successfully",
+      data: restaurant,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Restaurant Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", error);
+      res.status(500).json({ status: false, message: error.message });
+    }
+  }
+};
+
 const deleteRestaurant = async (req, res) => {
   try {
     const deleteRestaurant = await restaurantService.deleteRestaurant(
@@ -121,5 +155,6 @@ module.exports = {
   createRestaurant,
   updateRestaurant,
   deleteRestaurant,
+  updateRestaurantData,
   getSingleRestaurant,
 };

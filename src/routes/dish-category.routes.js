@@ -13,7 +13,7 @@ router.post("/", dishCategoryController.createDishCategory);
 router.patch("/:id", dishCategoryController.updateDishCategory);
 
 //update entire dish data
-router.put("/:id", dishCategoryController.updateDishCategory);
+router.put("/:id", dishCategoryController.updateDishCategoryData);
 
 //delete a dish category
 router.delete("/:id", dishCategoryController.deleteDishCategory);

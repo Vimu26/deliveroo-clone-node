@@ -64,6 +64,33 @@ const updateDishCategory = async (req, res) => {
   }
 };
 
+const updateDishCategoryData = async (req, res) => {
+  try {
+    const updatedDishCategory =
+      await dishCategoryService.updateDishCategoryData(req.params.id, req.body);
+    res.status(200).json({
+      status: true,
+      message: "Dish Category updated successfully",
+      data: updatedDishCategory,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Dish Category Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
+    }
+  }
+};
+
 const deleteDishCategory = async (req, res) => {
   try {
     const dish = await dishCategoryService.deleteDishCategory(
@@ -116,4 +143,5 @@ module.exports = {
   updateDishCategory,
   deleteDishCategory,
   getSingleDishCategory,
+  updateDishCategoryData,
 };

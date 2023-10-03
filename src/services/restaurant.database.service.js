@@ -30,6 +30,15 @@ const updateRestaurant = async (id, restaurantDetails) => {
   return updatedRestaurant;
 };
 
+const updateRestaurantData = async (id, restaurantDetails) => {
+  const updatedRestaurant = await restaurantDetailsModel.findByIdAndUpdate(
+    id,
+    restaurantDetails,
+    { new: true },
+  );
+  return updatedRestaurant;
+};
+
 const deleteRestaurant = async (id) => {
   const restaurant = await restaurantDetailsModel.findByIdAndDelete(id);
   return restaurant;
@@ -41,4 +50,5 @@ module.exports = {
   updateRestaurant,
   deleteRestaurant,
   getSingleRestaurant,
+  updateRestaurantData,
 };

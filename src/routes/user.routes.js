@@ -16,7 +16,7 @@ router.post("/", userController.createUser);
 router.patch("/:id", userController.updateUser);
 
 //update entire user data
-router.put("/:id", userController.updateUser);
+router.put("/:id", userController.updateUserData);
 
 // delete user
 router.delete("/:id", userController.deleteUser);

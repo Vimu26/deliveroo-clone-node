@@ -30,6 +30,15 @@ const updateDish = async (id, dishDetails) => {
   return updatedDish;
 };
 
+const updateDishData = async (id, dishDetails) => {
+  const updatedDish = await dishDetailsModel.findByIdAndUpdate(
+    id,
+    dishDetails,
+    { new: true },
+  );
+  return updatedDish;
+};
+
 const deleteDish = async (id) => {
   const dish = await dishDetailsModel.findByIdAndDelete(id);
   return dish;
@@ -41,4 +50,5 @@ module.exports = {
   updateDish,
   deleteDish,
   getSingleDish,
+  updateDishData,
 };

@@ -70,6 +70,37 @@ const updateOrder = async (req, res) => {
   }
 };
 
+const updateOrderData = async (req, res) => {
+  try {
+    const UpdatedOrder = await orderService.updateOrderData(req.params.id, {
+      quantity: req.body.quantity,
+      order_code: req.body.order_code,
+      total_price: req.body.total_price,
+    });
+
+    res.status(200).json({
+      status: true,
+      message: "Order updated successfully",
+      data: UpdatedOrder,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Order Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
+    }
+  }
+};
+
 const deleteOrder = async (req, res) => {
   try {
     const deletedOrder = await orderService.deleteOrder(req.params.id);
@@ -115,4 +146,5 @@ module.exports = {
   updateOrder,
   deleteOrder,
   getSingleOrder,
+  updateOrderData,
 };

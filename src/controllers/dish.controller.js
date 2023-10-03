@@ -84,6 +84,33 @@ const updateDish = async (req, res) => {
   }
 };
 
+const updateDishData = async (req, res) => {
+  try {
+    const dish = await dishService.updateDishData(req.params.id, req.body);
+
+    res.status(200).json({
+      status: true,
+      message: "Dish Updated Successfully",
+      data: dish,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        status: false,
+        message: "An error occurred Because of Duplicate Creation",
+      });
+    } else if (error.messageFormat == undefined) {
+      res.status(404).json({
+        status: false,
+        message: "Dish Does Not Exist",
+      });
+    } else {
+      console.error("An error occurred", error.message);
+      res.status(500).json({ status: false, message: error.message });
+    }
+  }
+};
+
 const deleteDish = async (req, res) => {
   try {
     const deleteDish = await dishService.deleteDish(req.params.id);
@@ -109,6 +136,7 @@ module.exports = {
   getAllDishes,
   createDish,
   updateDish,
+  updateDishData,
   deleteDish,
   getSingleDish,
 };
