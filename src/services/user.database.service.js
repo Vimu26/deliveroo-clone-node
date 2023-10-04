@@ -1,5 +1,5 @@
 const userDetailsModel = require("../models/user.model");
-const hashPassword = require("./password-hash.database.service");
+const hashPassword = require("./password.database.service");
 
 const getAllUsers = async () => {
   const users = await userDetailsModel.find();
@@ -58,6 +58,13 @@ const deleteUser = async (id) => {
   return user;
 };
 
+const findUserByEmail = async (userDetails) => {
+  const existingUser = await userDetailsModel.findOne({
+    email: userDetails.email,
+  });
+  return existingUser;
+};
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -65,4 +72,5 @@ module.exports = {
   deleteUser,
   getSingleUser,
   updateUserData,
+  findUserByEmail,
 };

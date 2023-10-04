@@ -6,3 +6,11 @@ module.exports.hashPassword = async (password) => {
   const hashPassword = await bcrypt.hash(password, salt);
   return hashPassword;
 };
+
+module.exports.comparePassword = async (requestedPassword, userPassword) => {
+  const comparedPassword = await bcrypt.compare(
+    requestedPassword,
+    userPassword,
+  );
+  return comparedPassword;
+};
