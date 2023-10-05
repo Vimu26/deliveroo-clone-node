@@ -1,12 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 module.exports.userTokenGenerator = async (existingUser) => {
-  const accessToken = await jwt.sign(
+  const accessToken = jwt.sign(
     {
       existingUser: {
-        first_name: existingUser.first_name,
-        last_name: existingUser.last_name,
-        contact_number: existingUser.contact_number,
         email: existingUser.email,
         id: existingUser._id,
       },
