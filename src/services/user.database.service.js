@@ -59,10 +59,9 @@ const deleteUser = async (id) => {
 };
 
 const findUserByEmail = async (userDetails) => {
-  const existingUser = userDetailsModel.findOne({
+  return userDetailsModel.findOne({
     email: userDetails.email,
   });
-  return existingUser;
 };
 
 module.exports = {

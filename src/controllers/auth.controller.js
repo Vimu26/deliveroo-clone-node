@@ -15,11 +15,11 @@ const authLogin = async (req, res) => {
           .json({ status: false, message: "Email Does Not Exist" });
       } else {
         //check the password
-        const checkPassword = await passwordService.comparePassword(
+        const isPasswordValid = await passwordService.comparePassword(
           req.body.password,
           foundUser.password,
         );
-        if (checkPassword) {
+        if (isPasswordValid) {
           //if password is correct generate the access token
           const accessToken = await tokenService.userTokenGenerator(foundUser);
           res.status(200).json({
@@ -35,7 +35,7 @@ const authLogin = async (req, res) => {
         }
       }
     } else {
-      res.status(409).json({
+      res.status(400).json({
         status: false,
         message: "Email and Password are Both Required",
       });
