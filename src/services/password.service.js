@@ -7,9 +7,6 @@ module.exports.hashPassword = async (password) => {
   return hashPassword;
 };
 
-module.exports.comparePassword = async (requestedPassword, hashPassword) => {
-  return bcrypt.compare(
-    requestedPassword,
-    hashPassword,
-  );
+module.exports.comparePassword = async (password, hashPassword) => {
+  return bcrypt.compare(password, hashPassword);
 };

@@ -1,8 +1,8 @@
 const userService = require("../services/user.database.service");
-const passwordService = require("../services/password.database.service");
-const tokenService = require("../services/token.database.service");
+const passwordService = require("../services/password.service");
+const tokenService = require("../services/token.service");
 
-const authLogin = async (req, res) => {
+const login = async (req, res) => {
   try {
     if (req.body.email && req.body.password) {
       //check the email do exist
@@ -46,4 +46,4 @@ const authLogin = async (req, res) => {
   }
 };
 
-module.exports = { authLogin };
+module.exports = { login };

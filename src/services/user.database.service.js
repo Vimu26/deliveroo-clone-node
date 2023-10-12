@@ -1,5 +1,5 @@
 const userDetailsModel = require("../models/user.model");
-const hashPassword = require("./password.database.service");
+const passwordService = require("./password.service");
 
 const getAllUsers = async () => {
   const users = await userDetailsModel.find();
@@ -12,7 +12,7 @@ const getSingleUser = async (id) => {
 };
 
 const createUser = async (userDetails) => {
-  const password = await hashPassword.hashPassword(userDetails.password);
+  const password = await passwordService.hashPassword(userDetails.password);
 
   const userModelData = new userDetailsModel({
     first_name: userDetails.first_name,
@@ -27,7 +27,7 @@ const createUser = async (userDetails) => {
 
 const updateUser = async (id, userDetails) => {
   if ("password" in userDetails) {
-    userDetails.password = await hashPassword.hashPassword(
+    userDetails.password = await passwordService.hashPassword(
       userDetails.password,
     );
   }
@@ -41,7 +41,7 @@ const updateUser = async (id, userDetails) => {
 
 const updateUserData = async (id, userDetails) => {
   if ("password" in userDetails) {
-    userDetails.password = await hashPassword.hashPassword(
+    userDetails.password = await passwordService.hashPassword(
       userDetails.password,
     );
   }
