@@ -17,7 +17,7 @@ const login = async (req, res) => {
         //check the password
         const isPasswordValid = await passwordService.comparePassword(
           req.body.password,
-          foundUser.password,
+          foundUser.password
         );
         if (isPasswordValid) {
           //if password is correct generate the access token
@@ -62,4 +62,24 @@ const currentUser = async (req, res) => {
   }
 };
 
-module.exports = { login, currentUser };
+const registerUser = async (req, res) => {
+  try {
+    const user = await userService.createUser({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      contact_number: req.body.contact_number,
+      password: req.body.password,
+    });
+    res.status(201).json({
+      status: true,
+      message: "User Registered Successfully",
+      data: user,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ status: false, message: err.message });
+  }
+};
+
+module.exports = { login, currentUser, registerUser };
