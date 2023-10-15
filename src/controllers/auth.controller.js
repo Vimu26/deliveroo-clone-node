@@ -46,4 +46,20 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+const currentUser = async (req, res) => {
+  try {
+    const foundUser = await userService.getSingleUser(req.user.sub);
+    console.log(foundUser);
+    if (!foundUser) {
+      res.status(404).json({ status: false, message: "User not found" });
+    }
+    res
+      .status(200)
+      .json({ status: true, message: "User found", data: foundUser });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ status: false, message: err.message });
+  }
+};
+
+module.exports = { login, currentUser };
