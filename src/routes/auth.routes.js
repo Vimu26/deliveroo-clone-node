@@ -8,7 +8,8 @@ router.post("/login", authController.login);
 router.get(
   "/current-user",
   tokenValidationMiddleware.validateToken,
-  authController.currentUser,
+  authController.currentUser
 );
+router.post("/register", authController.registerUser);
 
 module.exports = router;
