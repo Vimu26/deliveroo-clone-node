@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const bearerToken = require("express-bearer-token");
 const userRoutes = require("./routes/user.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
 const dishRoutes = require("./routes/dish.routes");
@@ -16,6 +17,7 @@ const server = express();
 //connect to the api  with the port and if error show error and if no error program starts
 server.use(express.json());
 server.use(cors());
+server.use(bearerToken());
 
 //use routes
 server.use("/users", userRoutes);
