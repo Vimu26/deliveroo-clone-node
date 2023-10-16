@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 const db_name = require("../constants/db.names");
 
 const orderDetailsSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "user",
+  },
+  restaurant_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "restaurant",
+  },
   quantity: {
     type: Number,
     required: true,
