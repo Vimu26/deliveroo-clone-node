@@ -1,7 +1,8 @@
-const mongoose = require("mongoose");
-const db_name = require("../constants/db.names");
+const {Schema,model} = require("mongoose");
+const {DB_NAMES} = require("../constants");
 
-const restaurantDetailsSchema = new mongoose.Schema({
+
+const restaurantDetailsSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -23,7 +24,7 @@ const restaurantDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model(
-  db_name.DB_NAMES.RESTAURANTS,
+module.exports = new model(
+  DB_NAMES.RESTAURANTS,
   restaurantDetailsSchema,
 );

@@ -1,21 +1,21 @@
-const mongoose = require("mongoose");
-const db_name = require("../constants/db.names");
+const {Schema,model} = require("mongoose");
+const {DB_NAMES} = require("../constants");
 
-const dishDetailsSchema = new mongoose.Schema({
+const dishDetailsSchema = new Schema({
   restaurant_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: "restaurant",
+    ref: DB_NAMES.RESTAURANTS,
   },
   order_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: "order",
+    ref: DB_NAMES.ORDERS,
   },
   dish_category_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: "dish-category",
+    ref: DB_NAMES.DISH_CATEGORIES,
   },
   name: {
     type: String,
@@ -36,4 +36,4 @@ const dishDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model(db_name.DB_NAMES.DISHES, dishDetailsSchema);
+module.exports = new model(DB_NAMES.DISHES, dishDetailsSchema);

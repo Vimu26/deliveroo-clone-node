@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const db_name = require("../constants/db.names");
+const {Schema , model} = require("mongoose");
+const {DB_NAMES} = require("../constants");
 
-const dishCategoryDetailsSchema = new mongoose.Schema({
+const dishCategoryDetailsSchema = new Schema({
   restaurant_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: "restaurant",
+    ref: DB_NAMES.RESTAURANTS
   },
   name: {
     type: String,
@@ -17,7 +17,7 @@ const dishCategoryDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model(
-  db_name.DB_NAMES.DISH_CATEGORIES,
+module.exports = new model(
+  DB_NAMES.DISH_CATEGORIES,
   dishCategoryDetailsSchema,
 );

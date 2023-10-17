@@ -1,16 +1,16 @@
-const mongoose = require("mongoose");
-const db_name = require("../constants/db.names");
+const {Schema,model} = require("mongoose");
+const {DB_NAMES} = require("../constants");
 
-const orderDetailsSchema = new mongoose.Schema({
+const orderDetailsSchema = new Schema({
   user_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: "user",
+    ref: DB_NAMES.USERS,
   },
   restaurant_id: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     required: true,
-    ref: "restaurant",
+    ref: DB_NAMES.RESTAURANTS,
   },
   quantity: {
     type: Number,
@@ -32,7 +32,7 @@ const orderDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model(
-  db_name.DB_NAMES.ORDERS,
+module.exports = new model(
+  DB_NAMES.ORDERS,
   orderDetailsSchema,
 );
