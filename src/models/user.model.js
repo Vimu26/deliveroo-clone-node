@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const db_name = require("../constants/db.names");
+const {Schema, model} = require("mongoose");
+const {DB_NAMES} = require("../constants");
 
-const userDetailsSchema = new mongoose.Schema({
+const userDetailsSchema = new Schema({
   first_name: {
     type: String,
     required: true,
@@ -27,4 +27,4 @@ const userDetailsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model(db_name.DB_NAMES.USERS, userDetailsSchema);
+module.exports = new model(DB_NAMES.USERS, userDetailsSchema);

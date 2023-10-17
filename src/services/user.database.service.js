@@ -54,8 +54,7 @@ const updateUserData = async (id, userDetails) => {
 };
 
 const deleteUser = async (id) => {
-  const user = await userDetailsModel.findByIdAndDelete(id);
-  return user;
+  return userDetailsModel.findByIdAndDelete(id);
 };
 
 const findUserByEmail = async (userDetails) => {
