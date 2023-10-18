@@ -1,13 +1,11 @@
 const restaurantDetailsModel = require("../models/restaurant.model");
 
 const getAllRestaurants = async () => {
-  const restaurants = await restaurantDetailsModel.find();
-  return restaurants;
+  return await restaurantDetailsModel.find();
 };
 
 const getSingleRestaurant = async (id) => {
-  const restaurants = await restaurantDetailsModel.findById(id);
-  return restaurants;
+  return await restaurantDetailsModel.findById(id);
 };
 
 const createRestaurant = async (restaurantDetails) => {
@@ -22,26 +20,23 @@ const createRestaurant = async (restaurantDetails) => {
 };
 
 const updateRestaurant = async (id, restaurantDetails) => {
-  const updatedRestaurant = await restaurantDetailsModel.findByIdAndUpdate(
+  return await restaurantDetailsModel.findByIdAndUpdate(
     id,
     restaurantDetails,
     { new: true },
   );
-  return updatedRestaurant;
 };
 
 const updateRestaurantData = async (id, restaurantDetails) => {
-  const updatedRestaurant = await restaurantDetailsModel.findByIdAndUpdate(
+ return await restaurantDetailsModel.findByIdAndUpdate(
     id,
     restaurantDetails,
     { new: true },
   );
-  return updatedRestaurant;
 };
 
 const deleteRestaurant = async (id) => {
-  const restaurant = await restaurantDetailsModel.findByIdAndDelete(id);
-  return restaurant;
+  return await restaurantDetailsModel.findByIdAndDelete(id);
 };
 
 module.exports = {
