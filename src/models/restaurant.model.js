@@ -1,6 +1,5 @@
-const {Schema,model} = require("mongoose");
-const {DB_NAMES} = require("../constants");
-
+const { Schema, model } = require("mongoose");
+const { DB_NAMES } = require("../constants");
 
 const restaurantDetailsSchema = new Schema({
   name: {
@@ -24,7 +23,4 @@ const restaurantDetailsSchema = new Schema({
   },
 });
 
-module.exports = new model(
-  DB_NAMES.RESTAURANTS,
-  restaurantDetailsSchema,
-);
+module.exports = new model(DB_NAMES.RESTAURANTS, restaurantDetailsSchema);

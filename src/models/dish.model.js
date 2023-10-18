@@ -1,5 +1,5 @@
-const {Schema,model} = require("mongoose");
-const {DB_NAMES} = require("../constants");
+const { Schema, model } = require("mongoose");
+const { DB_NAMES } = require("../constants");
 
 const dishDetailsSchema = new Schema({
   restaurant_id: {
