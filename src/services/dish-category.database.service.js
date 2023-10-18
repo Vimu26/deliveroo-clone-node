@@ -23,10 +23,10 @@ const updateDishCategory = async (id, category) => {
   return dishCategory;
 };
 
-const updateDishCategoryData = async (id, category) => {
+const updateDishCategoryData = async (id, categoryData) => {
   const dishCategory = await dishCategoryDetailsModel.findByIdAndUpdate(
     id,
-    category,
+    categoryData,
     { new: true },
   );
   return dishCategory;

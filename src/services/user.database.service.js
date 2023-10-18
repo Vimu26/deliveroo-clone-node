@@ -2,13 +2,11 @@ const userDetailsModel = require("../models/user.model");
 const passwordService = require("./password.service");
 
 const getAllUsers = async () => {
-  const users = await userDetailsModel.find();
-  return users;
+  return await userDetailsModel.find();
 };
 
 const getSingleUser = async (id) => {
-  const user = await userDetailsModel.findById(id);
-  return user;
+  return await userDetailsModel.findById(id);
 };
 
 const createUser = async (userDetails) => {
@@ -28,29 +26,19 @@ const createUser = async (userDetails) => {
 const updateUser = async (id, userDetails) => {
   if ("password" in userDetails) {
     userDetails.password = await passwordService.hashPassword(
-      userDetails.password,
+      userDetails.password
     );
   }
-  const updatedUser = await userDetailsModel.findByIdAndUpdate(
-    id,
-    userDetails,
-    { new: true },
-  );
-  return updatedUser;
+  return await userDetailsModel.findByIdAndUpdate(id, userDetails, {
+    new: true,
+  });
 };
 
-const updateUserData = async (id, userDetails) => {
-  if ("password" in userDetails) {
-    userDetails.password = await passwordService.hashPassword(
-      userDetails.password,
-    );
-  }
-  const updatedUser = await userDetailsModel.findByIdAndUpdate(
-    id,
-    userDetails,
-    { new: true },
-  );
-  return updatedUser;
+const updateUserData = async (id, userData) => {
+  userData.password = await passwordService.hashPassword(userData.password);
+  return await userDetailsModel.findByIdAndUpdate(id, userData, {
+    new: true,
+  });
 };
 
 const deleteUser = async (id) => {
