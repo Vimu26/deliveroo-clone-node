@@ -1,13 +1,11 @@
 const dishDetailsModel = require("../models/dish.model");
 
 const getAllDishes = async () => {
-  const dishes = await dishDetailsModel.find();
-  return dishes;
+  return await dishDetailsModel.find();
 };
 
 const getSingleDish = async (id) => {
-  const dish = await dishDetailsModel.findById(id);
-  return dish;
+  return await dishDetailsModel.findById(id);
 };
 
 const createDish = async (dishDetails) => {
@@ -22,26 +20,19 @@ const createDish = async (dishDetails) => {
 };
 
 const updateDish = async (id, dishDetails) => {
-  const updatedDish = await dishDetailsModel.findByIdAndUpdate(
-    id,
-    dishDetails,
-    { new: true },
-  );
-  return updatedDish;
+  return await dishDetailsModel.findByIdAndUpdate(id, dishDetails, {
+    new: true,
+  });
 };
 
 const updateDishData = async (id, dishDetails) => {
-  const updatedDish = await dishDetailsModel.findByIdAndUpdate(
-    id,
-    dishDetails,
-    { new: true },
-  );
-  return updatedDish;
+  return await dishDetailsModel.findByIdAndUpdate(id, dishDetails, {
+    new: true,
+  });
 };
 
 const deleteDish = async (id) => {
-  const dish = await dishDetailsModel.findByIdAndDelete(id);
-  return dish;
+  return await dishDetailsModel.findByIdAndDelete(id);
 };
 
 module.exports = {

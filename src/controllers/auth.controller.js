@@ -48,8 +48,7 @@ const login = async (req, res) => {
 
 const currentUser = async (req, res) => {
   try {
-    const foundUser = await userService.getSingleUser(req.user.sub);
-    console.log(foundUser);
+    const foundUser = await userService.getSingleUser(req.userId);
     if (!foundUser) {
       res.status(404).json({ status: false, message: "User not found" });
     }
