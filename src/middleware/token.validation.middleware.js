@@ -13,6 +13,7 @@ const validateToken = async (req, res, next) => {
           message: "Token is Invalid Or Expired",
         });
       } else {
+        console.log(decodedPayload.sub)
         req.userId = decodedPayload.sub;
         next();
       }

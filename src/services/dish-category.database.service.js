@@ -1,8 +1,7 @@
 const dishCategoryDetailsModel = require("../models/dish-category.model");
 
 const getAllDishCategories = async () => {
-  const dish = await dishCategoryDetailsModel.find();
-  return dish;
+  return await dishCategoryDetailsModel.find();
 };
 
 const createDishCategory = async (dishCategory) => {
@@ -15,31 +14,23 @@ const createDishCategory = async (dishCategory) => {
 };
 
 const updateDishCategory = async (id, category) => {
-  const dishCategory = await dishCategoryDetailsModel.findByIdAndUpdate(
-    id,
-    category,
-    { new: true },
-  );
-  return dishCategory;
+  return await dishCategoryDetailsModel.findByIdAndUpdate(id, category, {
+    new: true,
+  });
 };
 
 const updateDishCategoryData = async (id, categoryData) => {
-  const dishCategory = await dishCategoryDetailsModel.findByIdAndUpdate(
-    id,
-    categoryData,
-    { new: true },
-  );
-  return dishCategory;
+  return await dishCategoryDetailsModel.findByIdAndUpdate(id, categoryData, {
+    new: true,
+  });
 };
 
 const deleteDishCategory = async (id) => {
-  const dish = await dishCategoryDetailsModel.findByIdAndDelete(id);
-  return dish;
+  return await dishCategoryDetailsModel.findByIdAndDelete(id);
 };
 
 const getSingleDishCategory = async (id) => {
-  const category = await dishCategoryDetailsModel.findById(id);
-  return category;
+  return await dishCategoryDetailsModel.findById(id);
 };
 
 module.exports = {

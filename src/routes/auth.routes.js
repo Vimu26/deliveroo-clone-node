@@ -6,7 +6,7 @@ const tokenValidationMiddleware = require("../middleware/token.validation.middle
 
 router.post("/login", authController.login);
 router.get(
-  "/current-user",
+  "/profile",
   tokenValidationMiddleware.validateToken,
   authController.currentUser
 );

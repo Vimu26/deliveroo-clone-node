@@ -1,8 +1,7 @@
 const orderDetailsModel = require("../models/order.model");
 
 const getAllOrders = async () => {
-  const orders = await orderDetailsModel.find();
-  return orders;
+  return await orderDetailsModel.find();
 };
 
 const createOrder = async (orderDetails) => {
@@ -16,31 +15,23 @@ const createOrder = async (orderDetails) => {
 };
 
 const updateOrder = async (orderId, orderDetails) => {
-  const order = await orderDetailsModel.findByIdAndUpdate(
-    orderId,
-    orderDetails,
-    { new: true },
-  );
-  return order;
+  return await orderDetailsModel.findByIdAndUpdate(orderId, orderDetails, {
+    new: true,
+  });
 };
 
 const updateOrderData = async (orderId, orderDetails) => {
-  const order = await orderDetailsModel.findByIdAndUpdate(
-    orderId,
-    orderDetails,
-    { new: true },
-  );
-  return order;
+  return await orderDetailsModel.findByIdAndUpdate(orderId, orderDetails, {
+    new: true,
+  });
 };
 
 const deleteOrder = async (orderId) => {
-  const order = await orderDetailsModel.findByIdAndDelete(orderId);
-  return order;
+  return await orderDetailsModel.findByIdAndDelete(orderId);
 };
 
 const getSingleUser = async (orderId) => {
-  const order = await orderDetailsModel.findById(orderId);
-  return order;
+  return await orderDetailsModel.findById(orderId);
 };
 
 module.exports = {
