@@ -24,7 +24,7 @@ const createUser = async (userDetails) => {
 };
 
 const updateUser = async (id, userDetails) => {
-  if ("password" in userDetails) {
+  if (userDetails.password !== undefined) {
     userDetails.password = await passwordService.hashPassword(
       userDetails.password
     );
