@@ -20,19 +20,15 @@ const createRestaurant = async (restaurantDetails) => {
 };
 
 const updateRestaurant = async (id, restaurantDetails) => {
-  return await restaurantDetailsModel.findByIdAndUpdate(
-    id,
-    restaurantDetails,
-    { new: true },
-  );
+  return await restaurantDetailsModel.findByIdAndUpdate(id, restaurantDetails, {
+    new: true,
+  });
 };
 
 const updateRestaurantData = async (id, restaurantDetails) => {
- return await restaurantDetailsModel.findByIdAndUpdate(
-    id,
-    restaurantDetails,
-    { new: true },
-  );
+  return await restaurantDetailsModel.findByIdAndUpdate(id, restaurantDetails, {
+    new: true,
+  });
 };
 
 const deleteRestaurant = async (id) => {
