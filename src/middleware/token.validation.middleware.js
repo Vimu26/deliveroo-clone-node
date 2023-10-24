@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const validateToken = async (req, res, next) => {
   const token = req.token;
   if (!token) {
-    res.status(401).json({ status: false, data: "Token is Not Available" });
+    res.status(401).json({ status: false, data: "Unauthorized Access" });
   } else {
     //verify the payload of the token
     jwt.verify(

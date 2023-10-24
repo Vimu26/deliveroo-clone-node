@@ -4,41 +4,32 @@ const tokenService = require("../services/token.service");
 
 const login = async (req, res) => {
   try {
-    if (req.body.email && req.body.password) {
-      //check the email do exist
-      const foundUser = await userService.findUserByEmail({
-        email: req.body.email,
-      });
-      if (!foundUser) {
-        res
-          .status(401)
-          .json({ status: false, message: "Email Does Not Exist" });
-      } else {
-        //check the password
-        const isPasswordValid = await passwordService.comparePassword(
-          req.body.password,
-          foundUser.password
-        );
-        if (isPasswordValid) {
-          //if password is correct generate the access token
-          const accessToken = await tokenService.userTokenGenerator(foundUser);
-          res.status(200).json({
-            status: true,
-            message: "User Login Successful",
-            data: accessToken,
-          });
-        } else {
-          res.status(401).json({
-            status: false,
-            message: "Password is Wrong , Enter the Correct Password!",
-          });
-        }
-      }
+    //check the email do exist
+    const foundUser = await userService.findUserByEmail({
+      email: req.body.email,
+    });
+    if (!foundUser) {
+      res.status(401).json({ status: false, message: "Email Does Not Exist" });
     } else {
-      res.status(400).json({
-        status: false,
-        message: "Email and Password are Both Required",
-      });
+      //check the password
+      const isPasswordValid = await passwordService.comparePassword(
+        req.body.password,
+        foundUser.password
+      );
+      if (isPasswordValid) {
+        //if password is correct generate the access token
+        const accessToken = await tokenService.userTokenGenerator(foundUser);
+        res.status(200).json({
+          status: true,
+          message: "User Login Successful",
+          data: accessToken,
+        });
+      } else {
+        res.status(401).json({
+          status: false,
+          message: "Password is Wrong , Enter the Correct Password!",
+        });
+      }
     }
   } catch (err) {
     console.error(err.message);
