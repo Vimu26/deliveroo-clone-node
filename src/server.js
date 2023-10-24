@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bearerToken = require("express-bearer-token");
+
+//import from modules
 const userRoutes = require("./routes/user.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
 const dishRoutes = require("./routes/dish.routes");
@@ -12,6 +14,7 @@ const dishCategories = require("./routes/dish-category.routes");
 const commonRoutes = require("./routes/common.routes");
 const authRoutes = require("./routes/auth.routes");
 
+//use express
 const server = express();
 
 //connect to the api  with the port and if error show error and if no error program starts

@@ -5,6 +5,7 @@ const validateToken = async (req, res, next) => {
   if (!token) {
     res.status(401).json({ status: false, data: "Token is Not Available" });
   } else {
+    //verify the payload of the token
     jwt.verify(
       token,
       process.env.SECRET_ACCESS_TOKEN,
