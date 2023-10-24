@@ -19,7 +19,7 @@ const validateToken = async (req, res, next) => {
           req.userId = decodedPayload.sub;
           next();
         }
-      }
+      },
     );
   }
 };
