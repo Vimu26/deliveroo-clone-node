@@ -23,12 +23,8 @@ const getSingleDish = async (req, res) => {
       data: dishDetails,
     });
   } catch (err) {
-    if (err.messageFormat == undefined) {
-      res.status(404).json({ status: false, message: "Dish Does Not Exist" });
-    } else {
-      console.error("An error occurred", err.message);
-      res.status(500).json({ status: false, message: err.message });
-    }
+    console.error("An error occurred", err.message);
+    return res.status(500).json({ status: false, message: err.message });
   }
 };
 
@@ -40,25 +36,24 @@ const createDish = async (req, res) => {
       price: req.body.price,
       image: req.body.image,
     });
-    if (dish) {
-      res.status(201).json({
-        status: true,
-        message: "Dish Created Successfully",
-        data: dish,
-      });
-    } else {
-      res.status(404).json({ status: false, message: "Dish Not Created" });
-    }
+    if (!dish) {
+      return res.status(404).json({ status: false, message: "Dish Not Created" });
+    } 
+    res.status(201).json({
+      status: true,
+      message: "Dish Created Successfully",
+      data: dish,
+    });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else {
+    if (!error.code == 11000) {
       console.error("An error occurred", error.message);
-      res.status(500).json({ status: false, message: error.message });
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+      error  : error.message
+    });
   }
 };
 
@@ -77,20 +72,14 @@ const updateDish = async (req, res) => {
       data: dish,
     });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else if (error.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "Dish Does Not Exist",
-      });
-    } else {
+    if (!error.code == 11000) {
       console.error("An error occurred", error.message);
-      res.status(500).json({ status: false, message: error.message });
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+    });
   }
 };
 
@@ -104,20 +93,14 @@ const updateDishData = async (req, res) => {
       data: dish,
     });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else if (error.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "Dish Does Not Exist",
-      });
-    } else {
+    if (!error.code == 11000) {
       console.error("An error occurred", error.message);
-      res.status(500).json({ status: false, message: error.message });
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+    });
   }
 };
 
@@ -130,15 +113,8 @@ const deleteDish = async (req, res) => {
       data: deleteDish,
     });
   } catch (err) {
-    if (err.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "Dish Does Not Exist",
-      });
-    } else {
-      console.error("An error occurred", err.message);
-      res.status(500).json({ status: false, message: err.message });
-    }
+    console.error("An error occurred", err.message);
+    return res.status(500).json({ status: false, message: err.message });
   }
 };
 
