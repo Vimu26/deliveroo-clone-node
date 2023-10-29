@@ -11,11 +11,11 @@ const getSingleUser = async (id) => {
 
 const createUser = async (userDetails) => {
   const password = await passwordService.hashPassword(userDetails.password);
-
   const userModelData = new userDetailsModel({
     first_name: userDetails.first_name,
     last_name: userDetails.last_name,
     contact_number: userDetails.contact_number,
+    address: userDetails.address,
     email: userDetails.email,
     password: password,
   });

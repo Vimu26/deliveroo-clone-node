@@ -33,6 +33,7 @@ const createUser = async (req, res) => {
       last_name: req.body.last_name,
       email: req.body.email,
       contact_number: req.body.contact_number,
+      address: req.body.address,
       password: req.body.password,
     });
     res.status(201).json({
@@ -60,6 +61,7 @@ const updateUser = async (req, res) => {
       last_name: req.body.last_name,
       email: req.body.email,
       contact_number: req.body.contact_number,
+      address: req.body.address,
       password: req.body.password,
     });
     res.status(200).json({
@@ -87,6 +89,7 @@ const updateUserData = async (req, res) => {
       last_name: req.body.last_name,
       email: req.body.email,
       contact_number: req.body.contact_number,
+      address: req.body.address,
       password: req.body.password,
     });
     res.status(200).json({

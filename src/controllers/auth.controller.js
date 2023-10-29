@@ -9,7 +9,9 @@ const login = async (req, res) => {
       email: req.body.email,
     });
     if (!foundUser) {
-      return res.status(401).json({ status: false, message: "Invalid credentials" });
+      return res
+        .status(401)
+        .json({ status: false, message: "Invalid credentials" });
     }
     //check the password
     const isPasswordValid = await passwordService.comparePassword(
@@ -58,6 +60,7 @@ const registerUser = async (req, res) => {
       last_name: req.body.last_name,
       email: req.body.email,
       contact_number: req.body.contact_number,
+      address: req.body.address,
       password: req.body.password,
     });
     res.status(201).json({
@@ -65,9 +68,16 @@ const registerUser = async (req, res) => {
       message: "User Registered Successfully",
       data: user,
     });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ status: false, message: err.message });
+  } catch (error) {
+    if (!error.code == 11000) {
+      console.error("An error occurred", error.message);
+      return res.status(500).json({ status: false, message: error.message });
+    }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+      error: error.message,
+    });
   }
 };
 
