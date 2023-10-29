@@ -44,9 +44,8 @@ mongoose
 
 //connect to the api  with the port and if error show error and if no error program starts
 server.listen(process.env.PORT, (error) => {
-  if (error) {
-    console.error(error.message);
-  } else {
-    console.log(`Api Started Successfully in Port ${process.env.PORT}!`);
-  }
+  if (!error) {
+    return console.log(`Api Started Successfully in Port ${process.env.PORT}!`); 
+  } 
+  return console.error(error.message);
 });

@@ -21,12 +21,8 @@ const getSingleUser = async (req, res) => {
       .status(200)
       .json({ status: true, message: "User Found Successfully", data: user });
   } catch (err) {
-    if (err.messageFormat == undefined) {
-      res.status(404).json({ status: false, message: "User Does Not Exist" });
-    } else {
-      console.error("An error occurred", err.message);
-      res.status(500).json({ status: false, message: err.message });
-    }
+    console.error("An error occurred", err.message);
+    return res.status(500).json({ status: false, message: err.message });
   }
 };
 
@@ -45,15 +41,15 @@ const createUser = async (req, res) => {
       data: user,
     });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else {
+    if (!error.code == 11000) {
       console.error("An error occurred", error.message);
-      res.status(500).json({ status: false, message: error.message });
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+      error: error.message,
+    });
   }
 };
 
@@ -72,20 +68,15 @@ const updateUser = async (req, res) => {
       data: user,
     });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else if (error.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "User Does Not Exist",
-      });
-    } else {
-      console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: error.message });
+    if (!error.code == 11000) {
+      console.error("An error occurred", error.message);
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+      error: error.message,
+    });
   }
 };
 
@@ -104,20 +95,15 @@ const updateUserData = async (req, res) => {
       data: user,
     });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else if (error.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "User Does Not Exist",
-      });
-    } else {
-      console.error("An error occurred", error);
-      res.status(500).json({ status: false, message: error.message });
+    if (!error.code == 11000) {
+      console.error("An error occurred", error.message);
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+      error: error.message,
+    });
   }
 };
 
@@ -130,15 +116,8 @@ const deleteUser = async (req, res) => {
       data: deleteUser,
     });
   } catch (err) {
-    if (err.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "User Does Not Exist",
-      });
-    } else {
-      console.error("An error occurred", err);
-      res.status(500).json({ status: false, message: err.message });
-    }
+    console.error("An error occurred", err);
+    return res.status(500).json({ status: false, message: err.message });
   }
 };
 

@@ -26,15 +26,15 @@ const createDishCategory = async (req, res) => {
       data: category,
     });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else {
+    if (!error?.code == 11000) {
       console.error("An error occurred", error.message);
-      res.status(500).json({ status: false, message: error.message });
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+      error: error.message,
+    });
   }
 };
 
@@ -45,7 +45,7 @@ const updateDishCategory = async (req, res) => {
       {
         name: req.body.name,
         image: req.body.image,
-      },
+      }
     );
     res.status(200).json({
       status: true,
@@ -53,20 +53,15 @@ const updateDishCategory = async (req, res) => {
       data: updatedDishCategory,
     });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else if (error.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "Dish Category Does Not Exist",
-      });
-    } else {
+    if (!error.code == 11000) {
       console.error("An error occurred", error.message);
-      res.status(500).json({ status: false, message: error.message });
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+      error: error.message,
+    });
   }
 };
 
@@ -80,20 +75,15 @@ const updateDishCategoryData = async (req, res) => {
       data: updatedDishCategory,
     });
   } catch (error) {
-    if (error.code === 11000) {
-      res.status(409).json({
-        status: false,
-        message: "An error occurred Because of Duplicate Creation",
-      });
-    } else if (error.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "Dish Category Does Not Exist",
-      });
-    } else {
+    if (!error.code == 11000) {
       console.error("An error occurred", error.message);
-      res.status(500).json({ status: false, message: error.message });
+      return res.status(500).json({ status: false, message: error.message });
     }
+    res.status(409).json({
+      status: false,
+      message: "An error occurred Because of Duplicate Creation",
+      error: error.message,
+    });
   }
 };
 
@@ -101,7 +91,7 @@ const deleteDishCategory = async (req, res) => {
   try {
     const dish = await dishCategoryService.deleteDishCategory(
       req.params.id,
-      req.body,
+      req.body
     );
     res.status(200).json({
       status: true,
@@ -109,22 +99,15 @@ const deleteDishCategory = async (req, res) => {
       data: dish,
     });
   } catch (err) {
-    if (err.messageFormat == undefined) {
-      res.status(404).json({
-        status: false,
-        message: "Dish Category Does Not Exist",
-      });
-    } else {
-      console.error("An error occurred", err.message);
-      res.status(500).json({ status: false, message: err.message });
-    }
+    console.error("An error occurred", err.message);
+    return res.status(500).json({ status: false, message: err.message });
   }
 };
 
 const getSingleDishCategory = async (req, res) => {
   try {
     const category = await dishCategoryService.getSingleDishCategory(
-      req.params.id,
+      req.params.id
     );
     res.status(200).json({
       status: true,
@@ -132,14 +115,8 @@ const getSingleDishCategory = async (req, res) => {
       data: category,
     });
   } catch (err) {
-    if (err.messageFormat == undefined) {
-      res
-        .status(404)
-        .json({ status: false, message: "Dish Category Does Not Exist" });
-    } else {
-      console.error("An error occurred", err.message);
-      res.status(500).json({ status: false, message: err.message });
-    }
+    console.error("An error occurred", err.message);
+    return res.status(500).json({ status: false, message: err.message });
   }
 };
 
