@@ -21,6 +21,10 @@ const userDetailsSchema = new Schema({
     max: [10],
     required: true,
   },
+  address : {
+   type: String, 
+   required: true,
+  },
   password: {
     type: String,
     required: true,
