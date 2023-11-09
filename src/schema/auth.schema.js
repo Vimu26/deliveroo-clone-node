@@ -8,8 +8,6 @@ const loginUser = {
     },
     password: {
       type: "string",
-      minLength: 6,
-      pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).{6,}$",
     },
   },
   required: ["email", "password"],
@@ -40,7 +38,6 @@ const registerUser = {
     },
     password: {
       type: "string",
-      pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).{6,}$",
     },
   },
   required: [
