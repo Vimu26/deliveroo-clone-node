@@ -10,7 +10,10 @@ const getSingleDish = async (id) => {
 
 const createDish = async (dishDetails) => {
   const dishModelData = new dishDetailsModel({
+    restaurant_id: dishDetails.restaurant_id,
+    order_id: dishDetails.order_id,
     name: dishDetails.name,
+    dish_category_id: dishDetails.dish_category_id,
     dish_code: dishDetails.dish_code,
     price: dishDetails.price,
     image: dishDetails.image,

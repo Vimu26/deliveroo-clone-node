@@ -17,6 +17,7 @@ const getAllDishCategories = async (req, res) => {
 const createDishCategory = async (req, res) => {
   try {
     const category = await dishCategoryService.createDishCategory({
+      restaurant_id: req.body.restaurant_id,
       name: req.body.name,
       image: req.body.image,
     });

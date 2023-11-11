@@ -2,12 +2,20 @@ const express = require("express");
 const router = express.Router();
 
 const dishCategoryController = require("../controllers/dish-category.controller");
+const schemaValidationMiddleware = require("../middleware/ajv-format-validation-middleware");
+const dishCategorySchemaFormat = require("../schema/dish-category.schema");
 
 //get all dish categories
 router.get("/", dishCategoryController.getAllDishCategories);
 
 //create a new dish category
-router.post("/", dishCategoryController.createDishCategory);
+router.post(
+  "/",
+  schemaValidationMiddleware.createDishCategoryFormatValidation(
+    dishCategorySchemaFormat.createDishCategory,
+  ),
+  dishCategoryController.createDishCategory,
+);
 
 //update a dish category partially
 router.patch("/:id", dishCategoryController.updateDishCategory);

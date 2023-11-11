@@ -31,7 +31,10 @@ const getSingleDish = async (req, res) => {
 const createDish = async (req, res) => {
   try {
     const dish = await dishService.createDish({
+      restaurant_id: req.body.restaurant_id,
+      order_id: req.body.order_id,
       name: req.body.name,
+      dish_category_id: req.body.dish_category_id,
       dish_code: req.body.dish_code,
       price: req.body.price,
       image: req.body.image,

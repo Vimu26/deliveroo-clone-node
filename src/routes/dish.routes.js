@@ -2,12 +2,20 @@ const express = require("express");
 const router = express.Router();
 
 const dishController = require("../controllers/dish.controller");
+const schemaValidationMiddleware = require("../middleware/ajv-format-validation-middleware");
+const dishSchemaFormat = require("../schema/dish.schema");
 
 //get all dishes
 router.get("/", dishController.getAllDishes);
 
 //create a new dish
-router.post("/", dishController.createDish);
+router.post(
+  "/",
+  schemaValidationMiddleware.createDishFormatValidation(
+    dishSchemaFormat.createOrder,
+  ),
+  dishController.createDish,
+);
 
 //update a dish partially
 router.patch("/:id", dishController.updateDish);
