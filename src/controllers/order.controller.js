@@ -15,11 +15,10 @@ const getAllOrders = async (req, res) => {
 };
 
 const createOrder = async (req, res) => {
-  console.log("request body ", req.body)
   try {
     const order = await orderService.createOrder({
-      user_id : req.body.user_id,
-      restaurant_id : req.body.restaurant_id,
+      user_id: req.body.user_id,
+      restaurant_id: req.body.restaurant_id,
       quantity: req.body.quantity,
       order_code: req.body.order_code,
       total_price: req.body.total_price,

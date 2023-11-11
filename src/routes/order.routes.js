@@ -12,9 +12,9 @@ router.get("/", orderController.getAllOrders);
 router.post(
   "/",
   schemaValidationMiddleware.createOrderCategoryFormatValidation(
-    orderSchemaFormat.createOrder
+    orderSchemaFormat.createOrder,
   ),
-  orderController.createOrder
+  orderController.createOrder,
 );
 
 //update order partially

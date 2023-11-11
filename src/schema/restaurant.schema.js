@@ -22,4 +22,4 @@ const createRestaurant = {
   additionalProperties: false,
 };
 
-module.exports = {createRestaurant}
+module.exports = { createRestaurant };

@@ -12,9 +12,9 @@ router.get("/", restaurantController.getAllRestaurants);
 router.post(
   "/",
   schemaValidationMiddleware.createRestaurantFormatValidation(
-    restaurantSchema.createRestaurant
+    restaurantSchema.createRestaurant,
   ),
-  restaurantController.createRestaurant
+  restaurantController.createRestaurant,
 );
 
 //update restaurants partially

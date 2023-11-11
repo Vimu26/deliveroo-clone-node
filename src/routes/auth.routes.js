@@ -9,21 +9,21 @@ const authSchemaFormat = require("../schema/auth.schema");
 router.post(
   "/login",
   schemaValidationMiddleware.userLoginFormatValidation(
-    authSchemaFormat.loginUser
+    authSchemaFormat.loginUser,
   ),
-  authController.login
+  authController.login,
 );
 router.get(
   "/profile",
   tokenValidationMiddleware.validateToken,
-  authController.currentUser
+  authController.currentUser,
 );
 router.post(
   "/register",
   schemaValidationMiddleware.userRegisterFormatValidation(
-    authSchemaFormat.registerUser
+    authSchemaFormat.registerUser,
   ),
-  authController.registerUser
+  authController.registerUser,
 );
 
 module.exports = router;

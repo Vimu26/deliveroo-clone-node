@@ -3,7 +3,7 @@ const { DB_NAMES } = require("../constants");
 
 const orderDetailsSchema = new Schema({
   user_id: {
-    type: Schema.Types.ObjectId ,
+    type: Schema.Types.ObjectId,
     required: true,
     ref: DB_NAMES.USERS,
   },

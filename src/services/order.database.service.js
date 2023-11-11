@@ -5,10 +5,9 @@ const getAllOrders = async () => {
 };
 
 const createOrder = async (orderDetails) => {
-  console.log(orderDetails)
   const orderModelData = new orderDetailsModel({
-    user_id : orderDetails.user_id,
-    restaurant_id : orderDetails.restaurant_id,
+    user_id: orderDetails.user_id,
+    restaurant_id: orderDetails.restaurant_id,
     quantity: orderDetails.quantity,
     order_code: orderDetails.order_code,
     total_price: orderDetails.total_price,

@@ -37,8 +37,10 @@ const createDish = async (req, res) => {
       image: req.body.image,
     });
     if (!dish) {
-      return res.status(404).json({ status: false, message: "Dish Not Created" });
-    } 
+      return res
+        .status(404)
+        .json({ status: false, message: "Dish Not Created" });
+    }
     res.status(201).json({
       status: true,
       message: "Dish Created Successfully",
@@ -52,7 +54,7 @@ const createDish = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error  : error.message
+      error: error.message,
     });
   }
 };

@@ -16,7 +16,7 @@ const login = async (req, res) => {
     //check the password
     const isPasswordValid = await passwordService.comparePassword(
       req.body.password,
-      foundUser.password
+      foundUser.password,
     );
     if (!isPasswordValid) {
       return res.status(401).json({
