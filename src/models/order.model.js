@@ -27,7 +27,6 @@ const orderDetailsSchema = new Schema({
   },
   placed_on: {
     type: Date,
-    required: true,
     default: new Date(),
   },
 });

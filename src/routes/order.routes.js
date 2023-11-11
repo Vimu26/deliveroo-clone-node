@@ -2,12 +2,20 @@ const express = require("express");
 const router = express.Router();
 
 const orderController = require("../controllers/order.controller");
+const schemaValidationMiddleware = require("../middleware/ajv-format-validation-middleware");
+const orderSchemaFormat = require("../schema/order.schema");
 
 //get all orders
 router.get("/", orderController.getAllOrders);
 
 //create a new order
-router.post("/", orderController.createOrder);
+router.post(
+  "/",
+  schemaValidationMiddleware.createOrderCategoryFormatValidation(
+    orderSchemaFormat.createOrder,
+  ),
+  orderController.createOrder,
+);
 
 //update order partially
 router.patch("/:id", orderController.updateOrder);
