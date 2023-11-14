@@ -2,6 +2,7 @@ const userService = require("../services/user.database.service");
 const passwordService = require("../services/password.service");
 const tokenService = require("../services/token.service");
 
+//login user
 const login = async (req, res) => {
   try {
     //check the email do exist
@@ -38,6 +39,7 @@ const login = async (req, res) => {
   }
 };
 
+//get the logged user details
 const currentUser = async (req, res) => {
   try {
     const foundUser = await userService.getSingleUser(req.userId);
@@ -53,6 +55,7 @@ const currentUser = async (req, res) => {
   }
 };
 
+//register user
 const registerUser = async (req, res) => {
   try {
     const user = await userService.createUser({
