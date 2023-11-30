@@ -14,11 +14,18 @@ const createRestaurant = {
       minLength: 10,
       maxLength: 10,
     },
-    address: {
+    location: {
       type: "string",
     },
+    opensAt: {
+      type: "string",
+      pattern: "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)$",
+    },
+    distance : {
+      type: "number",
+    }
   },
-  required: ["name", "email", "contact_number", "address"],
+  required: ["name", "email", "contact_number", "location", "opensAt","distance"],
   additionalProperties: false,
 };
 

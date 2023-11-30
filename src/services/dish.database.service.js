@@ -17,6 +17,7 @@ const createDish = async (dishDetails) => {
     dish_code: dishDetails.dish_code,
     price: dishDetails.price,
     image: dishDetails.image,
+    calories: dishDetails.calories,
   });
   await dishModelData.save();
   return dishModelData;

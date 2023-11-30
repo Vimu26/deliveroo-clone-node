@@ -9,13 +9,13 @@ const dishDetailsSchema = new Schema({
   },
   order_id: {
     type: Schema.Types.ObjectId,
-    required: true,
     ref: DB_NAMES.ORDERS,
+    defaultValue: '-'
   },
   dish_category_id: {
     type: Schema.Types.ObjectId,
-    required: true,
     ref: DB_NAMES.DISH_CATEGORIES,
+    defaultValue: '-'
   },
   name: {
     type: String,
@@ -27,11 +27,15 @@ const dishDetailsSchema = new Schema({
     unique: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
   },
   image: {
     type: String,
+    required: true,
+  },
+  calories: {
+    type: Number,
     required: true,
   },
 });

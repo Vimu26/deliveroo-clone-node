@@ -36,7 +36,10 @@ const createRestaurant = async (req, res) => {
       name: req.body.name,
       contact_number: req.body.contact_number,
       email: req.body.email,
-      address: req.body.address,
+      location: req.body.location,
+      opensAt :req.body.opensAt,
+      distance : req.body.distance
+
     });
     res.status(201).json({
       status: true,
@@ -62,7 +65,10 @@ const updateRestaurant = async (req, res) => {
       name: req.body.name,
       contact_number: req.body.contact_number,
       email: req.body.email,
-      address: req.body.address,
+      location: req.body.location,
+      opensAt :req.body.opensAt,
+      distance : req.body.distance
+
     });
     res.status(200).json({
       status: true,
@@ -90,7 +96,10 @@ const updateRestaurantData = async (req, res) => {
         name: req.body.name,
         contact_number: req.body.contact_number,
         email: req.body.email,
-        address: req.body.address,
+        location: req.body.location,
+        opensAt :req.body.opensAt,
+        distance : req.body.distance
+  
       },
     );
     res.status(200).json({

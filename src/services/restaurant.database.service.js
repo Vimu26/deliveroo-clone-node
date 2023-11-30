@@ -13,7 +13,10 @@ const createRestaurant = async (restaurantDetails) => {
     name: restaurantDetails.name,
     contact_number: restaurantDetails.contact_number,
     email: restaurantDetails.email,
-    address: restaurantDetails.address,
+    location: restaurantDetails.location,
+    opensAt :restaurantDetails.opensAt,
+    distance : restaurantDetails.distance
+
   });
   await restaurantModelData.save();
   return restaurantModelData;
