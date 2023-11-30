@@ -38,6 +38,7 @@ const createDish = async (req, res) => {
       dish_code: req.body.dish_code,
       price: req.body.price,
       image: req.body.image,
+      calories: req.body.calories,
     });
     if (!dish) {
       return res
@@ -65,10 +66,14 @@ const createDish = async (req, res) => {
 const updateDish = async (req, res) => {
   try {
     const dish = await dishService.updateDish(req.params.id, {
+      restaurant_id: req.body.restaurant_id,
+      order_id: req.body.order_id,
       name: req.body.name,
+      dish_category_id: req.body.dish_category_id,
       dish_code: req.body.dish_code,
       price: req.body.price,
       image: req.body.image,
+      calories: req.body.calories,
     });
 
     res.status(200).json({
@@ -90,7 +95,16 @@ const updateDish = async (req, res) => {
 
 const updateDishData = async (req, res) => {
   try {
-    const dish = await dishService.updateDishData(req.params.id, req.body);
+    const dish = await dishService.updateDishData(req.params.id, {
+      restaurant_id: req.body.restaurant_id,
+      order_id: req.body.order_id,
+      name: req.body.name,
+      dish_category_id: req.body.dish_category_id,
+      dish_code: req.body.dish_code,
+      price: req.body.price,
+      image: req.body.image,
+      calories: req.body.calories,
+    });
 
     res.status(200).json({
       status: true,

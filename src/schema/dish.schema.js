@@ -47,15 +47,17 @@ const createOrder = {
     image: {
       type: "string",
     },
+    calories: {
+      type: "number",
+    }
   },
   required: [
-    "order_id",
     "restaurant_id",
-    "dish_category_id",
     "dish_code",
     "price",
     "name",
     "image",
+    "calories",
   ],
   additionalProperties: false,
 };

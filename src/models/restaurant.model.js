@@ -17,9 +17,25 @@ const restaurantDetailsSchema = new Schema({
     max: [10],
     required: true,
   },
-  address: {
+  location: {
     type: String,
     required: true,
+  },
+  distance: {
+    type: String,
+    required: true,
+  },
+  opensAt: {
+    type: String,
+    required: true,
+    validate: {
+      validator: (value) => {
+        // Custom validation logic for time format (HH:mm AM/PM)
+        const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)$/;
+        return regex.test(value);
+      },
+      message: "Invalid time format. Please use HH:mm AM/PM.",
+    },
   },
 });
 
