@@ -12,14 +12,11 @@ const createDishCategory = {
         },
       ],
     },
-    name: {
-      type: "string",
-    },
-    image: {
+    dish_category_name: {
       type: "string",
     },
   },
-  required: ["restaurant_id", "name", "image"],
+  required: ["restaurant_id", "dish_category_name"],
   additionalProperties: false,
 };
 
