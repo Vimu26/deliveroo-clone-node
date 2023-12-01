@@ -7,11 +7,7 @@ const dishCategoryDetailsSchema = new Schema({
     required: true,
     ref: DB_NAMES.RESTAURANTS,
   },
-  name: {
-    type: String,
-    required: true,
-  },
-  image: {
+  dish_category_name: {
     type: String,
     required: true,
   },

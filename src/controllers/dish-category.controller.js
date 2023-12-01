@@ -18,8 +18,7 @@ const createDishCategory = async (req, res) => {
   try {
     const category = await dishCategoryService.createDishCategory({
       restaurant_id: req.body.restaurant_id,
-      name: req.body.name,
-      image: req.body.image,
+      dish_category_name: req.body.dish_category_name,
     });
     res.status(201).json({
       status: true,
@@ -44,7 +43,7 @@ const updateDishCategory = async (req, res) => {
     const updatedDishCategory = await dishCategoryService.updateDishCategory(
       req.params.id,
       {
-        name: req.body.name,
+        dish_category_name: req.body.dish_category_name,
         image: req.body.image,
       },
     );

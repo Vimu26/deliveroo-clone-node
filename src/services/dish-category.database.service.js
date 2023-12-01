@@ -7,7 +7,7 @@ const getAllDishCategories = async () => {
 const createDishCategory = async (dishCategory) => {
   const category = new dishCategoryDetailsModel({
     restaurant_id: dishCategory.restaurant_id,
-    name: dishCategory.name,
+    dish_category_name: dishCategory.dish_category_name,
     image: dishCategory.image,
   });
   await category.save();
