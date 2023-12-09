@@ -8,6 +8,9 @@ const dishCategorySchemaFormat = require("../schema/dish-category.schema");
 //get all dish categories
 router.get("/", dishCategoryController.getAllDishCategories);
 
+//get all dish categories by restaurantID
+router.get("/:restaurantId", dishCategoryController.getAllRestaurantDishCategories);
+
 //create a new dish category
 router.post(
   "/",

@@ -17,15 +17,30 @@ const createRestaurant = {
     location: {
       type: "string",
     },
-    opensAt: {
+    closesAt: {
       type: "string",
       pattern: "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)$",
     },
-    distance : {
-      type: "number",
-    }
+    distance: {
+      type: "string",
+    },
+    minimumPrice: {
+      type: "string",
+    },
+    deliveryFee: {
+      type: "string",
+    },
   },
-  required: ["name", "email", "contact_number", "location", "opensAt","distance"],
+  required: [
+    "name",
+    "email",
+    "contact_number",
+    "location",
+    "closesAt",
+    "distance",
+    "minimumPrice",
+    "deliveryFee",
+  ],
   additionalProperties: false,
 };
 
