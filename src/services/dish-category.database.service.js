@@ -4,6 +4,14 @@ const getAllDishCategories = async () => {
   return await dishCategoryDetailsModel.find();
 };
 
+const getAllRestaurantDishCategories = async (restaurant_id) => {
+  const allDishCategories = await dishCategoryDetailsModel.find();
+  const filteredDishCategories = allDishCategories.filter(
+    (category) => category.restaurant_id.toString() === restaurant_id.toString()
+  );
+  return filteredDishCategories;
+};
+
 const createDishCategory = async (dishCategory) => {
   const category = new dishCategoryDetailsModel({
     restaurant_id: dishCategory.restaurant_id,
@@ -41,4 +49,5 @@ module.exports = {
   deleteDishCategory,
   getSingleDishCategory,
   updateDishCategoryData,
+  getAllRestaurantDishCategories
 };

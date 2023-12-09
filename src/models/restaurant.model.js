@@ -25,7 +25,7 @@ const restaurantDetailsSchema = new Schema({
     type: String,
     required: true,
   },
-  opensAt: {
+  closesAt: {
     type: String,
     required: true,
     validate: {
@@ -36,6 +36,14 @@ const restaurantDetailsSchema = new Schema({
       },
       message: "Invalid time format. Please use HH:mm AM/PM.",
     },
+  },
+  minimumPrice: {
+    type: String,
+    required: true,
+  },
+  deliveryFee: {
+    type: String,
+    required: true,
   },
 });
 

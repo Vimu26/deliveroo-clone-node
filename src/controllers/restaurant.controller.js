@@ -17,7 +17,7 @@ const getAllRestaurants = async (req, res) => {
 const getSingleRestaurant = async (req, res) => {
   try {
     const restaurant = await restaurantService.getSingleRestaurant(
-      req.params.id,
+      req.params.id
     );
     res.status(200).json({
       status: true,
@@ -37,9 +37,10 @@ const createRestaurant = async (req, res) => {
       contact_number: req.body.contact_number,
       email: req.body.email,
       location: req.body.location,
-      opensAt :req.body.opensAt,
-      distance : req.body.distance
-
+      closesAt: req.body.closesAt,
+      distance: req.body.distance,
+      minimumPrice: req.body.minimumPrice,
+      deliveryFee: req.body.deliveryFee,
     });
     res.status(201).json({
       status: true,
@@ -66,9 +67,10 @@ const updateRestaurant = async (req, res) => {
       contact_number: req.body.contact_number,
       email: req.body.email,
       location: req.body.location,
-      opensAt :req.body.opensAt,
-      distance : req.body.distance
-
+      closesAt: req.body.closesAt,
+      distance: req.body.distance,
+      minimumPrice: req.body.minimumPrice,
+      deliveryFee: req.body.deliveryFee,
     });
     res.status(200).json({
       status: true,
@@ -97,10 +99,11 @@ const updateRestaurantData = async (req, res) => {
         contact_number: req.body.contact_number,
         email: req.body.email,
         location: req.body.location,
-        opensAt :req.body.opensAt,
-        distance : req.body.distance
-  
-      },
+        closesAt: req.body.closesAt,
+        distance: req.body.distance,
+        minimumPrice: req.body.minimumPrice,
+        deliveryFee: req.body.deliveryFee,
+      }
     );
     res.status(200).json({
       status: true,
@@ -123,7 +126,7 @@ const updateRestaurantData = async (req, res) => {
 const deleteRestaurant = async (req, res) => {
   try {
     const deleteRestaurant = await restaurantService.deleteRestaurant(
-      req.params.id,
+      req.params.id
     );
     res.status(200).json({
       status: true,
