@@ -49,5 +49,5 @@ module.exports = {
   deleteDishCategory,
   getSingleDishCategory,
   updateDishCategoryData,
-  getAllRestaurantDishCategories
+  getAllRestaurantDishCategories,
 };
