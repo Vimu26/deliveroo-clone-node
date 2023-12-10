@@ -4,6 +4,19 @@ const getAllDishes = async () => {
   return await dishDetailsModel.find();
 };
 
+const getCategoryDishes = async (restaurantId,dishCategoryId) => {
+  const allDishes = await dishDetailsModel.find();
+  const restaurantDishes = allDishes.filter((dishes)=>{
+    dishes.restaurant_id.toString() === restaurantId.toString()
+  })
+  if(restaurantDishes.length > 0){
+    const categoryDishes =restaurantDishes.filter((dishes)=>{
+      dishes.dish_category_id.toString() === dishCategoryId.toString()
+    })
+    return categoryDishes
+  }
+};
+
 const getSingleDish = async (id) => {
   return await dishDetailsModel.findById(id);
 };
@@ -12,9 +25,9 @@ const createDish = async (dishDetails) => {
   const dishModelData = new dishDetailsModel({
     restaurant_id: dishDetails.restaurant_id,
     order_id: dishDetails.order_id,
-    name: dishDetails.name,
     dish_category_id: dishDetails.dish_category_id,
-    dish_code: dishDetails.dish_code,
+    name: dishDetails.name,
+    description : dishDetails.description,
     price: dishDetails.price,
     image: dishDetails.image,
     calories: dishDetails.calories,
@@ -46,4 +59,5 @@ module.exports = {
   deleteDish,
   getSingleDish,
   updateDishData,
+  getCategoryDishes
 };

@@ -14,6 +14,23 @@ const getAllDishes = async (req, res) => {
   }
 };
 
+const getCategoryDishes = async (req, res) => {
+  try {
+    const dishDetails = await dishService.getCategoryDishes({
+      restaurantId: req.params.restaurantId,
+      dishCategoryId: req.params.dishCategoryId
+    });
+    res.status(200).json({
+      status: true,
+      message: "Dishes Found successfully",
+      data: dishDetails,
+    });
+  } catch (err) {
+    console.error("An error occurred", err.message);
+    res.status(500).json({ status: false, message: err.message });
+  }
+};
+
 const getSingleDish = async (req, res) => {
   try {
     const dishDetails = await dishService.getSingleDish(req.params.id);
@@ -33,9 +50,9 @@ const createDish = async (req, res) => {
     const dish = await dishService.createDish({
       restaurant_id: req.body.restaurant_id,
       order_id: req.body.order_id,
-      name: req.body.name,
       dish_category_id: req.body.dish_category_id,
-      dish_code: req.body.dish_code,
+      name: req.body.name,
+      description : req.body.description,
       price: req.body.price,
       image: req.body.image,
       calories: req.body.calories,
@@ -68,9 +85,9 @@ const updateDish = async (req, res) => {
     const dish = await dishService.updateDish(req.params.id, {
       restaurant_id: req.body.restaurant_id,
       order_id: req.body.order_id,
-      name: req.body.name,
       dish_category_id: req.body.dish_category_id,
-      dish_code: req.body.dish_code,
+      name: req.body.name,
+      description : req.body.description,
       price: req.body.price,
       image: req.body.image,
       calories: req.body.calories,
@@ -98,9 +115,9 @@ const updateDishData = async (req, res) => {
     const dish = await dishService.updateDishData(req.params.id, {
       restaurant_id: req.body.restaurant_id,
       order_id: req.body.order_id,
-      name: req.body.name,
       dish_category_id: req.body.dish_category_id,
-      dish_code: req.body.dish_code,
+      name: req.body.name,
+      description : req.body.description,
       price: req.body.price,
       image: req.body.image,
       calories: req.body.calories,
@@ -144,4 +161,5 @@ module.exports = {
   updateDishData,
   deleteDish,
   getSingleDish,
+  getCategoryDishes
 };

@@ -37,9 +37,6 @@ const createOrder = {
     name: {
       type: "string",
     },
-    dish_code: {
-      type: "string",
-    },
     price: {
       type: "number",
       minimum: 0,
@@ -48,16 +45,21 @@ const createOrder = {
       type: "string",
     },
     calories: {
-      type: "number",
-    }
+      type: "string",
+    },
+    description: {
+      type: "string",
+    },
   },
   required: [
     "restaurant_id",
+    "dish_category_id",
     "dish_code",
     "price",
     "name",
     "image",
     "calories",
+    "description"
   ],
   additionalProperties: false,
 };
