@@ -15,16 +15,15 @@ const dishDetailsSchema = new Schema({
   dish_category_id: {
     type: Schema.Types.ObjectId,
     ref: DB_NAMES.DISH_CATEGORIES,
-    defaultValue: '-'
+    required: true,
   },
   name: {
     type: String,
     required: true,
   },
-  dish_code: {
+  description : {
     type: String,
     required: true,
-    unique: true,
   },
   price: {
     type: Number,
@@ -35,7 +34,7 @@ const dishDetailsSchema = new Schema({
     required: true,
   },
   calories: {
-    type: Number,
+    type: String,
     required: true,
   },
 });
