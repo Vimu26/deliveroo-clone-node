@@ -14,9 +14,10 @@ const getAllDishCategories = async (req, res) => {
   }
 };
 
-const getAllRestaurantDishCategories = async(req,res)=>{
+const getAllRestaurantDishCategories = async (req, res) => {
   try {
-    const dishCategory = await dishCategoryService.getAllRestaurantDishCategories(req.params.restaurantId);
+    const dishCategory =
+      await dishCategoryService.getAllRestaurantDishCategories(req.params.restaurantId);
     res.status(200).json({
       status: true,
       message: "Dish Categories Found Successfully",
@@ -26,7 +27,7 @@ const getAllRestaurantDishCategories = async(req,res)=>{
     console.error("An error occurred", err.message);
     res.status(500).json({ status: false, message: err.message });
   }
-}
+};
 
 const createDishCategory = async (req, res) => {
   try {
@@ -59,7 +60,7 @@ const updateDishCategory = async (req, res) => {
       {
         dish_category_name: req.body.dish_category_name,
         image: req.body.image,
-      },
+      }
     );
     res.status(200).json({
       status: true,
@@ -105,7 +106,7 @@ const deleteDishCategory = async (req, res) => {
   try {
     const dish = await dishCategoryService.deleteDishCategory(
       req.params.id,
-      req.body,
+      req.body
     );
     res.status(200).json({
       status: true,
@@ -121,7 +122,7 @@ const deleteDishCategory = async (req, res) => {
 const getSingleDishCategory = async (req, res) => {
   try {
     const category = await dishCategoryService.getSingleDishCategory(
-      req.params.id,
+      req.params.id
     );
     res.status(200).json({
       status: true,
@@ -141,5 +142,5 @@ module.exports = {
   deleteDishCategory,
   getSingleDishCategory,
   updateDishCategoryData,
-  getAllRestaurantDishCategories
+  getAllRestaurantDishCategories,
 };

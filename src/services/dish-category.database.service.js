@@ -4,12 +4,10 @@ const getAllDishCategories = async () => {
   return await dishCategoryDetailsModel.find();
 };
 
-const getAllRestaurantDishCategories = async (restaurant_id) => {
-  const allDishCategories = await dishCategoryDetailsModel.find();
-  const filteredDishCategories = allDishCategories.filter(
-    (category) => category.restaurant_id.toString() === restaurant_id.toString()
-  );
-  return filteredDishCategories;
+const getAllRestaurantDishCategories = async (id) => {
+  return await dishCategoryDetailsModel.find({
+    restaurant_id: id,
+  });
 };
 
 const createDishCategory = async (dishCategory) => {
@@ -49,5 +47,5 @@ module.exports = {
   deleteDishCategory,
   getSingleDishCategory,
   updateDishCategoryData,
-  getAllRestaurantDishCategories
+  getAllRestaurantDishCategories,
 };

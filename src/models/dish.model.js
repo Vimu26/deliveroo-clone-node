@@ -26,7 +26,7 @@ const dishDetailsSchema = new Schema({
     required: true,
   },
   price: {
-    type: Number,
+    type: String,
     required: true,
   },
   image: {
