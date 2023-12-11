@@ -38,8 +38,7 @@ const createOrder = {
       type: "string",
     },
     price: {
-      type: "number",
-      minimum: 0,
+      type: "string",
     },
     image: {
       type: "string",
@@ -54,7 +53,6 @@ const createOrder = {
   required: [
     "restaurant_id",
     "dish_category_id",
-    "dish_code",
     "price",
     "name",
     "image",

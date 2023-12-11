@@ -4,17 +4,15 @@ const getAllDishes = async () => {
   return await dishDetailsModel.find();
 };
 
-const getCategoryDishes = async (restaurantId,dishCategoryId) => {
-  const allDishes = await dishDetailsModel.find();
-  const restaurantDishes = allDishes.filter((dishes)=>{
-    dishes.restaurant_id.toString() === restaurantId.toString()
-  })
-  if(restaurantDishes.length > 0){
-    const categoryDishes =restaurantDishes.filter((dishes)=>{
-      dishes.dish_category_id.toString() === dishCategoryId.toString()
-    })
-    return categoryDishes
-  }
+
+
+
+const getCategoryDishes = async (id) => {
+  console.log(id)
+  return await dishDetailsModel.find({
+    restaurant_id: id.restaurantId,
+    dish_category_id: id.dishCategoryId
+  });
 };
 
 const getSingleDish = async (id) => {

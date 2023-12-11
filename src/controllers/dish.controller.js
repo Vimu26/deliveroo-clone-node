@@ -18,7 +18,7 @@ const getCategoryDishes = async (req, res) => {
   try {
     const dishDetails = await dishService.getCategoryDishes({
       restaurantId: req.params.restaurantId,
-      dishCategoryId: req.params.dishCategoryId
+      dishCategoryId: req.params.dishCategoryId,
     });
     res.status(200).json({
       status: true,
@@ -52,7 +52,7 @@ const createDish = async (req, res) => {
       order_id: req.body.order_id,
       dish_category_id: req.body.dish_category_id,
       name: req.body.name,
-      description : req.body.description,
+      description: req.body.description,
       price: req.body.price,
       image: req.body.image,
       calories: req.body.calories,
@@ -87,7 +87,7 @@ const updateDish = async (req, res) => {
       order_id: req.body.order_id,
       dish_category_id: req.body.dish_category_id,
       name: req.body.name,
-      description : req.body.description,
+      description: req.body.description,
       price: req.body.price,
       image: req.body.image,
       calories: req.body.calories,
@@ -117,7 +117,7 @@ const updateDishData = async (req, res) => {
       order_id: req.body.order_id,
       dish_category_id: req.body.dish_category_id,
       name: req.body.name,
-      description : req.body.description,
+      description: req.body.description,
       price: req.body.price,
       image: req.body.image,
       calories: req.body.calories,
@@ -161,5 +161,5 @@ module.exports = {
   updateDishData,
   deleteDish,
   getSingleDish,
-  getCategoryDishes
+  getCategoryDishes,
 };
