@@ -57,7 +57,7 @@ const createOrder = {
     "name",
     "image",
     "calories",
-    "description"
+    "description",
   ],
   additionalProperties: false,
 };

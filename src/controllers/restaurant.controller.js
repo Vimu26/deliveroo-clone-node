@@ -17,7 +17,7 @@ const getAllRestaurants = async (req, res) => {
 const getSingleRestaurant = async (req, res) => {
   try {
     const restaurant = await restaurantService.getSingleRestaurant(
-      req.params.id
+      req.params.id,
     );
     res.status(200).json({
       status: true,
@@ -103,7 +103,7 @@ const updateRestaurantData = async (req, res) => {
         distance: req.body.distance,
         minimumPrice: req.body.minimumPrice,
         deliveryFee: req.body.deliveryFee,
-      }
+      },
     );
     res.status(200).json({
       status: true,
@@ -126,7 +126,7 @@ const updateRestaurantData = async (req, res) => {
 const deleteRestaurant = async (req, res) => {
   try {
     const deleteRestaurant = await restaurantService.deleteRestaurant(
-      req.params.id
+      req.params.id,
     );
     res.status(200).json({
       status: true,
