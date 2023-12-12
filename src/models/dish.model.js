@@ -10,7 +10,7 @@ const dishDetailsSchema = new Schema({
   order_id: {
     type: Schema.Types.ObjectId,
     ref: DB_NAMES.ORDERS,
-    defaultValue: '-'
+    defaultValue: "-",
   },
   dish_category_id: {
     type: Schema.Types.ObjectId,
@@ -21,7 +21,7 @@ const dishDetailsSchema = new Schema({
     type: String,
     required: true,
   },
-  description : {
+  description: {
     type: String,
     required: true,
   },
