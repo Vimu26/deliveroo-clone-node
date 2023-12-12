@@ -8,7 +8,6 @@ const getAllDishes = async () => {
 
 
 const getCategoryDishes = async (id) => {
-  console.log(id)
   return await dishDetailsModel.find({
     restaurant_id: id.restaurantId,
     dish_category_id: id.dishCategoryId
