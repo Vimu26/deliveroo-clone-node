@@ -1,13 +1,9 @@
 const dishCategoryDetailsModel = require("../models/dish-category.model");
 
-const getAllDishCategories = async () => {
-  return await dishCategoryDetailsModel.find();
-};
-
-const getAllRestaurantDishCategories = async (id) => {
-  return await dishCategoryDetailsModel.find({
-    restaurant_id: id,
-  });
+const getAllDishCategories = async (restaurantId) => {
+  return await dishCategoryDetailsModel
+    .find({ restaurant_id: restaurantId })
+    .populate("restaurant_id");
 };
 
 const createDishCategory = async (dishCategory) => {
@@ -47,5 +43,4 @@ module.exports = {
   deleteDishCategory,
   getSingleDishCategory,
   updateDishCategoryData,
-  getAllRestaurantDishCategories,
 };
