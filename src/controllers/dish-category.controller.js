@@ -2,7 +2,8 @@ const dishCategoryService = require("../services/dish-category.database.service"
 
 const getAllDishCategories = async (req, res) => {
   try {
-    const dishCategory = await dishCategoryService.getAllDishCategories();
+    const { restaurantId } = req.query;
+    const dishCategory = await dishCategoryService.getAllDishCategories(restaurantId);
     res.status(200).json({
       status: true,
       message: "Dish Categories Found Successfully",
@@ -14,22 +15,6 @@ const getAllDishCategories = async (req, res) => {
   }
 };
 
-const getAllRestaurantDishCategories = async (req, res) => {
-  try {
-    const dishCategory =
-      await dishCategoryService.getAllRestaurantDishCategories(
-        req.params.restaurantId,
-      );
-    res.status(200).json({
-      status: true,
-      message: "Dish Categories Found Successfully",
-      data: dishCategory,
-    });
-  } catch (err) {
-    console.error("An error occurred", err.message);
-    res.status(500).json({ status: false, message: err.message });
-  }
-};
 
 const createDishCategory = async (req, res) => {
   try {
@@ -144,5 +129,4 @@ module.exports = {
   deleteDishCategory,
   getSingleDishCategory,
   updateDishCategoryData,
-  getAllRestaurantDishCategories,
 };
