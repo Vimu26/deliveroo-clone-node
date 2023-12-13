@@ -1,9 +1,7 @@
 const dishCategoryDetailsModel = require("../models/dish-category.model");
 
-const getAllDishCategories = async (restaurantId) => {
-  return await dishCategoryDetailsModel
-    .find({ restaurant_id: restaurantId })
-    .populate("restaurant_id");
+const getAllDishCategories = async (query) => {
+  return await dishCategoryDetailsModel.find(query).populate("restaurant_id");
 };
 
 const createDishCategory = async (dishCategory) => {
