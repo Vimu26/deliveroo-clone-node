@@ -50,7 +50,7 @@ const updateDishCategory = async (req, res) => {
       {
         dish_category_name: req.body.dish_category_name,
         image: req.body.image,
-      }
+      },
     );
     res.status(200).json({
       status: true,
@@ -96,7 +96,7 @@ const deleteDishCategory = async (req, res) => {
   try {
     const dish = await dishCategoryService.deleteDishCategory(
       req.params.id,
-      req.body
+      req.body,
     );
     res.status(200).json({
       status: true,
@@ -112,7 +112,7 @@ const deleteDishCategory = async (req, res) => {
 const getSingleDishCategory = async (req, res) => {
   try {
     const category = await dishCategoryService.getSingleDishCategory(
-      req.params.id
+      req.params.id,
     );
     res.status(200).json({
       status: true,

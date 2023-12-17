@@ -37,10 +37,20 @@ const createRestaurant = async (req, res) => {
       contact_number: req.body.contact_number,
       email: req.body.email,
       location: req.body.location,
-      closesAt: req.body.closesAt,
+      opens_at: req.body.opens_at,
+      closes_at: req.body.closes_at,
       distance: req.body.distance,
       minimumPrice: req.body.minimumPrice,
       deliveryFee: req.body.deliveryFee,
+      tags: {
+        delivery_time: {
+          from: req.body.tags.delivery_time.from,
+          to: req.body.tags.delivery_time.to,
+        },
+        tag1: req.body.tags.tag1,
+        tag2: req.body.tags.tag2,
+        tag3: req.body.tags.tag3,
+      },
     });
     res.status(201).json({
       status: true,
@@ -67,10 +77,20 @@ const updateRestaurant = async (req, res) => {
       contact_number: req.body.contact_number,
       email: req.body.email,
       location: req.body.location,
-      closesAt: req.body.closesAt,
+      opens_at: req.body.opens_at,
+      closes_at: req.body.closes_at,
       distance: req.body.distance,
       minimumPrice: req.body.minimumPrice,
       deliveryFee: req.body.deliveryFee,
+      tags: {
+        delivery_time: {
+          from: req.body.tags.delivery_time.from,
+          to: req.body.tags.delivery_time.to,
+        },
+        tag1: req.body.tags.tag1,
+        tag2: req.body.tags.tag2,
+        tag3: req.body.tags.tag3,
+      },
     });
     res.status(200).json({
       status: true,
@@ -99,10 +119,20 @@ const updateRestaurantData = async (req, res) => {
         contact_number: req.body.contact_number,
         email: req.body.email,
         location: req.body.location,
-        closesAt: req.body.closesAt,
+        opens_at: req.body.opens_at,
+        closes_at: req.body.closes_at,
         distance: req.body.distance,
         minimumPrice: req.body.minimumPrice,
         deliveryFee: req.body.deliveryFee,
+        tags: {
+          delivery_time: {
+            from: req.body.tags.delivery_time.from,
+            to: req.body.tags.delivery_time.to,
+          },
+          tag1: req.body.tags.tag1,
+          tag2: req.body.tags.tag2,
+          tag3: req.body.tags.tag3,
+        },
       },
     );
     res.status(200).json({

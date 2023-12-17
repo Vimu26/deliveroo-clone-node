@@ -14,10 +14,20 @@ const createRestaurant = async (restaurantDetails) => {
     contact_number: restaurantDetails.contact_number,
     email: restaurantDetails.email,
     location: restaurantDetails.location,
-    closesAt: restaurantDetails.closesAt,
+    opens_at: restaurantDetails.opens_at,
+    closes_at: restaurantDetails.closes_at,
     distance: restaurantDetails.distance,
     minimumPrice: restaurantDetails.minimumPrice,
     deliveryFee: restaurantDetails.deliveryFee,
+    tags: {
+      delivery_time: {
+        from: restaurantDetails.tags.delivery_time.from,
+        to: restaurantDetails.tags.delivery_time.to,
+      },
+      tag1: restaurantDetails.tags.tag1,
+      tag2: restaurantDetails.tags.tag2,
+      tag3: restaurantDetails.tags.tag3,
+    },
   });
   await restaurantModelData.save();
   return restaurantModelData;

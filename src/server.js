@@ -33,7 +33,7 @@ server.use(commonRoutes);
 
 //connect to the database
 mongoose
-  .connect("mongodb://127.0.0.1:27017/deliveroo-clone-api", {
+  .connect("mongodb://127.0.0.1:27017/foodie-node", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

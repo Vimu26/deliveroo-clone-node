@@ -25,7 +25,19 @@ const restaurantDetailsSchema = new Schema({
     type: String,
     required: true,
   },
-  closesAt: {
+  opens_at: {
+    type: String,
+    required: true,
+    validate: {
+      validator: (value) => {
+        // Custom validation logic for time format (HH:mm AM/PM)
+        const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)$/;
+        return regex.test(value);
+      },
+      message: "Invalid time format. Please use HH:mm AM/PM.",
+    },
+  },
+  closes_at: {
     type: String,
     required: true,
     validate: {
@@ -44,6 +56,30 @@ const restaurantDetailsSchema = new Schema({
   deliveryFee: {
     type: String,
     required: true,
+  },
+  tags: {
+    delivery_time: {
+      from: {
+        type: Number,
+        required: true,
+      },
+      to: {
+        type: Number,
+        required: true,
+      },
+    },
+    tag1: {
+      type: String,
+      required: true,
+    },
+    tag2: {
+      type: String,
+      required: true,
+    },
+    tag3: {
+      type: String,
+      required: true,
+    },
   },
 });
 
