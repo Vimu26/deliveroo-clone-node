@@ -12,9 +12,9 @@ router.get("/", dishCategoryController.getAllDishCategories);
 router.post(
   "/",
   schemaValidationMiddleware.createDishCategoryFormatValidation(
-    dishCategorySchemaFormat.createDishCategory
+    dishCategorySchemaFormat.createDishCategory,
   ),
-  dishCategoryController.createDishCategory
+  dishCategoryController.createDishCategory,
 );
 
 //update a dish category partially
