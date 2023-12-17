@@ -2,7 +2,12 @@ const dishService = require("../services/dish.database.service");
 
 const getAllDishes = async (req, res) => {
   try {
-    const dishDetails = await dishService.getAllDishes();
+    const { restaurantId } = req.query;
+    let query = {};
+    if (restaurantId) {
+      query = { restaurant_id: restaurantId };
+    }
+    const dishDetails = await dishService.getAllDishes(query);
     res.status(200).json({
       status: true,
       message: "Dishes Found successfully",
