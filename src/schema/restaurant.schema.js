@@ -49,17 +49,14 @@ const createRestaurant = {
           },
           required: ["from", "to"],
         },
-        tag1: {
-          type: "string",
-        },
-        tag2: {
-          type: "string",
-        },
-        tag3: {
-          type: "string",
+        tag_list: {
+          type: "array",
+          items: {
+            type: "string",
+          },
         },
       },
-      required: ["delivery_time", "tag1", "tag2", "tag3"],
+      required: ["delivery_time", "tag_list"],
     },
   },
   required: [

@@ -2,12 +2,12 @@ const { Schema, model } = require("mongoose");
 const { DB_NAMES } = require("../constants");
 
 const orderDetailsSchema = new Schema({
-  user_id: {
+  user: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: DB_NAMES.USERS,
   },
-  restaurant_id: {
+  restaurant: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: DB_NAMES.RESTAURANTS,
@@ -27,7 +27,7 @@ const orderDetailsSchema = new Schema({
   },
   placed_on: {
     type: Date,
-    default: new Date(),
+    default: Date.now(),
   },
 });
 
