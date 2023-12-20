@@ -2,17 +2,12 @@ const { Schema, model } = require("mongoose");
 const { DB_NAMES } = require("../constants");
 
 const dishDetailsSchema = new Schema({
-  restaurant_id: {
+  restaurant: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: DB_NAMES.RESTAURANTS,
   },
-  order_id: {
-    type: Schema.Types.ObjectId,
-    ref: DB_NAMES.ORDERS,
-    defaultValue: "-",
-  },
-  dish_category_id: {
+  dish_category: {
     type: Schema.Types.ObjectId,
     ref: DB_NAMES.DISH_CATEGORIES,
     required: true,
@@ -26,7 +21,7 @@ const dishDetailsSchema = new Schema({
     required: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
   },
   image: {
@@ -34,7 +29,7 @@ const dishDetailsSchema = new Schema({
     required: true,
   },
   calories: {
-    type: String,
+    type:  Number,
     required: true,
   },
 });

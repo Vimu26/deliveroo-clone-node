@@ -22,39 +22,23 @@ const restaurantDetailsSchema = new Schema({
     required: true,
   },
   distance: {
-    type: String,
+    type: Number,
     required: true,
   },
   opens_at: {
     type: String,
     required: true,
-    validate: {
-      validator: (value) => {
-        // Custom validation logic for time format (HH:mm AM/PM)
-        const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)$/;
-        return regex.test(value);
-      },
-      message: "Invalid time format. Please use HH:mm AM/PM.",
-    },
   },
   closes_at: {
     type: String,
     required: true,
-    validate: {
-      validator: (value) => {
-        // Custom validation logic for time format (HH:mm AM/PM)
-        const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)$/;
-        return regex.test(value);
-      },
-      message: "Invalid time format. Please use HH:mm AM/PM.",
-    },
   },
   minimumPrice: {
-    type: String,
+    type: Number,
     required: true,
   },
   deliveryFee: {
-    type: String,
+    type: Number,
     required: true,
   },
   tags: {
@@ -68,16 +52,8 @@ const restaurantDetailsSchema = new Schema({
         required: true,
       },
     },
-    tag1: {
-      type: String,
-      required: true,
-    },
-    tag2: {
-      type: String,
-      required: true,
-    },
-    tag3: {
-      type: String,
+    tag_list: {
+      type: [String],
       required: true,
     },
   },
