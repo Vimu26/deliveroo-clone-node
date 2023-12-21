@@ -1,7 +1,7 @@
 const createDishCategory = {
   type: "object",
   properties: {
-    restaurant_id: {
+    restaurant: {
       oneOf: [
         {
           type: "string",
@@ -12,11 +12,11 @@ const createDishCategory = {
         },
       ],
     },
-    dish_category_name: {
+    name: {
       type: "string",
     },
   },
-  required: ["restaurant_id", "dish_category_name"],
+  required: ["restaurant", "name"],
   additionalProperties: false,
 };
 

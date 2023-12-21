@@ -3,15 +3,8 @@ const dishDetailsModel = require("../models/dish.model");
 const getAllDishes = async (query) => {
   return await dishDetailsModel
     .find(query)
-    .populate("restaurant_id")
-    .populate("dish_category_id");
-};
-
-const getCategoryDishes = async (id) => {
-  return await dishDetailsModel.find({
-    restaurant_id: id.restaurantId,
-    dish_category_id: id.dishCategoryId,
-  });
+    .populate("restaurant")
+    .populate("dish_category");
 };
 
 const getSingleDish = async (id) => {
@@ -20,9 +13,9 @@ const getSingleDish = async (id) => {
 
 const createDish = async (dishDetails) => {
   const dishModelData = new dishDetailsModel({
-    restaurant_id: dishDetails.restaurant_id,
-    order_id: dishDetails.order_id,
-    dish_category_id: dishDetails.dish_category_id,
+    restaurant: dishDetails.restaurant,
+    order: dishDetails.order,
+    dish_category: dishDetails.dish_category,
     name: dishDetails.name,
     description: dishDetails.description,
     price: dishDetails.price,
@@ -56,5 +49,4 @@ module.exports = {
   deleteDish,
   getSingleDish,
   updateDishData,
-  getCategoryDishes,
 };

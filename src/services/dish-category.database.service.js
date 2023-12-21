@@ -1,14 +1,13 @@
 const dishCategoryDetailsModel = require("../models/dish-category.model");
 
 const getAllDishCategories = async (query) => {
-  return await dishCategoryDetailsModel.find(query).populate("restaurant_id");
+  return await dishCategoryDetailsModel.find(query);
 };
 
 const createDishCategory = async (dishCategory) => {
   const category = new dishCategoryDetailsModel({
-    restaurant_id: dishCategory.restaurant_id,
-    dish_category_name: dishCategory.dish_category_name,
-    image: dishCategory.image,
+    restaurant: dishCategory.restaurant,
+    name: dishCategory.name,
   });
   await category.save();
   return category;
