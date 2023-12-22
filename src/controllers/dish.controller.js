@@ -2,29 +2,12 @@ const dishService = require("../services/dish.database.service");
 
 const getAllDishes = async (req, res) => {
   try {
-    const { restaurantId } = req.query;
+    const { restaurant } = req.query;
     let query = {};
-    if (restaurantId) {
-      query = { restaurant_id: restaurantId };
+    if (restaurant) {
+      query = { restaurant: restaurant };
     }
     const dishDetails = await dishService.getAllDishes(query);
-    res.status(200).json({
-      status: true,
-      message: "Dishes Found successfully",
-      data: dishDetails,
-    });
-  } catch (err) {
-    console.error("An error occurred", err.message);
-    res.status(500).json({ status: false, message: err.message });
-  }
-};
-
-const getCategoryDishes = async (req, res) => {
-  try {
-    const dishDetails = await dishService.getCategoryDishes({
-      restaurantId: req.params.restaurantId,
-      dishCategoryId: req.params.dishCategoryId,
-    });
     res.status(200).json({
       status: true,
       message: "Dishes Found successfully",
@@ -53,9 +36,9 @@ const getSingleDish = async (req, res) => {
 const createDish = async (req, res) => {
   try {
     const dish = await dishService.createDish({
-      restaurant_id: req.body.restaurant_id,
-      order_id: req.body.order_id,
-      dish_category_id: req.body.dish_category_id,
+      restaurant: req.body.restaurant,
+      order: req.body.order,
+      dish_category: req.body.dish_category,
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
@@ -88,9 +71,9 @@ const createDish = async (req, res) => {
 const updateDish = async (req, res) => {
   try {
     const dish = await dishService.updateDish(req.params.id, {
-      restaurant_id: req.body.restaurant_id,
-      order_id: req.body.order_id,
-      dish_category_id: req.body.dish_category_id,
+      restaurant: req.body.restaurant,
+      order: req.body.order,
+      dish_category: req.body.dish_category,
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
@@ -118,9 +101,9 @@ const updateDish = async (req, res) => {
 const updateDishData = async (req, res) => {
   try {
     const dish = await dishService.updateDishData(req.params.id, {
-      restaurant_id: req.body.restaurant_id,
-      order_id: req.body.order_id,
-      dish_category_id: req.body.dish_category_id,
+      restaurant: req.body.restaurant,
+      order: req.body.order,
+      dish_category: req.body.dish_category,
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
@@ -166,5 +149,4 @@ module.exports = {
   updateDishData,
   deleteDish,
   getSingleDish,
-  getCategoryDishes,
 };

@@ -8,12 +8,6 @@ const dishSchemaFormat = require("../schema/dish.schema");
 //get all dishes
 router.get("/", dishController.getAllDishes);
 
-//get dishes by restaurant_id and dish-category_Id
-router.get(
-  "/dish-categories/:restaurantId/:dishCategoryId",
-  dishController.getCategoryDishes,
-);
-
 //create a new dish
 router.post(
   "/",

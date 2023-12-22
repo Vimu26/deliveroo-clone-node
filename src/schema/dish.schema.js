@@ -1,7 +1,7 @@
 const createOrder = {
   type: "object",
   properties: {
-    order_id: {
+    order: {
       oneOf: [
         {
           type: "string",
@@ -12,7 +12,7 @@ const createOrder = {
         },
       ],
     },
-    restaurant_id: {
+    restaurant: {
       oneOf: [
         {
           type: "string",
@@ -23,7 +23,7 @@ const createOrder = {
         },
       ],
     },
-    dish_category_id: {
+    dish_category: {
       oneOf: [
         {
           type: "string",
@@ -38,21 +38,21 @@ const createOrder = {
       type: "string",
     },
     price: {
-      type: "string",
+      type: "number",
     },
     image: {
       type: "string",
     },
     calories: {
-      type: "string",
+      type: "number",
     },
     description: {
       type: "string",
     },
   },
   required: [
-    "restaurant_id",
-    "dish_category_id",
+    "restaurant",
+    "dish_category",
     "price",
     "name",
     "image",
