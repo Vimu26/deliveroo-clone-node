@@ -3,18 +3,23 @@ const router = express.Router();
 
 const dishController = require("../controllers/dish.controller");
 const schemaValidationMiddleware = require("../middleware/ajv-format-validation-middleware");
+const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
 const dishSchemaFormat = require("../schema/dish.schema");
 
 //get all dishes
-router.get("/", dishController.getAllDishes);
+router.get(
+  "/",
+  tokenValidationMiddleware.validateToken,
+  dishController.getAllDishes
+);
 
 //create a new dish
 router.post(
   "/",
   schemaValidationMiddleware.createDishFormatValidation(
-    dishSchemaFormat.createOrder,
+    dishSchemaFormat.createOrder
   ),
-  dishController.createDish,
+  dishController.createDish
 );
 
 //update a dish partially
