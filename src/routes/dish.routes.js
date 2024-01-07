@@ -4,6 +4,9 @@ const router = express.Router();
 const dishController = require("../controllers/dish.controller");
 const schemaValidationMiddleware = require("../middleware/ajv-format-validation-middleware");
 const dishSchemaFormat = require("../schema/dish.schema");
+const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
+
+router.use(tokenValidationMiddleware.validateToken);
 
 //get all dishes
 router.get("/", dishController.getAllDishes);

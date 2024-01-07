@@ -29,7 +29,7 @@ const dishDetailsSchema = new Schema({
     required: true,
   },
   calories: {
-    type:  Number,
+    type: Number,
     required: true,
   },
 });
