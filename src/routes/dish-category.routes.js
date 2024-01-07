@@ -4,6 +4,9 @@ const router = express.Router();
 const dishCategoryController = require("../controllers/dish-category.controller");
 const schemaValidationMiddleware = require("../middleware/ajv-format-validation-middleware");
 const dishCategorySchemaFormat = require("../schema/dish-category.schema");
+const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
+
+router.use(tokenValidationMiddleware.validateToken);
 
 //get all dish categories
 router.get("/", dishCategoryController.getAllDishCategories);
