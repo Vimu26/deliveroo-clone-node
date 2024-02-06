@@ -12,16 +12,16 @@ router.use(tokenValidationMiddleware.validateToken);
 router.get(
   "/",
   tokenValidationMiddleware.validateToken,
-  dishController.getAllDishes
+  dishController.getAllDishes,
 );
 
 //create a new dish
 router.post(
   "/",
   schemaValidationMiddleware.createDishFormatValidation(
-    dishSchemaFormat.createOrder
+    dishSchemaFormat.createOrder,
   ),
-  dishController.createDish
+  dishController.createDish,
 );
 
 //update a dish partially
