@@ -36,7 +36,7 @@ const dishDetailsSchema = new Schema({
     {
       name: { type: String, required: true },
       price: { type: Number, required: true },
-      checked: {type:Boolean , default: false}
+      checked: { type: Boolean, default: false },
     },
   ],
 });

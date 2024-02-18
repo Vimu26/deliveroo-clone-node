@@ -3,7 +3,7 @@ const addOnsItemSchema = {
   properties: {
     name: { type: "string" },
     price: { type: "number" },
-    checked: {type: "boolean"}
+    checked: { type: "boolean" },
   },
   required: ["name", "price"],
   additionalProperties: false,
