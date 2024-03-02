@@ -1,13 +1,14 @@
 const userService = require("../services/user.database.service");
 const passwordService = require("../services/password.service");
 const tokenService = require("../services/token.service");
+const jwt = require("jsonwebtoken");
 
 //login user
 const login = async (req, res) => {
   try {
     //check the email do exist
     const foundUser = await userService.findUserByEmail({
-      email: req.body.email,
+      email: req.body.email
     });
     if (!foundUser) {
       return res
@@ -17,12 +18,12 @@ const login = async (req, res) => {
     //check the password
     const isPasswordValid = await passwordService.comparePassword(
       req.body.password,
-      foundUser.password,
+      foundUser.password
     );
     if (!isPasswordValid) {
       return res.status(401).json({
         status: false,
-        message: "Invalid credentials",
+        message: "Invalid credentials"
       });
     }
 
@@ -32,8 +33,8 @@ const login = async (req, res) => {
       status: true,
       message: "User Login Successful",
       data: {
-        token: accessToken,
-      },
+        token: accessToken
+      }
     });
   } catch (err) {
     console.error(err.message);
@@ -44,7 +45,9 @@ const login = async (req, res) => {
 //get the logged user details
 const currentUser = async (req, res) => {
   try {
-    const foundUser = await userService.getSingleUser(req.userId);
+    const token = req.body.token;
+    const decodedToken = jwt.verify(token, process.env.SECRET_ACCESS_TOKEN);
+    const foundUser = await userService.getSingleUser(decodedToken.sub);
     if (!foundUser) {
       return res.status(404).json({ status: false, message: "User not found" });
     }
@@ -66,12 +69,12 @@ const registerUser = async (req, res) => {
       email: req.body.email,
       contact_number: req.body.contact_number,
       address: req.body.address,
-      password: req.body.password,
+      password: req.body.password
     });
     res.status(201).json({
       status: true,
       message: "User Registered Successfully",
-      data: user,
+      data: user
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -81,7 +84,7 @@ const registerUser = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message,
+      error: error.message
     });
   }
 };
