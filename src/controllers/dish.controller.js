@@ -45,6 +45,7 @@ const createDish = async (req, res) => {
       image: req.body.image,
       calories: req.body.calories,
       addOns: req.body.addOns,
+      size : req.body.size,
     });
     if (!dish) {
       return res
@@ -81,6 +82,7 @@ const updateDish = async (req, res) => {
       image: req.body.image,
       calories: req.body.calories,
       addOns: req.body.addOns,
+      size : req.body.size,
     });
 
     res.status(200).json({
@@ -112,6 +114,7 @@ const updateDishData = async (req, res) => {
       image: req.body.image,
       calories: req.body.calories,
       addOns: req.body.addOns,
+      size : req.body.size,
     });
 
     res.status(200).json({

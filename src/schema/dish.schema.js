@@ -9,6 +9,16 @@ const addOnsItemSchema = {
   additionalProperties: false,
 };
 
+const sizeSchema = {
+  type : "object",
+  properties: {
+    name: { type: "string" },
+    price: { type: "number" },
+  },
+  required: ["name", "price"],
+  additionalProperties: false,
+}
+
 const createOrder = {
   type: "object",
   properties: {
@@ -64,6 +74,10 @@ const createOrder = {
       type: "array",
       items: addOnsItemSchema,
     },
+    size: {
+      type: "array",
+      items: sizeSchema,
+    },
   },
   required: [
     "restaurant",
@@ -74,6 +88,7 @@ const createOrder = {
     "calories",
     "description",
     "addOns",
+    "size",
   ],
   additionalProperties: false,
 };
