@@ -11,6 +11,7 @@ const getSingleUser = async (id) => {
     { $match: { _id: new mongoose.Types.ObjectId(id) } },
     {
       $project: {
+        _id: 1,
         full_name: { $concat: ["$first_name", " ", "$last_name"] },
         address: 1,
         contact_number: 1
