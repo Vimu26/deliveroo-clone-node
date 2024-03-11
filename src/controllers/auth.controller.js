@@ -1,7 +1,6 @@
 const userService = require("../services/user.database.service");
 const passwordService = require("../services/password.service");
 const tokenService = require("../services/token.service");
-const jwt = require("jsonwebtoken");
 
 //login user
 const login = async (req, res) => {
@@ -45,9 +44,7 @@ const login = async (req, res) => {
 //get the logged user details
 const currentUser = async (req, res) => {
   try {
-    const token = req.body.token;
-    const decodedToken = jwt.verify(token, process.env.SECRET_ACCESS_TOKEN);
-    const foundUser = await userService.getSingleUser(decodedToken.sub);
+    const foundUser = await userService.getSingleUser(req.userId);
     if (!foundUser) {
       return res.status(404).json({ status: false, message: "User not found" });
     }

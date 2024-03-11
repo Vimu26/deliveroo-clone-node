@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const authController = require("../controllers/auth.controller");
-// const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
+const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
 const schemaValidationMiddleware = require("../middleware/ajv-format-validation-middleware");
 const authSchemaFormat = require("../schema/auth.schema");
 
@@ -13,7 +13,11 @@ router.post(
   ),
   authController.login
 );
-router.post("/currentUser", authController.currentUser);
+router.post(
+  "/currentUser",
+  tokenValidationMiddleware.validateTokenByHeaders,
+  authController.currentUser
+);
 router.post(
   "/register",
   schemaValidationMiddleware.userRegisterFormatValidation(
