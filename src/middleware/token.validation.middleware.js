@@ -17,15 +17,15 @@ const validateToken = async (req, res, next) => {
       return res.status(401).json({
         status: false,
         Error: error,
-        message: "Token is Invalid Or Expired"
+        message: "Token is Invalid Or Expired",
       });
-    }
+    },
   );
 };
 
 const validateTokenByHeaders = async (req, res, next) => {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
   if (!token) {
     return res.status(401).json({ status: false, data: "Unauthorized Access" });
   }
@@ -41,9 +41,9 @@ const validateTokenByHeaders = async (req, res, next) => {
       return res.status(401).json({
         status: false,
         Error: error,
-        message: "Token is Invalid Or Expired"
+        message: "Token is Invalid Or Expired",
       });
-    }
+    },
   );
 };
 
