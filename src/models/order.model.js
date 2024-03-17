@@ -5,30 +5,53 @@ const orderDetailsSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: DB_NAMES.USERS,
+    ref: DB_NAMES.USERS
   },
   restaurant: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: DB_NAMES.RESTAURANTS,
+    ref: DB_NAMES.RESTAURANTS
   },
-  quantity: {
-    type: Number,
-    required: true,
+  order_items: {
+    type: Array,
+    required: true
   },
-  order_code: {
+  payment_method: {
     type: String,
     required: true,
-    unique: true,
+    enum: ["CASH", "CARD"]
   },
-  total_price: {
-    type: Number,
+  selected_option: {
+    type: String,
     required: true,
+    enum: ["TakeAway", "Delivery"]
+  },
+  user_details: {
+    type: Object,
+    required: true,
+    properties: {
+      name: {
+        type: String,
+        required: true
+      },
+      address: {
+        type: String,
+        required: true
+      },
+      contact_number: {
+        type: String,
+        required: true
+      }
+    }
+  },
+  total_amount: {
+    type: Number,
+    required: true
   },
   placed_on: {
     type: Date,
-    default: Date.now(),
-  },
+    default: Date.now()
+  }
 });
 
 module.exports = new model(DB_NAMES.ORDERS, orderDetailsSchema);
