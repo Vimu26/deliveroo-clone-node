@@ -1,53 +1,76 @@
 const createOrder = {
   type: "object",
   properties: {
-    user_id: {
+    user: {
       oneOf: [
         {
-          type: "string",
+          type: "string"
         },
         {
           type: "string",
-          format: "uuid",
-        },
-      ],
+          format: "uuid"
+        }
+      ]
     },
-    restaurant_id: {
+    restaurant: {
       oneOf: [
         {
-          type: "string",
+          type: "string"
         },
         {
           type: "string",
-          format: "uuid",
-        },
-      ],
+          format: "uuid"
+        }
+      ]
     },
-    quantity: {
-      type: "integer",
-      minimum: 1,
+    order_items: {
+      type: "array"
     },
-    order_code: {
+    payment_method: {
       type: "string",
-      minLength: 1,
+      enum: ["CASH", "CARD"]
     },
-    total_price: {
+    total_amount: {
       type: "number",
-      minimum: 0,
+      minimum: 0
+    },
+    user_details: {
+      type: "object",
+      properties: {
+        name: {
+          type: "string",
+          minLength: 1
+        },
+        address: {
+          type: "string",
+          minLength: 1
+        },
+        contact_number: {
+          type: "string",
+          minLength: 1
+        }
+      },
+      required: ["name", "address", "contact_number"]
+    },
+    selected_option: {
+      type: "string",
+      enum: ["TakeAway", "Delivery"]
     },
     placed_on: {
       type: "string",
-      format: "date-time",
-    },
+      format: "date-time"
+    }
   },
   required: [
-    "user_id",
-    "restaurant_id",
-    "quantity",
-    "order_code",
-    "total_price",
+    "user",
+    "restaurant",
+    "order_items",
+    "payment_method",
+    "total_amount",
+    "user_details",
+    "selected_option"
   ],
-  additionalProperties: false,
+  additionalProperties: false
 };
 
 module.exports = { createOrder };
