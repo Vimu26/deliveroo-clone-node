@@ -4,20 +4,29 @@ const router = express.Router();
 const restaurantController = require("../controllers/restaurant.controller");
 const schemaValidationMiddleware = require("../middleware/ajv-format-validation-middleware");
 const restaurantSchema = require("../schema/restaurant.schema");
-const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
+// const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
 
-router.use(tokenValidationMiddleware.validateToken);
+// router.use(tokenValidationMiddleware.validateToken);
 
 //get all restaurants
 router.get("/", restaurantController.getAllRestaurants);
+
+//check Restaurant Details
+router.post(
+  "/check-restaurant-details",
+  schemaValidationMiddleware.createRestaurantFormatValidation(
+    restaurantSchema.createRestaurant
+  ),
+  restaurantController.checkRestaurantDetails
+);
 
 //create restaurants
 router.post(
   "/",
   schemaValidationMiddleware.createRestaurantFormatValidation(
-    restaurantSchema.createRestaurant,
+    restaurantSchema.createRestaurant
   ),
-  restaurantController.createRestaurant,
+  restaurantController.createRestaurant
 );
 
 //update restaurants partially
