@@ -22,7 +22,7 @@ const createDish = async (dishDetails) => {
     image: dishDetails.image,
     calories: dishDetails.calories,
     addOns: dishDetails.addOns,
-    size : dishDetails.size,
+    size: dishDetails.size,
   });
   await dishModelData.save();
   return dishModelData;
