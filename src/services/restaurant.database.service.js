@@ -19,15 +19,11 @@ const createRestaurant = async (restaurantDetails) => {
     distance: restaurantDetails.distance,
     minimumPrice: restaurantDetails.minimumPrice,
     deliveryFee: restaurantDetails.deliveryFee,
-    tags: {
-      delivery_time: {
-        from: restaurantDetails.tags.delivery_time.from,
-        to: restaurantDetails.tags.delivery_time.to,
-      },
-      tag1: restaurantDetails.tags.tag1,
-      tag2: restaurantDetails.tags.tag2,
-      tag3: restaurantDetails.tags.tag3,
+    delivery_time: {
+      from: restaurantDetails.tags.delivery_time.from,
+      to: restaurantDetails.tags.delivery_time.to
     },
+    tags: restaurantDetails.tags
   });
   await restaurantModelData.save();
   return restaurantModelData;
@@ -35,13 +31,13 @@ const createRestaurant = async (restaurantDetails) => {
 
 const updateRestaurant = async (id, restaurantDetails) => {
   return await restaurantDetailsModel.findByIdAndUpdate(id, restaurantDetails, {
-    new: true,
+    new: true
   });
 };
 
 const updateRestaurantData = async (id, restaurantDetails) => {
   return await restaurantDetailsModel.findByIdAndUpdate(id, restaurantDetails, {
-    new: true,
+    new: true
   });
 };
 
@@ -55,5 +51,5 @@ module.exports = {
   updateRestaurant,
   deleteRestaurant,
   getSingleRestaurant,
-  updateRestaurantData,
+  updateRestaurantData
 };

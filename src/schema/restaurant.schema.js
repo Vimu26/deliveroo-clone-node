@@ -3,61 +3,62 @@ const createRestaurant = {
 
   properties: {
     name: {
-      type: "string",
+      type: "string"
     },
     email: {
       type: "string",
-      format: "email",
+      format: "email"
     },
     contact_number: {
       type: "string",
       minLength: 10,
-      maxLength: 10,
+      maxLength: 10
     },
     location: {
-      type: "string",
+      type: "string"
     },
     opens_at: {
       type: "string",
-      pattern: "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)$",
+      pattern: "^(1[012]|0?[1-9]):([0-5][0-9]) (AM|PM)$"
     },
     closes_at: {
       type: "string",
-      pattern: "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9] (AM|PM)$",
+      pattern: "^(1[012]|0?[1-9]):([0-5][0-9]) (AM|PM)$"
     },
     distance: {
-      type: "string",
+      type: "number"
     },
     minimumPrice: {
-      type: "string",
+      type: "number"
     },
     deliveryFee: {
-      type: "string",
+      type: "number"
     },
-    tags: {
+    delivery_time: {
       type: "object",
       properties: {
-        delivery_time: {
-          type: "object",
-          properties: {
-            from: {
-              type: "number",
-            },
-            to: {
-              type: "number",
-            },
-          },
-          required: ["from", "to"],
+        from: {
+          type: "number"
         },
-        tag_list: {
-          type: "array",
-          items: {
-            type: "string",
-          },
-        },
+        to: {
+          type: "number"
+        }
       },
-      required: ["delivery_time", "tag_list"],
+      required: ["from", "to"]
     },
+    tag_list: {
+      type: "array",
+      items: {
+        type: "string"
+      }
+    }
+    // tags: {
+    //   type: "object",
+    //   properties: {
+
+    //   },
+    //   required: ["delivery_time", "tag_list"],
+    // },
   },
   required: [
     "name",
@@ -69,8 +70,9 @@ const createRestaurant = {
     "distance",
     "minimumPrice",
     "deliveryFee",
+    "tag_list"
   ],
-  additionalProperties: false,
+  additionalProperties: false
 };
 
 module.exports = { createRestaurant };

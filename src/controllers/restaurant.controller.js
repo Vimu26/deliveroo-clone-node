@@ -6,7 +6,20 @@ const getAllRestaurants = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Restaurants Found Successfully",
-      data: restaurantDetails,
+      data: restaurantDetails
+    });
+  } catch (err) {
+    console.error("An error occurred", err.message);
+    res.status(500).json({ status: false, message: err.message });
+  }
+};
+
+const checkRestaurantDetails = async (req, res) => {
+  try {
+    res.status(201).json({
+      status: true,
+      message: "Restaurants Details Checked Successfully",
+      code: 201
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -17,12 +30,12 @@ const getAllRestaurants = async (req, res) => {
 const getSingleRestaurant = async (req, res) => {
   try {
     const restaurant = await restaurantService.getSingleRestaurant(
-      req.params.id,
+      req.params.id
     );
     res.status(200).json({
       status: true,
       message: "Restaurant Found Successfully",
-      data: restaurant,
+      data: restaurant
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -42,20 +55,16 @@ const createRestaurant = async (req, res) => {
       distance: req.body.distance,
       minimumPrice: req.body.minimumPrice,
       deliveryFee: req.body.deliveryFee,
-      tags: {
-        delivery_time: {
-          from: req.body.tags.delivery_time.from,
-          to: req.body.tags.delivery_time.to,
-        },
-        tag1: req.body.tags.tag1,
-        tag2: req.body.tags.tag2,
-        tag3: req.body.tags.tag3,
+      delivery_time: {
+        from: req.body.tags.delivery_time.from,
+        to: req.body.tags.delivery_time.to
       },
+      tags: req.body.tags
     });
     res.status(201).json({
       status: true,
       message: "Restaurant Created Successfully",
-      data: restaurant,
+      data: restaurant
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -65,7 +74,7 @@ const createRestaurant = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message,
+      error: error.message
     });
   }
 };
@@ -82,20 +91,16 @@ const updateRestaurant = async (req, res) => {
       distance: req.body.distance,
       minimumPrice: req.body.minimumPrice,
       deliveryFee: req.body.deliveryFee,
-      tags: {
-        delivery_time: {
-          from: req.body.tags.delivery_time.from,
-          to: req.body.tags.delivery_time.to,
-        },
-        tag1: req.body.tags.tag1,
-        tag2: req.body.tags.tag2,
-        tag3: req.body.tags.tag3,
+      delivery_time: {
+        from: req.body.tags.delivery_time.from,
+        to: req.body.tags.delivery_time.to
       },
+      tags: req.body.tags
     });
     res.status(200).json({
       status: true,
       message: "Restaurant Updated Successfully",
-      data: restaurant,
+      data: restaurant
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -105,7 +110,7 @@ const updateRestaurant = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message,
+      error: error.message
     });
   }
 };
@@ -124,21 +129,17 @@ const updateRestaurantData = async (req, res) => {
         distance: req.body.distance,
         minimumPrice: req.body.minimumPrice,
         deliveryFee: req.body.deliveryFee,
-        tags: {
-          delivery_time: {
-            from: req.body.tags.delivery_time.from,
-            to: req.body.tags.delivery_time.to,
-          },
-          tag1: req.body.tags.tag1,
-          tag2: req.body.tags.tag2,
-          tag3: req.body.tags.tag3,
+        delivery_time: {
+          from: req.body.tags.delivery_time.from,
+          to: req.body.tags.delivery_time.to
         },
-      },
+        tags: req.body.tags
+      }
     );
     res.status(200).json({
       status: true,
       message: "Restaurant Updated Successfully",
-      data: restaurant,
+      data: restaurant
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -148,7 +149,7 @@ const updateRestaurantData = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message,
+      error: error.message
     });
   }
 };
@@ -156,12 +157,12 @@ const updateRestaurantData = async (req, res) => {
 const deleteRestaurant = async (req, res) => {
   try {
     const deleteRestaurant = await restaurantService.deleteRestaurant(
-      req.params.id,
+      req.params.id
     );
     res.status(200).json({
       status: true,
       message: "Restaurant Deleted Successfully",
-      data: deleteRestaurant,
+      data: deleteRestaurant
     });
   } catch (err) {
     console.error("An error occurred", err);
@@ -176,4 +177,5 @@ module.exports = {
   deleteRestaurant,
   updateRestaurantData,
   getSingleRestaurant,
+  checkRestaurantDetails
 };
