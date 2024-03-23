@@ -13,23 +13,23 @@ const createOrder = async (orderDetails) => {
     user_details: {
       name: orderDetails.user_details.name,
       address: orderDetails.user_details.address,
-      contact_number: orderDetails.user_details.contact_number
+      contact_number: orderDetails.user_details.contact_number,
     },
     payment_method: orderDetails.payment_method,
-    total_amount: orderDetails.total_amount
+    total_amount: orderDetails.total_amount,
   });
   return await orderModelData.save();
 };
 
 const updateOrder = async (orderId, orderDetails) => {
   return await orderDetailsModel.findByIdAndUpdate(orderId, orderDetails, {
-    new: true
+    new: true,
   });
 };
 
 const updateOrderData = async (orderId, orderDetails) => {
   return await orderDetailsModel.findByIdAndUpdate(orderId, orderDetails, {
-    new: true
+    new: true,
   });
 };
 
@@ -47,5 +47,5 @@ module.exports = {
   updateOrder,
   deleteOrder,
   getSingleUser,
-  updateOrderData
+  updateOrderData,
 };

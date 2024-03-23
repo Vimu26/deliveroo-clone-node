@@ -10,14 +10,14 @@ const addOnsItemSchema = {
 };
 
 const sizeSchema = {
-  type : "object",
+  type: "object",
   properties: {
     name: { type: "string" },
     price: { type: "number" },
   },
   required: ["name", "price"],
   additionalProperties: false,
-}
+};
 
 const createOrder = {
   type: "object",
