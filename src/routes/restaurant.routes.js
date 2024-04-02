@@ -15,18 +15,18 @@ router.get("/", restaurantController.getAllRestaurants);
 router.post(
   "/check-restaurant-details",
   schemaValidationMiddleware.createRestaurantFormatValidation(
-    restaurantSchema.createRestaurant
+    restaurantSchema.createRestaurant,
   ),
-  restaurantController.checkRestaurantDetails
+  restaurantController.checkRestaurantDetails,
 );
 
 //create restaurants
 router.post(
   "/",
   schemaValidationMiddleware.createRestaurantFormatValidation(
-    restaurantSchema.createRestaurant
+    restaurantSchema.createRestaurant,
   ),
-  restaurantController.createRestaurant
+  restaurantController.createRestaurant,
 );
 
 //update restaurants partially
