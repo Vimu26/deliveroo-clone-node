@@ -4,20 +4,34 @@ const createDishCategory = {
     restaurant: {
       oneOf: [
         {
-          type: "string",
+          type: "string"
         },
         {
           type: "string",
-          format: "uuid",
-        },
-      ],
+          format: "uuid"
+        }
+      ]
     },
     name: {
-      type: "string",
-    },
+      type: "string"
+    }
   },
   required: ["restaurant", "name"],
-  additionalProperties: false,
+  additionalProperties: false
 };
 
-module.exports = { createDishCategory };
+const checkDishCategory = {
+  type: "object",
+  properties: {
+    restaurant: {
+      type: "string"
+    },
+    name: {
+      type: "string"
+    }
+  },
+  required: ["name"],
+  additionalProperties: false
+};
+
+module.exports = { createDishCategory, checkDishCategory };
