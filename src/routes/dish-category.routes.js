@@ -6,30 +6,59 @@ const schemaValidationMiddleware = require("../middleware/ajv-format-validation-
 const dishCategorySchemaFormat = require("../schema/dish-category.schema");
 const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
 
-router.use(tokenValidationMiddleware.validateToken);
+// router.use(tokenValidationMiddleware.validateToken);
 
 //get all dish categories
-router.get("/", dishCategoryController.getAllDishCategories);
+router.get(
+  "/",
+  tokenValidationMiddleware.validateToken,
+  dishCategoryController.getAllDishCategories
+);
 
 //create a new dish category
 router.post(
   "/",
   schemaValidationMiddleware.createDishCategoryFormatValidation(
-    dishCategorySchemaFormat.createDishCategory,
+    dishCategorySchemaFormat.createDishCategory
   ),
-  dishCategoryController.createDishCategory,
+  dishCategoryController.createDishCategory
+);
+
+//check dish category
+router.post(
+  "/check-dish-categories-details",
+  schemaValidationMiddleware.createDishCategoryFormatValidation(
+    dishCategorySchemaFormat.checkDishCategory
+  ),
+  dishCategoryController.checkDishCategoriesDetails
 );
 
 //update a dish category partially
-router.patch("/:id", dishCategoryController.updateDishCategory);
+router.patch(
+  "/:id",
+  tokenValidationMiddleware.validateToken,
+  dishCategoryController.updateDishCategory
+);
 
 //update entire dish data
-router.put("/:id", dishCategoryController.updateDishCategoryData);
+router.put(
+  "/:id",
+  tokenValidationMiddleware.validateToken,
+  dishCategoryController.updateDishCategoryData
+);
 
 //delete a dish category
-router.delete("/:id", dishCategoryController.deleteDishCategory);
+router.delete(
+  "/:id",
+  tokenValidationMiddleware.validateToken,
+  dishCategoryController.deleteDishCategory
+);
 
 //get single dish category
-router.get("/:id", dishCategoryController.getSingleDishCategory);
+router.get(
+  "/:id",
+  tokenValidationMiddleware.validateToken,
+  dishCategoryController.getSingleDishCategory
+);
 
 module.exports = router;
