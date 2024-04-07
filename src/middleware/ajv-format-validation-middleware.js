@@ -8,7 +8,7 @@ const userLoginFormatValidation = (schema) => {
       return res.status(400).json({
         status: false,
         message: "Error Occurs In Validation of the Request body",
-        error: validateLoginSchema.errors
+        error: validateLoginSchema.errors,
       });
     }
     next();
@@ -23,7 +23,7 @@ const userRegisterFormatValidation = (schema) => {
       return res.status(400).json({
         status: false,
         message: "Error Occurs In Validation of the Request body",
-        error: validateRegisterSchema.errors
+        error: validateRegisterSchema.errors,
       });
     }
     next();
@@ -38,7 +38,7 @@ const createRestaurantFormatValidation = (schema) => {
       return res.status(400).json({
         status: false,
         message: "Error Occurs In Validation of the Request body",
-        error: validateRestaurantSchema.errors
+        error: validateRestaurantSchema.errors,
       });
     }
     next();
@@ -53,7 +53,7 @@ const createDishFormatValidation = (schema) => {
       return res.status(400).json({
         status: false,
         message: "Error Occurs In Validation of the Request body",
-        error: validateDishSchema.errors
+        error: validateDishSchema.errors,
       });
     }
     next();
@@ -71,7 +71,7 @@ const createDishCategoryFormatValidation = (schema) => {
       return res.status(400).json({
         status: false,
         message: "Error Occurs In Validation of the Request body",
-        error: validateDishCategorySchema.errors
+        error: validateDishCategorySchema.errors,
       });
     }
     next();
@@ -86,7 +86,7 @@ const createOrderCategoryFormatValidation = (schema) => {
       return res.status(400).json({
         status: false,
         message: "Error Occurs In Validation of the Request body",
-        error: validateOrderCategorySchema.errors
+        error: validateOrderCategorySchema.errors,
       });
     }
     next();
@@ -99,5 +99,5 @@ module.exports = {
   createRestaurantFormatValidation,
   createDishFormatValidation,
   createDishCategoryFormatValidation,
-  createOrderCategoryFormatValidation
+  createOrderCategoryFormatValidation,
 };

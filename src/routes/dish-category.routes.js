@@ -12,53 +12,53 @@ const tokenValidationMiddleware = require("../middleware/token.validation.middle
 router.get(
   "/",
   tokenValidationMiddleware.validateToken,
-  dishCategoryController.getAllDishCategories
+  dishCategoryController.getAllDishCategories,
 );
 
 //create a new dish category
 router.post(
   "/",
   schemaValidationMiddleware.createDishCategoryFormatValidation(
-    dishCategorySchemaFormat.createDishCategory
+    dishCategorySchemaFormat.createDishCategory,
   ),
-  dishCategoryController.createDishCategory
+  dishCategoryController.createDishCategory,
 );
 
 //check dish category
 router.post(
   "/check-dish-categories-details",
   schemaValidationMiddleware.createDishCategoryFormatValidation(
-    dishCategorySchemaFormat.checkDishCategory
+    dishCategorySchemaFormat.checkDishCategory,
   ),
-  dishCategoryController.checkDishCategoriesDetails
+  dishCategoryController.checkDishCategoriesDetails,
 );
 
 //update a dish category partially
 router.patch(
   "/:id",
   tokenValidationMiddleware.validateToken,
-  dishCategoryController.updateDishCategory
+  dishCategoryController.updateDishCategory,
 );
 
 //update entire dish data
 router.put(
   "/:id",
   tokenValidationMiddleware.validateToken,
-  dishCategoryController.updateDishCategoryData
+  dishCategoryController.updateDishCategoryData,
 );
 
 //delete a dish category
 router.delete(
   "/:id",
   tokenValidationMiddleware.validateToken,
-  dishCategoryController.deleteDishCategory
+  dishCategoryController.deleteDishCategory,
 );
 
 //get single dish category
 router.get(
   "/:id",
   tokenValidationMiddleware.validateToken,
-  dishCategoryController.getSingleDishCategory
+  dishCategoryController.getSingleDishCategory,
 );
 
 module.exports = router;
