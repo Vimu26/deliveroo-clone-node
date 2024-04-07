@@ -11,7 +11,7 @@ const getAllDishCategories = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Dish Categories Found Successfully",
-      data: dishCategory
+      data: dishCategory,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -23,12 +23,12 @@ const createDishCategory = async (req, res) => {
   try {
     const category = await dishCategoryService.createDishCategory({
       restaurant: req.body.restaurant,
-      name: req.body.name
+      name: req.body.name,
     });
     res.status(201).json({
       status: true,
       message: "Dish category Created Successfully",
-      data: category
+      data: category,
     });
   } catch (error) {
     if (!error?.code == 11000) {
@@ -38,7 +38,7 @@ const createDishCategory = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -48,7 +48,7 @@ const checkDishCategoriesDetails = async (req, res) => {
     res.status(201).json({
       status: true,
       message: "Dish Category Details Checked Successfully",
-      code: 201
+      code: 201,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -62,13 +62,13 @@ const updateDishCategory = async (req, res) => {
       req.params.id,
       {
         name: req.body.dish_category_name,
-        image: req.body.image
-      }
+        image: req.body.image,
+      },
     );
     res.status(200).json({
       status: true,
       message: "Dish Category updated successfully",
-      data: updatedDishCategory
+      data: updatedDishCategory,
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -78,7 +78,7 @@ const updateDishCategory = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -90,7 +90,7 @@ const updateDishCategoryData = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Dish Category updated successfully",
-      data: updatedDishCategory
+      data: updatedDishCategory,
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -100,7 +100,7 @@ const updateDishCategoryData = async (req, res) => {
     res.status(409).json({
       status: false,
       message: "An error occurred Because of Duplicate Creation",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -109,12 +109,12 @@ const deleteDishCategory = async (req, res) => {
   try {
     const dish = await dishCategoryService.deleteDishCategory(
       req.params.id,
-      req.body
+      req.body,
     );
     res.status(200).json({
       status: true,
       message: "Dish Category Deleted successfully",
-      data: dish
+      data: dish,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -125,12 +125,12 @@ const deleteDishCategory = async (req, res) => {
 const getSingleDishCategory = async (req, res) => {
   try {
     const category = await dishCategoryService.getSingleDishCategory(
-      req.params.id
+      req.params.id,
     );
     res.status(200).json({
       status: true,
       message: "Dish Category Found Successfully",
-      data: category
+      data: category,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -145,5 +145,5 @@ module.exports = {
   deleteDishCategory,
   getSingleDishCategory,
   updateDishCategoryData,
-  checkDishCategoriesDetails
+  checkDishCategoriesDetails,
 };
