@@ -19,7 +19,7 @@ const sizeSchema = {
   additionalProperties: false,
 };
 
-const createOrder = {
+const createDish = {
   type: "object",
   properties: {
     order: {
@@ -92,4 +92,4 @@ const createOrder = {
   additionalProperties: false,
 };
 
-module.exports = { createOrder };
+module.exports = { createDish };
