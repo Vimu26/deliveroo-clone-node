@@ -168,5 +168,5 @@ module.exports = {
   updateDishData,
   deleteDish,
   getSingleDish,
-  checkDishDetails
+  checkDishDetails,
 };
