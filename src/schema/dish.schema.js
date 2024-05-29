@@ -80,7 +80,6 @@ const createOrder = {
     },
   },
   required: [
-    "restaurant",
     "dish_category",
     "price",
     "name",

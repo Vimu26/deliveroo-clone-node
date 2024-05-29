@@ -70,6 +70,19 @@ const createDish = async (req, res) => {
   }
 };
 
+const checkDishDetails = async (req, res) => {
+  try {
+    res.status(201).json({
+      status: true,
+      message: "Dish Details Checked Successfully",
+      code: 201,
+    });
+  } catch (err) {
+    console.error("An error occurred", err.message);
+    res.status(500).json({ status: false, message: err.message });
+  }
+};
+
 const updateDish = async (req, res) => {
   try {
     const dish = await dishService.updateDish(req.params.id, {
@@ -155,4 +168,5 @@ module.exports = {
   updateDishData,
   deleteDish,
   getSingleDish,
+  checkDishDetails
 };

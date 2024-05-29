@@ -24,6 +24,10 @@ router.post(
   dishController.createDish,
 );
 
+router.post("/check-dishes-details",schemaValidationMiddleware.createDishFormatValidation(
+  dishSchemaFormat.createOrder,
+),dishController.checkDishDetails)
+
 //update a dish partially
 router.patch("/:id", dishController.updateDish);
 
