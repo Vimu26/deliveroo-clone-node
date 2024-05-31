@@ -6,7 +6,7 @@ const schemaValidationMiddleware = require("../middleware/ajv-format-validation-
 const tokenValidationMiddleware = require("../middleware/token.validation.middleware");
 const dishSchemaFormat = require("../schema/dish.schema");
 
-router.use(tokenValidationMiddleware.validateToken);
+// router.use(tokenValidationMiddleware.validateToken);
 
 //get all dishes
 router.get(
@@ -19,9 +19,17 @@ router.get(
 router.post(
   "/",
   schemaValidationMiddleware.createDishFormatValidation(
-    dishSchemaFormat.createOrder,
+    dishSchemaFormat.createDish,
   ),
   dishController.createDish,
+);
+
+router.post(
+  "/check-dishes-details",
+  schemaValidationMiddleware.createDishFormatValidation(
+    dishSchemaFormat.createDish,
+  ),
+  dishController.checkDishDetails,
 );
 
 //update a dish partially

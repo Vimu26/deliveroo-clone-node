@@ -19,7 +19,7 @@ const sizeSchema = {
   additionalProperties: false,
 };
 
-const createOrder = {
+const createDish = {
   type: "object",
   properties: {
     order: {
@@ -80,7 +80,6 @@ const createOrder = {
     },
   },
   required: [
-    "restaurant",
     "dish_category",
     "price",
     "name",
@@ -93,4 +92,4 @@ const createOrder = {
   additionalProperties: false,
 };
 
-module.exports = { createOrder };
+module.exports = { createDish };
