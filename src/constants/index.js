@@ -4,6 +4,7 @@ const DB_NAMES = {
   ORDERS: "orders",
   RESTAURANTS: "restaurants",
   DISH_CATEGORIES: "dish_categories",
+  RIDERS : 'riders'
 };
 
 module.exports = { DB_NAMES };
