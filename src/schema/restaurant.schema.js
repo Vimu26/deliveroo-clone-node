@@ -52,13 +52,6 @@ const createRestaurant = {
         type: "string",
       },
     },
-    // tags: {
-    //   type: "object",
-    //   properties: {
-
-    //   },
-    //   required: ["delivery_time", "tag_list"],
-    // },
   },
   required: [
     "name",
