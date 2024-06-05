@@ -10,6 +10,11 @@ const riderDetailsSchema = new Schema({
     type: String,
     required: true
   },
+  nic : {
+    type: String,
+    required: true,
+    unique: true
+  },
   email: {
     type: String,
     required: true,
@@ -28,6 +33,9 @@ const riderDetailsSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  riderID: {
+    type: String
   },
   orders: [
     {
