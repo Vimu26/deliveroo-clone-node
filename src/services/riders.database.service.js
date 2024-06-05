@@ -1,5 +1,5 @@
 const Rider = require("../models/rider.model");
-const passwordService = require ("../services/password.service")
+const passwordService = require("../services/password.service");
 
 //get all riders
 const getAllRiders = async () => {
@@ -7,7 +7,9 @@ const getAllRiders = async () => {
 };
 // Create a new rider
 const createRider = async (riderDetails) => {
-  const hashedPassword = await passwordService.hashPassword(riderDetails.password);
+  const hashedPassword = await passwordService.hashPassword(
+    riderDetails.password,
+  );
   const riderModelData = new Rider({
     first_name: riderDetails.first_name,
     last_name: riderDetails.last_name,
@@ -16,8 +18,8 @@ const createRider = async (riderDetails) => {
     nic: riderDetails.nic,
     email: riderDetails.email,
     password: hashedPassword,
-    orders : riderDetails.orders,
-    riderID : riderDetails.riderID
+    orders: riderDetails.orders,
+    riderID: riderDetails.riderID,
   });
 
   await riderModelData.save();
@@ -44,5 +46,5 @@ module.exports = {
   createRider,
   getRiderById,
   updateRider,
-  deleteRider
+  deleteRider,
 };

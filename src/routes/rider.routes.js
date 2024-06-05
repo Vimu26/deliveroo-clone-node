@@ -9,9 +9,11 @@ const ridersSchema = require("../schema/rider.schema");
 router.get("/", riderController.getAllRiders);
 
 // Create a new rider
-router.post("/",schemaValidationMiddleware.createRestaurantFormatValidation(
-    ridersSchema,
-  ), riderController.createRider);
+router.post(
+  "/",
+  schemaValidationMiddleware.createRestaurantFormatValidation(ridersSchema),
+  riderController.createRider,
+);
 
 // Get a rider by ID
 router.get("/:id", riderController.getRiderById);

@@ -13,7 +13,7 @@ const orderRoutes = require("./routes/order.routes");
 const dishCategories = require("./routes/dish-category.routes");
 const commonRoutes = require("./routes/common.routes");
 const authRoutes = require("./routes/auth.routes");
-const riderRotes = require("./routes/rider.routes")
+const riderRotes = require("./routes/rider.routes");
 
 //use express
 const server = express();

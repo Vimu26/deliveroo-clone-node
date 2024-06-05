@@ -7,7 +7,7 @@ exports.getAllRiders = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Riders Found Successfully",
-      data: riders
+      data: riders,
     });
   } catch (error) {
     if (!error.code == 11000) {
@@ -29,7 +29,7 @@ exports.createRider = async (req, res) => {
     res.status(201).json({
       status: true,
       message: "Riders created Successfully",
-      data: rider
+      data: rider,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -44,7 +44,7 @@ exports.getRiderById = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Riders Found Successfully",
-      data: rider
+      data: rider,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -59,7 +59,7 @@ exports.updateRider = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Rider Updated Successfully",
-      data: rider
+      data: rider,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
@@ -74,7 +74,7 @@ exports.deleteRider = async (req, res) => {
     res.status(200).json({
       status: true,
       message: "Riders Deleted Successfully",
-      data: result
+      data: result,
     });
   } catch (err) {
     console.error("An error occurred", err.message);
