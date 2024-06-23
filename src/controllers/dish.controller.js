@@ -35,27 +35,28 @@ const getSingleDish = async (req, res) => {
 
 const createDish = async (req, res) => {
   try {
-    const dish = await dishService.createDish({
-      restaurant: req.body.restaurant,
-      order: req.body.order,
-      dish_category: req.body.dish_category,
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      image: req.body.image,
-      calories: req.body.calories,
-      addOns: req.body.addOns,
-      size: req.body.size,
-    });
-    if (!dish) {
-      return res
-        .status(404)
-        .json({ status: false, message: "Dish Not Created" });
-    }
+    const dishPromises = req.body.map((data) =>
+      dishService.createDish({
+        restaurant: data.restaurant,
+        order: data.order,
+        dish_category: data.dish_category,
+        name: data.name,
+        description: data.description,
+        price: data.price,
+        image: data.image,
+        calories: data.calories,
+        addOns: data.addOns,
+        size: data.size,
+      }),
+    );
+
+    const dishData = await Promise.all(dishPromises);
+    console.log(dishData);
+
     res.status(201).json({
       status: true,
       message: "Dish Created Successfully",
-      data: dish,
+      data: dishData,
     });
   } catch (error) {
     if (!error.code == 11000) {

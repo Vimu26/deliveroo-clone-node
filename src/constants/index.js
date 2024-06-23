@@ -7,4 +7,11 @@ const DB_NAMES = {
   RIDERS: "riders",
 };
 
-module.exports = { DB_NAMES };
+const ROLES = {
+  ADMIN: "ADMIN",
+  CUSTOMER: "CUSTOMER",
+  RESTAURANT: "RESTAURANT",
+  RIDER: "RIDER",
+};
+
+module.exports = { DB_NAMES, ROLES };

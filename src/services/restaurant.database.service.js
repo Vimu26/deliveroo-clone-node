@@ -20,8 +20,8 @@ const createRestaurant = async (restaurantDetails) => {
     minimumPrice: restaurantDetails.minimumPrice,
     deliveryFee: restaurantDetails.deliveryFee,
     delivery_time: {
-      from: restaurantDetails.tags.delivery_time.from,
-      to: restaurantDetails.tags.delivery_time.to,
+      from: restaurantDetails.delivery_time.from,
+      to: restaurantDetails.delivery_time.to,
     },
     tags: restaurantDetails.tags,
   });

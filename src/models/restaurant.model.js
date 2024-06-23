@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { DB_NAMES } = require("../constants");
+const { DB_NAMES, ROLES } = require("../constants");
 
 const restaurantDetailsSchema = new Schema({
   name: {
@@ -54,6 +54,11 @@ const restaurantDetailsSchema = new Schema({
   tag_list: {
     type: [String],
     required: true,
+  },
+  role: {
+    type: String,
+    default: ROLES.RESTAURANT,
+    enum: ROLES,
   },
 });
 

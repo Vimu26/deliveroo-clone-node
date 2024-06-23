@@ -56,8 +56,8 @@ const createRestaurant = async (req, res) => {
       minimumPrice: req.body.minimumPrice,
       deliveryFee: req.body.deliveryFee,
       delivery_time: {
-        from: req.body.tags.delivery_time.from,
-        to: req.body.tags.delivery_time.to,
+        from: req.body.delivery_time.from,
+        to: req.body.delivery_time.to,
       },
       tags: req.body.tags,
     });
