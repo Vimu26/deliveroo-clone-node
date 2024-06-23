@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const { DB_NAMES } = require("../constants");
+const { DB_NAMES, ROLES } = require("../constants");
 
 const riderDetailsSchema = new Schema({
   first_name: {
@@ -36,6 +36,11 @@ const riderDetailsSchema = new Schema({
   },
   riderID: {
     type: String,
+  },
+  role: {
+    type: String,
+    default: ROLES.RIDER,
+    enum: ROLES,
   },
   orders: [
     {
