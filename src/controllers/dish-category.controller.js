@@ -21,14 +21,18 @@ const getAllDishCategories = async (req, res) => {
 
 const createDishCategory = async (req, res) => {
   try {
-    const category = await dishCategoryService.createDishCategory({
-      restaurant: req.body.restaurant,
-      name: req.body.name,
-    });
+    const categoryDataPromises = req.body.map((data) =>
+      dishCategoryService.createDishCategory({
+        restaurant: data.restaurant,
+        name: data.name,
+      }),
+    );
+    const categoryData = await Promise.all(categoryDataPromises);
+
     res.status(201).json({
       status: true,
       message: "Dish category Created Successfully",
-      data: category,
+      data: categoryData,
     });
   } catch (error) {
     if (!error?.code == 11000) {

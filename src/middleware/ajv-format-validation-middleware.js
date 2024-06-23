@@ -48,6 +48,24 @@ const createRestaurantFormatValidation = (schema) => {
 const createDishFormatValidation = (schema) => {
   const validateDishSchema = ajvFormatService.ajv.compile(schema);
   return (req, res, next) => {
+    const isDishValid = req.body.every((dish) => {
+      return validateDishSchema(dish);
+    });
+
+    if (!isDishValid) {
+      return res.status(400).json({
+        status: false,
+        message: "Error Occurs In Validation of the Request body",
+        error: validateDishSchema.errors,
+      });
+    }
+    next();
+  };
+};
+
+const checkDishFormatValidation = (schema) => {
+  const validateDishSchema = ajvFormatService.ajv.compile(schema);
+  return (req, res, next) => {
     const isValid = validateDishSchema(req.body);
     if (!isValid) {
       return res.status(400).json({
@@ -66,7 +84,6 @@ const createDishCategoryFormatValidation = (schema) => {
     const isCategoryValid = req.body.every((category) => {
       return validateDishCategorySchema(category);
     });
-    console.log(isCategoryValid);
     if (!isCategoryValid) {
       return res.status(400).json({
         status: false,
@@ -100,4 +117,5 @@ module.exports = {
   createDishFormatValidation,
   createDishCategoryFormatValidation,
   createOrderCategoryFormatValidation,
+  checkDishFormatValidation,
 };
