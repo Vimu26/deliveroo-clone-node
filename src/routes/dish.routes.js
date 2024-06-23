@@ -26,7 +26,7 @@ router.post(
 
 router.post(
   "/check-dishes-details",
-  schemaValidationMiddleware.createDishFormatValidation(
+  schemaValidationMiddleware.checkDishFormatValidation(
     dishSchemaFormat.createDish,
   ),
   dishController.checkDishDetails,
