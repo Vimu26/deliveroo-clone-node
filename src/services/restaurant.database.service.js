@@ -1,7 +1,7 @@
 const restaurantDetailsModel = require("../models/restaurant.model");
 
-const getAllRestaurants = async () => {
-  return await restaurantDetailsModel.find();
+const getAllRestaurants = async (params) => {
+  return await restaurantDetailsModel.find(params);
 };
 
 const getSingleRestaurant = async (id) => {
@@ -21,9 +21,10 @@ const createRestaurant = async (restaurantDetails) => {
     deliveryFee: restaurantDetails.deliveryFee,
     delivery_time: {
       from: restaurantDetails.delivery_time.from,
-      to: restaurantDetails.delivery_time.to,
+      to: restaurantDetails.delivery_time.to
     },
     tags: restaurantDetails.tags,
+    rating: restaurantDetails.rating
   });
   await restaurantModelData.save();
   return restaurantModelData;
@@ -31,13 +32,13 @@ const createRestaurant = async (restaurantDetails) => {
 
 const updateRestaurant = async (id, restaurantDetails) => {
   return await restaurantDetailsModel.findByIdAndUpdate(id, restaurantDetails, {
-    new: true,
+    new: true
   });
 };
 
 const updateRestaurantData = async (id, restaurantDetails) => {
   return await restaurantDetailsModel.findByIdAndUpdate(id, restaurantDetails, {
-    new: true,
+    new: true
   });
 };
 
@@ -51,5 +52,5 @@ module.exports = {
   updateRestaurant,
   deleteRestaurant,
   getSingleRestaurant,
-  updateRestaurantData,
+  updateRestaurantData
 };
