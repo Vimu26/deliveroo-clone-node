@@ -5,7 +5,7 @@ const getAllRestaurants = async (req, res) => {
     const { restaurant_name } = req.query;
     let queryParams = {};
     if (restaurant_name) {
-      queryParams = { name: restaurant_name };
+      queryParams = { name: { $regex: restaurant_name, $options: "i" } };
     }
     const restaurantDetails =
       await restaurantService.getAllRestaurants(queryParams);
