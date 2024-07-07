@@ -52,9 +52,12 @@ const createRestaurant = {
         type: "string",
       },
     },
-    rating : {
+    rating: {
       type: "number",
-    }
+    },
+    image: {
+      type: "string",
+    },
   },
   required: [
     "name",
@@ -67,7 +70,8 @@ const createRestaurant = {
     "minimumPrice",
     "deliveryFee",
     "tag_list",
-    "rating"
+    "rating",
+    "image",
   ],
   additionalProperties: false,
 };

@@ -11,6 +11,9 @@ const restaurantSchema = require("../schema/restaurant.schema");
 //get all restaurants
 router.get("/", restaurantController.getAllRestaurants);
 
+//get all for Cards
+router.get("/view-restaurants", restaurantController.getAllRestaurantCards);
+
 //check Restaurant Details
 router.post(
   "/check-restaurant-details",
