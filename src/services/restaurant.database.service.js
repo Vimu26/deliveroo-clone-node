@@ -4,6 +4,31 @@ const getAllRestaurants = async (params) => {
   return await restaurantDetailsModel.find(params);
 };
 
+const getAllRestaurantCards = async () => {
+  const page = 1;
+  const limit = 2;
+  // return await restaurantDetailsModel.find();
+  return await restaurantDetailsModel.aggregate([
+    {
+      $project: {
+        _id: 1,
+        name: 1,
+        image: 1,
+        distance: 1,
+        minimumPrice: 1,
+        deliveryFee: 1,
+        rating: 1
+      }
+    },
+    {
+      $skip: (page - 1) * limit
+    },
+    {
+      $limit: limit
+    }
+  ]);
+};
+
 const getSingleRestaurant = async (id) => {
   return await restaurantDetailsModel.findById(id);
 };
@@ -24,7 +49,8 @@ const createRestaurant = async (restaurantDetails) => {
       to: restaurantDetails.delivery_time.to
     },
     tags: restaurantDetails.tags,
-    rating: restaurantDetails.rating
+    rating: restaurantDetails.rating,
+    image: restaurantDetails.image
   });
   await restaurantModelData.save();
   return restaurantModelData;
@@ -52,5 +78,6 @@ module.exports = {
   updateRestaurant,
   deleteRestaurant,
   getSingleRestaurant,
-  updateRestaurantData
+  updateRestaurantData,
+  getAllRestaurantCards
 };

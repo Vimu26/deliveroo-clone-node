@@ -21,6 +21,10 @@ const restaurantDetailsSchema = new Schema({
     type: String,
     required: true,
   },
+  image : {
+    type: String,
+    required:true,
+  },
   distance: {
     type: Number,
     required: true,
