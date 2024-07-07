@@ -20,22 +20,19 @@ const getAllRestaurants = async (req, res) => {
   }
 };
 
-const getAllRestaurantCards = async (req,res) =>{
-  try{
-    console.log(req.query)
-    const restaurantDetails =
-      await restaurantService.getAllRestaurantCards();
+const getAllRestaurantCards = async (req, res) => {
+  try {
+    const restaurantDetails = await restaurantService.getAllRestaurantCards();
     res.status(200).json({
       status: true,
       message: "Restaurants Found Successfully",
       data: restaurantDetails
     });
-  }
-  catch(err){
+  } catch (err) {
     console.error("An error occurred", err.message);
     res.status(500).json({ status: false, message: err.message });
   }
-}
+};
 
 const checkRestaurantDetails = async (req, res) => {
   try {
@@ -84,7 +81,7 @@ const createRestaurant = async (req, res) => {
       },
       tags: req.body.tags,
       rating: req.body.rating,
-      image : req.body.image
+      image: req.body.image
     });
     res.status(201).json({
       status: true,
@@ -122,7 +119,7 @@ const updateRestaurant = async (req, res) => {
       },
       tags: req.body.tags,
       rating: req.body.rating,
-      image : req.body.image
+      image: req.body.image
     });
     res.status(200).json({
       status: true,
@@ -162,7 +159,7 @@ const updateRestaurantData = async (req, res) => {
         },
         tags: req.body.tags,
         rating: req.body.rating,
-        image : req.body.image
+        image: req.body.image
       }
     );
     res.status(200).json({
