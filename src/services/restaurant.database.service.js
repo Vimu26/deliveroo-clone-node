@@ -17,15 +17,15 @@ const getAllRestaurantCards = async () => {
         distance: 1,
         minimumPrice: 1,
         deliveryFee: 1,
-        rating: 1
-      }
+        rating: 1,
+      },
     },
     {
-      $skip: (page - 1) * limit
+      $skip: (page - 1) * limit,
     },
     {
-      $limit: limit
-    }
+      $limit: limit,
+    },
   ]);
 };
 
@@ -46,11 +46,11 @@ const createRestaurant = async (restaurantDetails) => {
     deliveryFee: restaurantDetails.deliveryFee,
     delivery_time: {
       from: restaurantDetails.delivery_time.from,
-      to: restaurantDetails.delivery_time.to
+      to: restaurantDetails.delivery_time.to,
     },
     tags: restaurantDetails.tags,
     rating: restaurantDetails.rating,
-    image: restaurantDetails.image
+    image: restaurantDetails.image,
   });
   await restaurantModelData.save();
   return restaurantModelData;
@@ -58,13 +58,13 @@ const createRestaurant = async (restaurantDetails) => {
 
 const updateRestaurant = async (id, restaurantDetails) => {
   return await restaurantDetailsModel.findByIdAndUpdate(id, restaurantDetails, {
-    new: true
+    new: true,
   });
 };
 
 const updateRestaurantData = async (id, restaurantDetails) => {
   return await restaurantDetailsModel.findByIdAndUpdate(id, restaurantDetails, {
-    new: true
+    new: true,
   });
 };
 
@@ -79,5 +79,5 @@ module.exports = {
   deleteRestaurant,
   getSingleRestaurant,
   updateRestaurantData,
-  getAllRestaurantCards
+  getAllRestaurantCards,
 };
