@@ -56,8 +56,8 @@ const getAllRestaurantCards = async (req, res) => {
     }
     const restaurantDetails = await restaurantService.getAllRestaurantCards(
       queryParams,
-      page,
-      limit
+      parseInt(page),
+      parseInt(limit)
     );
     res.status(200).json({
       status: true,
