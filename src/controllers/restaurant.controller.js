@@ -22,7 +22,43 @@ const getAllRestaurants = async (req, res) => {
 
 const getAllRestaurantCards = async (req, res) => {
   try {
-    const restaurantDetails = await restaurantService.getAllRestaurantCards();
+    const {
+      restaurant_name,
+      page,
+      limit,
+      rating,
+      minimum_price,
+      maximum_price,
+      delivery_fee,
+      distance,
+    } = req.query;
+    let queryParams = {};
+    if (restaurant_name) {
+      queryParams = {
+        ...queryParams,
+        name: { $regex: restaurant_name, $options: "i" },
+      };
+      if (rating) {
+        queryParams = { ...queryParams, rating: rating };
+      }
+      if (minimum_price) {
+        queryParams = { ...queryParams, minimumPrice: { $gt: minimum_price } };
+      }
+      if (maximum_price) {
+        queryParams = { ...queryParams, minimumPrice: { $lt: minimum_price } };
+      }
+      if (delivery_fee) {
+        queryParams = { ...queryParams, deliveryFee: { $lt: delivery_fee } };
+      }
+      if (distance) {
+        queryParams = { ...queryParams, distance: { $lt: distance } };
+      }
+    }
+    const restaurantDetails = await restaurantService.getAllRestaurantCards(
+      queryParams,
+      parseInt(page),
+      parseInt(limit),
+    );
     res.status(200).json({
       status: true,
       message: "Restaurants Found Successfully",

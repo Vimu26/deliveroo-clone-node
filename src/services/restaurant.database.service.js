@@ -4,11 +4,9 @@ const getAllRestaurants = async (params) => {
   return await restaurantDetailsModel.find(params);
 };
 
-const getAllRestaurantCards = async () => {
-  const page = 1;
-  const limit = 2;
-  // return await restaurantDetailsModel.find();
+const getAllRestaurantCards = async (params, page, limit) => {
   return await restaurantDetailsModel.aggregate([
+    { $match: params },
     {
       $project: {
         _id: 1,
