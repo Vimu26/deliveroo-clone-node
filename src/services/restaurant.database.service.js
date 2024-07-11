@@ -5,8 +5,6 @@ const getAllRestaurants = async (params) => {
 };
 
 const getAllRestaurantCards = async (params, page, limit) => {
-  const Page = Number(page);
-  const Limit = Number(limit);
   return await restaurantDetailsModel.aggregate([
     { $match: params },
     {
@@ -21,10 +19,10 @@ const getAllRestaurantCards = async (params, page, limit) => {
       }
     },
     {
-      $skip: (Page - 1) * Limit
+      $skip: (page - 1) * limit
     },
     {
-      $limit: Limit
+      $limit: limit
     }
   ]);
 };
