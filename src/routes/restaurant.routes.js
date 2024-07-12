@@ -11,6 +11,9 @@ const restaurantSchema = require("../schema/restaurant.schema");
 //get all restaurants
 router.get("/", restaurantController.getAllRestaurants);
 
+//get all restaurants
+router.get("/:id/single-restaurant", restaurantController.getSingleRestaurant);
+
 //get all for Cards
 router.get("/view-restaurants", restaurantController.getAllRestaurantCards);
 
@@ -18,18 +21,18 @@ router.get("/view-restaurants", restaurantController.getAllRestaurantCards);
 router.post(
   "/check-restaurant-details",
   schemaValidationMiddleware.createRestaurantFormatValidation(
-    restaurantSchema.createRestaurant,
+    restaurantSchema.createRestaurant
   ),
-  restaurantController.checkRestaurantDetails,
+  restaurantController.checkRestaurantDetails
 );
 
 //create restaurants
 router.post(
   "/",
   schemaValidationMiddleware.createRestaurantFormatValidation(
-    restaurantSchema.createRestaurant,
+    restaurantSchema.createRestaurant
   ),
-  restaurantController.createRestaurant,
+  restaurantController.createRestaurant
 );
 
 //update restaurants partially
@@ -41,7 +44,7 @@ router.put("/:id", restaurantController.updateRestaurantData);
 //delete restaurants
 router.delete("/:id", restaurantController.deleteRestaurant);
 
-//get single restaurants
-router.get("/:id", restaurantController.getSingleRestaurant);
+// //get single restaurants
+// router.get("/:id", restaurantController.getSingleRestaurant);
 
 module.exports = router;
