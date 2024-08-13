@@ -17,9 +17,9 @@ const validateToken = async (req, res, next) => {
       return res.status(401).json({
         status: false,
         Error: error,
-        message: "Token is Invalid Or Expired"
+        message: "Token is Invalid Or Expired",
       });
-    }
+    },
   );
 };
 
@@ -41,9 +41,9 @@ const validateTokenByHeaders = async (req, res, next) => {
       return res.status(401).json({
         status: false,
         Error: error,
-        message: "Token is Invalid Or Expired"
+        message: "Token is Invalid Or Expired",
       });
-    }
+    },
   );
 };
 
@@ -54,7 +54,7 @@ const decodeToken = async (req, res) => {
     if (!authHeader) {
       return res.status(401).json({
         status: false,
-        message: "Authorization header is missing"
+        message: "Authorization header is missing",
       });
     }
 
@@ -62,7 +62,7 @@ const decodeToken = async (req, res) => {
     if (!token) {
       return res.status(401).json({
         status: false,
-        message: "Token is missing"
+        message: "Token is missing",
       });
     }
 
@@ -70,19 +70,19 @@ const decodeToken = async (req, res) => {
     if (!decodedPayload) {
       return res.status(401).json({
         status: false,
-        message: "Token is Invalid"
+        message: "Token is Invalid",
       });
     }
 
     return res.status(200).json({
       status: true,
-      data: decodedPayload
+      data: decodedPayload,
     });
   } catch (error) {
     return res.status(500).json({
       status: false,
       message: "Internal Server Error",
-      error: error.message
+      error: error.message,
     });
   }
 };
